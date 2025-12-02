@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Schema>
+	<DatabaseName>ECommerceXML_DB</DatabaseName>
+
+	<Tables>
+		<!-- ========================================== -->
+		<!-- MODULE 1: CATALOG (SẢN PHẨM & DANH MỤC)    -->
+		<!-- ========================================== -->
+
+		<!-- Bảng Thương Hiệu -->
+		<Table Name="ThuongHieu">
+			<Script>
+				IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[ThuongHieu]') AND type in (N'U'))
+				CREATE TABLE ThuongHieu (
+				Id INT PRIMARY KEY IDENTITY(1,1),
+				TenThuongHieu NVARCHAR(100) NOT NULL,
+				HinhAnh NVARCHAR(MAX)
+				)
+			</Script>
+		</Table>
+
+		<!-- Bảng Loại Sản Phẩm -->
+		<Table Name="LoaiSanPham">
+			<Script>
+				IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LoaiSanPham]') AND type in (N'U'))
+				CREATE TABLE LoaiSanPham (
+				Id INT PRIMARY KEY IDENTITY(1,1),
+				TenLoai NVARCHAR(100) NOT NULL,
+				HienThi BIT DEFAULT 1
+				)
+			</Script>
+		</Table>
+
+		<!-- Bảng Sản Phẩm -->
+		<Table Name="SanPham">
+			<Script>
+				IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SanPham]') AND type in (N'U'))
+				CREATE TABLE SanPham (
+				Id INT PRIMARY KEY IDENTITY(1,1),
+				TenSanPham NVARCHAR(200) NOT NULL,
+				MoTa NVARCHAR(MAX),
+				ChiTiet NVARCHAR(MAX),
+				Gia DECIMAL(18, 2) NOT NULL,
+				GiaKhuyenMai DECIMAL(18, 2),
+				DuongDanAnh NVARCHAR(MAX),
+				SoLuongTon INT DEFAULT 0,
+				MaLoai INT NOT NULL,
+				MaThuongHieu INT NOT NULL,
+				HienThi BIT DEFAULT 1,
+				CONSTRAINT FK_SanPham_Loai FOREIGN KEY (MaLoai) REFERENCES LoaiSanPham(Id),
+				CONSTRAINT FK_SanPham_ThuongHieu FOREIGN KEY (MaThuongHieu) REFERENCES ThuongHieu(Id)
+				)
+			</Script>
+		</Table>
+
+		<!-- ========================================== -->
+		<!-- MODULE 2: USER & AUTH (NGƯỜI DÙNG)         -->
+		<!-- ========================================== -->
+
+		<!-- Bảng Người Dùng -->
+		<Table Name="NguoiDung">
+			<Script>
+				IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[NguoiDung]') AND type in (N'U'))
+				CREATE TABLE NguoiDung (
+				Id INT PRIMARY KEY IDENTITY(1,1),
+				HoTen NVARCHAR(100) NOT NULL,
+				Email NVARCHAR(100) NOT NULL UNIQUE,
+				MatKhauHash NVARCHAR(MAX) NOT NULL,
+				SoDienThoai NVARCHAR(20),
+				DiaChi NVARCHAR(200),
+				VaiTro NVARCHAR(20) NOT NULL DEFAULT 'Customer',
+				NgayTao DATETIME DEFAULT GETDATE(),
+				TrangThai BIT DEFAULT 1
+				)
+			</Script>
+		</Table>
+
+		<!-- Bảng Phương Thức Thanh Toán -->
+		<Table Name="PhuongThucThanhToan">
+			<Script>
+				IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[PhuongThucThanhToan]') AND type in (N'U'))
+				CREATE TABLE PhuongThucThanhToan (
+				Id INT PRIMARY KEY IDENTITY(1,1),
+				MaNguoiDung INT NOT NULL,
+				TenGoiNho NVARCHAR(200),
+				MaThe NVARCHAR(100),
+				BonSoCuoi NVARCHAR(4),
+				CONSTRAINT FK_ThanhToan_NguoiDung FOREIGN KEY (MaNguoiDung) REFERENCES NguoiDung(Id)
+				)
+			</Script>
+		</Table>
+
+		<!-- ========================================== -->
+		<!-- MODULE 3: SALES (BÁN HÀNG & ĐƠN HÀNG)      -->
+		<!-- ========================================== -->
+
+		<!-- Bảng Giỏ Hàng -->
+		<Table Name="GioHang">
+			<Script>
+				IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[GioHang]') AND type in (N'U'))
+				CREATE TABLE GioHang (
+				Id INT PRIMARY KEY IDENTITY(1,1),
+				MaNguoiDung INT NOT NULL,
+				NgayCapNhat DATETIME DEFAULT GETDATE(),
+				CONSTRAINT FK_GioHang_NguoiDung FOREIGN KEY (MaNguoiDung) REFERENCES NguoiDung(Id)
+				)
+			</Script>
+		</Table>
+
+		<!-- Bảng Chi Tiết Giỏ Hàng -->
+		<Table Name="ChiTietGioHang">
+			<Script>
+				IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[ChiTietGioHang]') AND type in (N'U'))
+				CREATE TABLE ChiTietGioHang (
+				Id INT PRIMARY KEY IDENTITY(1,1),
+				MaGioHang INT NOT NULL,
+				MaSanPham INT NOT NULL,
+				DonGia DECIMAL(18, 2) NOT NULL,
+				SoLuong INT NOT NULL,
+				CONSTRAINT FK_ChiTietGioHang_GioHang FOREIGN KEY (MaGioHang) REFERENCES GioHang(Id),
+				CONSTRAINT FK_ChiTietGioHang_SanPham FOREIGN KEY (MaSanPham) REFERENCES SanPham(Id)
+				)
+			</Script>
+		</Table>
+
+		<!-- Bảng Đơn Hàng -->
+		<Table Name="DonHang">
+			<Script>
+				IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[DonHang]') AND type in (N'U'))
+				CREATE TABLE DonHang (
+				Id INT PRIMARY KEY IDENTITY(1,1),
+				MaNguoiDung INT NOT NULL,
+				NgayDatHang DATETIMEOFFSET NOT NULL,
+				TrangThaiDonHang INT DEFAULT 0,
+				NguoiNhan_Ten NVARCHAR(100),
+				NguoiNhan_SDT NVARCHAR(20),
+				DiaChi_Duong NVARCHAR(200),
+				DiaChi_ThanhPho NVARCHAR(100),
+				DiaChi_Tinh NVARCHAR(100),
+				TongTien DECIMAL(18, 2),
+				GhiChu NVARCHAR(MAX),
+				CONSTRAINT FK_DonHang_NguoiDung FOREIGN KEY (MaNguoiDung) REFERENCES NguoiDung(Id)
+				)
+			</Script>
+		</Table>
+
+		<!-- Bảng Chi Tiết Đơn Hàng -->
+		<Table Name="ChiTietDonHang">
+			<Script>
+				IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[ChiTietDonHang]') AND type in (N'U'))
+				CREATE TABLE ChiTietDonHang (
+				Id INT PRIMARY KEY IDENTITY(1,1),
+				MaDonHang INT NOT NULL,
+				ItemOrdered_MaSanPham INT NOT NULL,
+				ItemOrdered_TenSanPham NVARCHAR(200),
+				ItemOrdered_DuongDanAnh NVARCHAR(MAX),
+				DonGia DECIMAL(18, 2) NOT NULL,
+				SoLuong INT NOT NULL,
+				CONSTRAINT FK_ChiTietDonHang_DonHang FOREIGN KEY (MaDonHang) REFERENCES DonHang(Id)
+				)
+			</Script>
+		</Table>
+
+		<!-- ========================================== -->
+		<!-- MODULE 4: CMS (QUẢN TRỊ NỘI DUNG)          -->
+		<!-- ========================================== -->
+
+		<!-- Bảng Bài Viết -->
+		<Table Name="BaiViet">
+			<Script>
+				IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[BaiViet]') AND type in (N'U'))
+				CREATE TABLE BaiViet (
+				Id INT PRIMARY KEY IDENTITY(1,1),
+				TieuDe NVARCHAR(200) NOT NULL,
+				HinhAnh NVARCHAR(MAX),
+				TomTat NVARCHAR(500),
+				NoiDung NVARCHAR(MAX),
+				NgayDang DATETIME DEFAULT GETDATE(),
+				MaNguoiViet INT NOT NULL,
+				HienThi BIT DEFAULT 1,
+				CONSTRAINT FK_BaiViet_NguoiDung FOREIGN KEY (MaNguoiViet) REFERENCES NguoiDung(Id)
+				)
+			</Script>
+		</Table>
+
+		<!-- Bảng Banner -->
+		<Table Name="Banner">
+			<Script>
+				IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Banner]') AND type in (N'U'))
+				CREATE TABLE Banner (
+				Id INT PRIMARY KEY IDENTITY(1,1),
+				TenBanner NVARCHAR(100),
+				HinhAnh NVARCHAR(MAX) NOT NULL,
+				LienKet NVARCHAR(MAX),
+				ThuTu INT DEFAULT 0,
+				HienThi BIT DEFAULT 1
+				)
+			</Script>
+		</Table>
+
+		<!-- Bảng Liên Hệ -->
+		<Table Name="LienHe">
+			<Script>
+				IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LienHe]') AND type in (N'U'))
+				CREATE TABLE LienHe (
+				Id INT PRIMARY KEY IDENTITY(1,1),
+				HoTen NVARCHAR(100),
+				Email NVARCHAR(100),
+				SoDienThoai NVARCHAR(20),
+				NoiDung NVARCHAR(MAX),
+				NgayGui DATETIME DEFAULT GETDATE(),
+				DaXem BIT DEFAULT 0
+				)
+			</Script>
+		</Table>
+
+		<!-- ========================================== -->
+		<!-- DỮ LIỆU MẪU (SAMPLE DATA)                  -->
+		<!-- ========================================== -->
+
+		<!-- Dữ liệu Thương Hiệu -->
+		<Table Name="Data_ThuongHieu">
+			<Script>
+				IF NOT EXISTS (SELECT TOP 1 * FROM ThuongHieu)
+				BEGIN
+				INSERT INTO ThuongHieu (TenThuongHieu) VALUES (N'Apple');
+				INSERT INTO ThuongHieu (TenThuongHieu) VALUES (N'Samsung');
+				INSERT INTO ThuongHieu (TenThuongHieu) VALUES (N'Sony');
+				INSERT INTO ThuongHieu (TenThuongHieu) VALUES (N'Dell');
+				INSERT INTO ThuongHieu (TenThuongHieu) VALUES (N'Logitech');
+				END
+			</Script>
+		</Table>
+
+		<!-- Dữ liệu Loại Sản Phẩm -->
+		<Table Name="Data_LoaiSanPham">
+			<Script>
+				IF NOT EXISTS (SELECT TOP 1 * FROM LoaiSanPham)
+				BEGIN
+				INSERT INTO LoaiSanPham (TenLoai) VALUES (N'Điện thoại');
+				INSERT INTO LoaiSanPham (TenLoai) VALUES (N'Laptop');
+				INSERT INTO LoaiSanPham (TenLoai) VALUES (N'Phụ kiện');
+				INSERT INTO LoaiSanPham (TenLoai) VALUES (N'Thiết bị âm thanh');
+				END
+			</Script>
+		</Table>
+
+		<!-- Dữ liệu Người Dùng (Admin Mặc định) -->
+		<!-- Pass: 123456 (Hash giả lập) -->
+		<Table Name="Data_Admin">
+			<Script>
+				IF NOT EXISTS (SELECT TOP 1 * FROM NguoiDung WHERE Email = 'admin@shop.com')
+				BEGIN
+				INSERT INTO NguoiDung (HoTen, Email, MatKhauHash, VaiTro, SoDienThoai, DiaChi)
+				VALUES (N'Quản Trị Viên', 'admin@shop.com', 'e10adc3949ba59abbe56e057f20f883e', 'Admin', '0909123456', N'Hà Nội');
+				END
+			</Script>
+		</Table>
+
+	</Tables>
+</Schema>

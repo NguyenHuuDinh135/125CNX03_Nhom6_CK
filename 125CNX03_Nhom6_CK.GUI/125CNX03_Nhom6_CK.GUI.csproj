@@ -77,10 +77,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\Data\db_config.xml">
+    <Content Include="Data\db_config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="bin\Debug\Data\db_schema.xml">
+    <Content Include="Data\db_schema.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -97,6 +97,9 @@
       <Project>{c04d0fd0-8ec0-4261-bff5-759a8f84cc16}</Project>
       <Name>125CNX03_Nhom6_CK.DTO</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

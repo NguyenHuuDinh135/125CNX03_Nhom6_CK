@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+	<!-- Dấu chấm (.) là máy Local. Nếu dùng SQLEXPRESS thì sửa thành .\SQLEXPRESS -->
+	<ServerName>.</ServerName>
+
+	<!-- Tên Database sẽ được tạo -->
+	<DatabaseName>ECommerceXML_DB</DatabaseName>
+
+	<!-- True: Dùng quyền Windows. False: Dùng User/Pass -->
+	<IntegratedSecurity>True</IntegratedSecurity>
+</Configuration>
