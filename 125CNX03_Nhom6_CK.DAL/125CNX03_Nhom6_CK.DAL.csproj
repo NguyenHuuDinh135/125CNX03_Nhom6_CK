@@ -41,12 +41,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Repositories\BaiVietRepository.cs" />
+    <Compile Include="Repositories\BannerRepository.cs" />
+    <Compile Include="Repositories\ChiTietDonHangRepository.cs" />
     <Compile Include="DbConnection.cs" />
     <Compile Include="DbInitializer.cs" />
+    <Compile Include="Repositories\ChiTietGioHangRepository.cs" />
+    <Compile Include="Repositories\DonHangRepository.cs" />
+    <Compile Include="Repositories\GioHangRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IBaiVietRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IBannerRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IChiTietDonHangRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IChiTietGioHangRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IDonHangRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IGioHangRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ILienHeRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ILoaiSanPhamRepository.cs" />
+    <Compile Include="Repositories\Interfaces\INguoiDungRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IPhuongThucThanhToanRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ISanPhamRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IThuongHieuRepository.cs" />
+    <Compile Include="Repositories\LienHeRepository.cs" />
+    <Compile Include="Repositories\LoaiSanPhamRepository.cs" />
+    <Compile Include="Repositories\NguoiDungRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\PhuongThucThanhToanRepository.cs" />
+    <Compile Include="Repositories\SanPhamRepository.cs" />
+    <Compile Include="Repositories\ThuongHieuRepository.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Repositories\" />
+    <ProjectReference Include="..\125CNX03_Nhom6_CK.DTO\125CNX03_Nhom6_CK.DTO.csproj">
+      <Project>{C04D0FD0-8EC0-4261-BFF5-759A8F84CC16}</Project>
+      <Name>125CNX03_Nhom6_CK.DTO</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
