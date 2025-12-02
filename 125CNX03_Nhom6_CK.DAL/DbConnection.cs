@@ -8,8 +8,8 @@ namespace _125CNX03_Nhom6_CK.DAL
         // Dấu chấm (.) nghĩa là máy local. Nếu dùng SQLEXPRESS thì sửa thành .\\SQLEXPRESS
         private static string ServerName = ".";
 
-        // Tên Database sẽ được tạo tự động
-        private static string DbName = "ECommerceXML_DB";
+        // Tên Database đã được đổi
+        private static string DbName = "QuanLyCuaHangBanLapTop";
 
         /// <summary>
         /// Chuỗi kết nối vào 'master' dùng để kiểm tra và tạo Database mới

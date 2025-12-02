@@ -4,7 +4,7 @@
 	<ServerName>.</ServerName>
 
 	<!-- Tên Database sẽ được tạo -->
-	<DatabaseName>ECommerceXML_DB</DatabaseName>
+	<DatabaseName>QuanLyCuaHangBanLapTop</DatabaseName>
 
 	<!-- True: Dùng quyền Windows. False: Dùng User/Pass -->
 	<IntegratedSecurity>True</IntegratedSecurity>

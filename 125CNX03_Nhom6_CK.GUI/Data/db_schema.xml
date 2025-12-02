@@ -1,261 +1,336 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Schema>
-	<DatabaseName>ECommerceXML_DB</DatabaseName>
+	<DatabaseName>QuanLyCuaHangBanLapTop</DatabaseName>
 
 	<Tables>
-		<!-- ========================================== -->
-		<!-- MODULE 1: CATALOG (SẢN PHẨM & DANH MỤC)    -->
-		<!-- ========================================== -->
+		<!-- MODULE 1: CATALOG -->
+		<ThuongHieu>
+			<Id Type="INT" PK="true" Identity="true" />
+			<TenThuongHieu Type="NVARCHAR(100)" NotNull="true" />
+			<HinhAnh Type="NVARCHAR(MAX)" />
+		</ThuongHieu>
 
-		<!-- Bảng Thương Hiệu -->
-		<Table Name="ThuongHieu">
-			<Script>
-				IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[ThuongHieu]') AND type in (N'U'))
-				CREATE TABLE ThuongHieu (
-				Id INT PRIMARY KEY IDENTITY(1,1),
-				TenThuongHieu NVARCHAR(100) NOT NULL,
-				HinhAnh NVARCHAR(MAX)
-				)
-			</Script>
-		</Table>
+		<LoaiSanPham>
+			<Id Type="INT" PK="true" Identity="true" />
+			<TenLoai Type="NVARCHAR(100)" NotNull="true" />
+			<HienThi Type="BIT" Default="1" />
+		</LoaiSanPham>
 
-		<!-- Bảng Loại Sản Phẩm -->
-		<Table Name="LoaiSanPham">
-			<Script>
-				IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LoaiSanPham]') AND type in (N'U'))
-				CREATE TABLE LoaiSanPham (
-				Id INT PRIMARY KEY IDENTITY(1,1),
-				TenLoai NVARCHAR(100) NOT NULL,
-				HienThi BIT DEFAULT 1
-				)
-			</Script>
-		</Table>
+		<SanPham>
+			<Id Type="INT" PK="true" Identity="true" />
+			<TenSanPham Type="NVARCHAR(200)" NotNull="true" />
+			<MoTa Type="NVARCHAR(MAX)" />
+			<ChiTiet Type="NVARCHAR(MAX)" />
+			<Gia Type="DECIMAL(18, 2)" NotNull="true" />
+			<GiaKhuyenMai Type="DECIMAL(18, 2)" />
+			<DuongDanAnh Type="NVARCHAR(MAX)" />
+			<SoLuongTon Type="INT" Default="0" />
 
-		<!-- Bảng Sản Phẩm -->
-		<Table Name="SanPham">
-			<Script>
-				IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SanPham]') AND type in (N'U'))
-				CREATE TABLE SanPham (
-				Id INT PRIMARY KEY IDENTITY(1,1),
-				TenSanPham NVARCHAR(200) NOT NULL,
-				MoTa NVARCHAR(MAX),
-				ChiTiet NVARCHAR(MAX),
-				Gia DECIMAL(18, 2) NOT NULL,
-				GiaKhuyenMai DECIMAL(18, 2),
-				DuongDanAnh NVARCHAR(MAX),
-				SoLuongTon INT DEFAULT 0,
-				MaLoai INT NOT NULL,
-				MaThuongHieu INT NOT NULL,
-				HienThi BIT DEFAULT 1,
-				CONSTRAINT FK_SanPham_Loai FOREIGN KEY (MaLoai) REFERENCES LoaiSanPham(Id),
-				CONSTRAINT FK_SanPham_ThuongHieu FOREIGN KEY (MaThuongHieu) REFERENCES ThuongHieu(Id)
-				)
-			</Script>
-		</Table>
+			<!-- Khai báo khóa ngoại trực tiếp: FK="TênBảng.TênCột" -->
+			<MaLoai Type="INT" NotNull="true" FK="LoaiSanPham.Id" />
+			<MaThuongHieu Type="INT" NotNull="true" FK="ThuongHieu.Id" />
 
-		<!-- ========================================== -->
-		<!-- MODULE 2: USER & AUTH (NGƯỜI DÙNG)         -->
-		<!-- ========================================== -->
+			<HienThi Type="BIT" Default="1" />
+		</SanPham>
 
-		<!-- Bảng Người Dùng -->
-		<Table Name="NguoiDung">
-			<Script>
-				IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[NguoiDung]') AND type in (N'U'))
-				CREATE TABLE NguoiDung (
-				Id INT PRIMARY KEY IDENTITY(1,1),
-				HoTen NVARCHAR(100) NOT NULL,
-				Email NVARCHAR(100) NOT NULL UNIQUE,
-				MatKhauHash NVARCHAR(MAX) NOT NULL,
-				SoDienThoai NVARCHAR(20),
-				DiaChi NVARCHAR(200),
-				VaiTro NVARCHAR(20) NOT NULL DEFAULT 'Customer',
-				NgayTao DATETIME DEFAULT GETDATE(),
-				TrangThai BIT DEFAULT 1
-				)
-			</Script>
-		</Table>
+		<!-- MODULE 2: USER -->
+		<NguoiDung>
+			<Id Type="INT" PK="true" Identity="true" />
+			<HoTen Type="NVARCHAR(100)" NotNull="true" />
+			<Email Type="NVARCHAR(100)" NotNull="true" Unique="true" />
+			<MatKhauHash Type="NVARCHAR(MAX)" NotNull="true" />
+			<SoDienThoai Type="NVARCHAR(20)" />
+			<DiaChi Type="NVARCHAR(200)" />
+			<VaiTro Type="NVARCHAR(20)" Default="'Customer'" />
+			<NgayTao Type="DATETIME" Default="GETDATE()" />
+			<TrangThai Type="BIT" Default="1" />
+		</NguoiDung>
 
-		<!-- Bảng Phương Thức Thanh Toán -->
-		<Table Name="PhuongThucThanhToan">
-			<Script>
-				IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[PhuongThucThanhToan]') AND type in (N'U'))
-				CREATE TABLE PhuongThucThanhToan (
-				Id INT PRIMARY KEY IDENTITY(1,1),
-				MaNguoiDung INT NOT NULL,
-				TenGoiNho NVARCHAR(200),
-				MaThe NVARCHAR(100),
-				BonSoCuoi NVARCHAR(4),
-				CONSTRAINT FK_ThanhToan_NguoiDung FOREIGN KEY (MaNguoiDung) REFERENCES NguoiDung(Id)
-				)
-			</Script>
-		</Table>
+		<PhuongThucThanhToan>
+			<Id Type="INT" PK="true" Identity="true" />
+			<MaNguoiDung Type="INT" NotNull="true" FK="NguoiDung.Id" />
+			<TenGoiNho Type="NVARCHAR(200)" />
+			<MaThe Type="NVARCHAR(100)" />
+			<BonSoCuoi Type="NVARCHAR(4)" />
+		</PhuongThucThanhToan>
 
-		<!-- ========================================== -->
-		<!-- MODULE 3: SALES (BÁN HÀNG & ĐƠN HÀNG)      -->
-		<!-- ========================================== -->
+		<!-- MODULE 3: SALES -->
+		<GioHang>
+			<Id Type="INT" PK="true" Identity="true" />
+			<MaNguoiDung Type="INT" NotNull="true" FK="NguoiDung.Id" />
+			<NgayCapNhat Type="DATETIME" Default="GETDATE()" />
+		</GioHang>
 
-		<!-- Bảng Giỏ Hàng -->
-		<Table Name="GioHang">
-			<Script>
-				IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[GioHang]') AND type in (N'U'))
-				CREATE TABLE GioHang (
-				Id INT PRIMARY KEY IDENTITY(1,1),
-				MaNguoiDung INT NOT NULL,
-				NgayCapNhat DATETIME DEFAULT GETDATE(),
-				CONSTRAINT FK_GioHang_NguoiDung FOREIGN KEY (MaNguoiDung) REFERENCES NguoiDung(Id)
-				)
-			</Script>
-		</Table>
+		<ChiTietGioHang>
+			<Id Type="INT" PK="true" Identity="true" />
+			<MaGioHang Type="INT" NotNull="true" FK="GioHang.Id" />
+			<MaSanPham Type="INT" NotNull="true" FK="SanPham.Id" />
+			<DonGia Type="DECIMAL(18, 2)" NotNull="true" />
+			<SoLuong Type="INT" NotNull="true" />
+		</ChiTietGioHang>
 
-		<!-- Bảng Chi Tiết Giỏ Hàng -->
-		<Table Name="ChiTietGioHang">
-			<Script>
-				IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[ChiTietGioHang]') AND type in (N'U'))
-				CREATE TABLE ChiTietGioHang (
-				Id INT PRIMARY KEY IDENTITY(1,1),
-				MaGioHang INT NOT NULL,
-				MaSanPham INT NOT NULL,
-				DonGia DECIMAL(18, 2) NOT NULL,
-				SoLuong INT NOT NULL,
-				CONSTRAINT FK_ChiTietGioHang_GioHang FOREIGN KEY (MaGioHang) REFERENCES GioHang(Id),
-				CONSTRAINT FK_ChiTietGioHang_SanPham FOREIGN KEY (MaSanPham) REFERENCES SanPham(Id)
-				)
-			</Script>
-		</Table>
+		<DonHang>
+			<Id Type="INT" PK="true" Identity="true" />
+			<MaNguoiDung Type="INT" NotNull="true" FK="NguoiDung.Id" />
+			<NgayDatHang Type="DATETIME" NotNull="true" />
+			<TrangThaiDonHang Type="INT" Default="0" />
+			<NguoiNhan_Ten Type="NVARCHAR(100)" />
+			<NguoiNhan_SDT Type="NVARCHAR(20)" />
+			<DiaChi_Duong Type="NVARCHAR(200)" />
+			<DiaChi_ThanhPho Type="NVARCHAR(100)" />
+			<DiaChi_Tinh Type="NVARCHAR(100)" />
+			<TongTien Type="DECIMAL(18, 2)" />
+			<GhiChu Type="NVARCHAR(MAX)" />
+		</DonHang>
 
-		<!-- Bảng Đơn Hàng -->
-		<Table Name="DonHang">
-			<Script>
-				IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[DonHang]') AND type in (N'U'))
-				CREATE TABLE DonHang (
-				Id INT PRIMARY KEY IDENTITY(1,1),
-				MaNguoiDung INT NOT NULL,
-				NgayDatHang DATETIMEOFFSET NOT NULL,
-				TrangThaiDonHang INT DEFAULT 0,
-				NguoiNhan_Ten NVARCHAR(100),
-				NguoiNhan_SDT NVARCHAR(20),
-				DiaChi_Duong NVARCHAR(200),
-				DiaChi_ThanhPho NVARCHAR(100),
-				DiaChi_Tinh NVARCHAR(100),
-				TongTien DECIMAL(18, 2),
-				GhiChu NVARCHAR(MAX),
-				CONSTRAINT FK_DonHang_NguoiDung FOREIGN KEY (MaNguoiDung) REFERENCES NguoiDung(Id)
-				)
-			</Script>
-		</Table>
+		<ChiTietDonHang>
+			<Id Type="INT" PK="true" Identity="true" />
+			<MaDonHang Type="INT" NotNull="true" FK="DonHang.Id" />
+			<ItemOrdered_MaSanPham Type="INT" NotNull="true" />
+			<ItemOrdered_TenSanPham Type="NVARCHAR(200)" />
+			<ItemOrdered_DuongDanAnh Type="NVARCHAR(MAX)" />
+			<DonGia Type="DECIMAL(18, 2)" NotNull="true" />
+			<SoLuong Type="INT" NotNull="true" />
+		</ChiTietDonHang>
 
-		<!-- Bảng Chi Tiết Đơn Hàng -->
-		<Table Name="ChiTietDonHang">
-			<Script>
-				IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[ChiTietDonHang]') AND type in (N'U'))
-				CREATE TABLE ChiTietDonHang (
-				Id INT PRIMARY KEY IDENTITY(1,1),
-				MaDonHang INT NOT NULL,
-				ItemOrdered_MaSanPham INT NOT NULL,
-				ItemOrdered_TenSanPham NVARCHAR(200),
-				ItemOrdered_DuongDanAnh NVARCHAR(MAX),
-				DonGia DECIMAL(18, 2) NOT NULL,
-				SoLuong INT NOT NULL,
-				CONSTRAINT FK_ChiTietDonHang_DonHang FOREIGN KEY (MaDonHang) REFERENCES DonHang(Id)
-				)
-			</Script>
-		</Table>
+		<!-- MODULE 4: CMS -->
+		<BaiViet>
+			<Id Type="INT" PK="true" Identity="true" />
+			<TieuDe Type="NVARCHAR(200)" NotNull="true" />
+			<HinhAnh Type="NVARCHAR(MAX)" />
+			<TomTat Type="NVARCHAR(500)" />
+			<NoiDung Type="NVARCHAR(MAX)" />
+			<NgayDang Type="DATETIME" Default="GETDATE()" />
+			<MaNguoiViet Type="INT" NotNull="true" FK="NguoiDung.Id" />
+			<HienThi Type="BIT" Default="1" />
+		</BaiViet>
 
-		<!-- ========================================== -->
-		<!-- MODULE 4: CMS (QUẢN TRỊ NỘI DUNG)          -->
-		<!-- ========================================== -->
+		<Banner>
+			<Id Type="INT" PK="true" Identity="true" />
+			<TenBanner Type="NVARCHAR(100)" />
+			<HinhAnh Type="NVARCHAR(MAX)" NotNull="true" />
+			<LienKet Type="NVARCHAR(MAX)" />
+			<ThuTu Type="INT" Default="0" />
+			<HienThi Type="BIT" Default="1" />
+		</Banner>
 
-		<!-- Bảng Bài Viết -->
-		<Table Name="BaiViet">
-			<Script>
-				IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[BaiViet]') AND type in (N'U'))
-				CREATE TABLE BaiViet (
-				Id INT PRIMARY KEY IDENTITY(1,1),
-				TieuDe NVARCHAR(200) NOT NULL,
-				HinhAnh NVARCHAR(MAX),
-				TomTat NVARCHAR(500),
-				NoiDung NVARCHAR(MAX),
-				NgayDang DATETIME DEFAULT GETDATE(),
-				MaNguoiViet INT NOT NULL,
-				HienThi BIT DEFAULT 1,
-				CONSTRAINT FK_BaiViet_NguoiDung FOREIGN KEY (MaNguoiViet) REFERENCES NguoiDung(Id)
-				)
-			</Script>
-		</Table>
-
-		<!-- Bảng Banner -->
-		<Table Name="Banner">
-			<Script>
-				IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Banner]') AND type in (N'U'))
-				CREATE TABLE Banner (
-				Id INT PRIMARY KEY IDENTITY(1,1),
-				TenBanner NVARCHAR(100),
-				HinhAnh NVARCHAR(MAX) NOT NULL,
-				LienKet NVARCHAR(MAX),
-				ThuTu INT DEFAULT 0,
-				HienThi BIT DEFAULT 1
-				)
-			</Script>
-		</Table>
-
-		<!-- Bảng Liên Hệ -->
-		<Table Name="LienHe">
-			<Script>
-				IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LienHe]') AND type in (N'U'))
-				CREATE TABLE LienHe (
-				Id INT PRIMARY KEY IDENTITY(1,1),
-				HoTen NVARCHAR(100),
-				Email NVARCHAR(100),
-				SoDienThoai NVARCHAR(20),
-				NoiDung NVARCHAR(MAX),
-				NgayGui DATETIME DEFAULT GETDATE(),
-				DaXem BIT DEFAULT 0
-				)
-			</Script>
-		</Table>
-
-		<!-- ========================================== -->
-		<!-- DỮ LIỆU MẪU (SAMPLE DATA)                  -->
-		<!-- ========================================== -->
-
-		<!-- Dữ liệu Thương Hiệu -->
-		<Table Name="Data_ThuongHieu">
-			<Script>
-				IF NOT EXISTS (SELECT TOP 1 * FROM ThuongHieu)
-				BEGIN
-				INSERT INTO ThuongHieu (TenThuongHieu) VALUES (N'Apple');
-				INSERT INTO ThuongHieu (TenThuongHieu) VALUES (N'Samsung');
-				INSERT INTO ThuongHieu (TenThuongHieu) VALUES (N'Sony');
-				INSERT INTO ThuongHieu (TenThuongHieu) VALUES (N'Dell');
-				INSERT INTO ThuongHieu (TenThuongHieu) VALUES (N'Logitech');
-				END
-			</Script>
-		</Table>
-
-		<!-- Dữ liệu Loại Sản Phẩm -->
-		<Table Name="Data_LoaiSanPham">
-			<Script>
-				IF NOT EXISTS (SELECT TOP 1 * FROM LoaiSanPham)
-				BEGIN
-				INSERT INTO LoaiSanPham (TenLoai) VALUES (N'Điện thoại');
-				INSERT INTO LoaiSanPham (TenLoai) VALUES (N'Laptop');
-				INSERT INTO LoaiSanPham (TenLoai) VALUES (N'Phụ kiện');
-				INSERT INTO LoaiSanPham (TenLoai) VALUES (N'Thiết bị âm thanh');
-				END
-			</Script>
-		</Table>
-
-		<!-- Dữ liệu Người Dùng (Admin Mặc định) -->
-		<!-- Pass: 123456 (Hash giả lập) -->
-		<Table Name="Data_Admin">
-			<Script>
-				IF NOT EXISTS (SELECT TOP 1 * FROM NguoiDung WHERE Email = 'admin@shop.com')
-				BEGIN
-				INSERT INTO NguoiDung (HoTen, Email, MatKhauHash, VaiTro, SoDienThoai, DiaChi)
-				VALUES (N'Quản Trị Viên', 'admin@shop.com', 'e10adc3949ba59abbe56e057f20f883e', 'Admin', '0909123456', N'Hà Nội');
-				END
-			</Script>
-		</Table>
-
+		<LienHe>
+			<Id Type="INT" PK="true" Identity="true" />
+			<HoTen Type="NVARCHAR(100)" />
+			<Email Type="NVARCHAR(100)" />
+			<SoDienThoai Type="NVARCHAR(20)" />
+			<NoiDung Type="NVARCHAR(MAX)" />
+			<NgayGui Type="DATETIME" Default="GETDATE()" />
+			<DaXem Type="BIT" Default="0" />
+		</LienHe>
 	</Tables>
+
+	<DataSeeder>
+		<!-- 1. Bảng Thương Hiệu (15 rows) -->
+		<ThuongHieu>
+			<Row TenThuongHieu="Apple" HinhAnh="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" />
+			<Row TenThuongHieu="Samsung" HinhAnh="https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg" />
+			<Row TenThuongHieu="Dell" HinhAnh="https://upload.wikimedia.org/wikipedia/commons/1/18/Dell_logo_2016.svg" />
+			<Row TenThuongHieu="HP" HinhAnh="https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_logo_2012.svg" />
+			<Row TenThuongHieu="Asus" HinhAnh="https://upload.wikimedia.org/wikipedia/commons/2/2e/ASUS_Logo.svg" />
+			<Row TenThuongHieu="Lenovo" HinhAnh="https://upload.wikimedia.org/wikipedia/commons/b/b8/Lenovo_logo_2015.svg" />
+			<Row TenThuongHieu="MSI" HinhAnh="https://upload.wikimedia.org/wikipedia/commons/8/8c/MSI_Logo_2019.svg" />
+			<Row TenThuongHieu="Acer" HinhAnh="https://upload.wikimedia.org/wikipedia/commons/0/00/Acer_2011.svg" />
+			<Row TenThuongHieu="Sony" HinhAnh="https://upload.wikimedia.org/wikipedia/commons/c/c3/Sony_logo.svg" />
+			<Row TenThuongHieu="LG" HinhAnh="https://upload.wikimedia.org/wikipedia/commons/b/bf/LG_logo_%282015%29.svg" />
+			<Row TenThuongHieu="Logitech" HinhAnh="https://upload.wikimedia.org/wikipedia/commons/ce/Logitech_logo.svg" />
+			<Row TenThuongHieu="Razer" HinhAnh="https://upload.wikimedia.org/wikipedia/en/4/40/Razer_snake_logo.svg" />
+			<Row TenThuongHieu="Corsair" HinhAnh="https://upload.wikimedia.org/wikipedia/commons/a/a2/Corsair_Components_logo.svg" />
+			<Row TenThuongHieu="Microsoft" HinhAnh="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" />
+			<Row TenThuongHieu="Xiaomi" HinhAnh="https://upload.wikimedia.org/wikipedia/commons/a/ae/Xiaomi_logo_%282021-%29.svg" />
+		</ThuongHieu>
+
+		<!-- 2. Bảng Loại Sản Phẩm (8 rows) -->
+		<LoaiSanPham>
+			<Row TenLoai="Laptop Văn Phòng" />
+			<Row TenLoai="Laptop Gaming" />
+			<Row TenLoai="Laptop Đồ Họa" />
+			<Row TenLoai="Điện thoại" />
+			<Row TenLoai="Máy tính bảng" />
+			<Row TenLoai="Phụ kiện" />
+			<Row TenLoai="Linh kiện máy tính" />
+			<Row TenLoai="Thiết bị âm thanh" />
+		</LoaiSanPham>
+
+		<!-- 3. Bảng Người Dùng (30 rows đại diện cho 60) -->
+		<!-- Row 1: Admin -->
+		<NguoiDung>
+			<Row HoTen="Quản Trị Viên" Email="admin@shop.com" MatKhauHash="e10adc3949ba59abbe56e057f20f883e" VaiTro="Admin" SoDienThoai="0909123456" DiaChi="Hà Nội" NgayTao="2024-01-01T08:00:00" TrangThai="1" />
+			<Row HoTen="Nguyễn Văn An" Email="user01@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345671" DiaChi="Số 10, Nguyễn Trãi, Thanh Xuân, Hà Nội" NgayTao="2024-02-15T09:30:00" TrangThai="1" />
+			<Row HoTen="Trần Thị Bích" Email="user02@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345672" DiaChi="25 Lê Lợi, Quận 1, TP.HCM" NgayTao="2024-02-20T14:20:00" TrangThai="1" />
+			<Row HoTen="Lê Hoàng Cường" Email="user03@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345673" DiaChi="12 Trần Hưng Đạo, Đà Nẵng" NgayTao="2024-03-05T10:15:00" TrangThai="1" />
+			<Row HoTen="Phạm Minh Dũng" Email="user04@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345674" DiaChi="88 Cầu Giấy, Hà Nội" NgayTao="2024-03-10T16:45:00" TrangThai="1" />
+			<Row HoTen="Hoàng Thu E" Email="user05@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345675" DiaChi="54 Nguyễn Văn Linh, Đà Nẵng" NgayTao="2024-03-25T11:00:00" TrangThai="1" />
+			<Row HoTen="Vũ Văn F" Email="user06@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345676" DiaChi="TP. Hải Phòng" NgayTao="2024-04-01T08:30:00" TrangThai="1" />
+			<Row HoTen="Đặng Thị G" Email="user07@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345677" DiaChi="TP. Cần Thơ" NgayTao="2024-04-12T13:20:00" TrangThai="1" />
+			<Row HoTen="Bùi Văn H" Email="user08@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345678" DiaChi="TP. Nha Trang" NgayTao="2024-05-05T09:10:00" TrangThai="1" />
+			<Row HoTen="Đỗ Thị I" Email="user09@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345679" DiaChi="TP. Vinh" NgayTao="2024-05-20T15:40:00" TrangThai="1" />
+			<Row HoTen="Ngô Văn K" Email="user10@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345680" DiaChi="TP. Huế" NgayTao="2024-06-01T10:00:00" TrangThai="1" />
+			<Row HoTen="Dương Thị L" Email="user11@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345681" DiaChi="Biên Hòa, Đồng Nai" NgayTao="2024-06-15T14:50:00" TrangThai="1" />
+			<Row HoTen="Lý Văn M" Email="user12@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345682" DiaChi="Thủ Đức, TP.HCM" NgayTao="2024-07-01T08:15:00" TrangThai="1" />
+			<Row HoTen="Mai Thị N" Email="user13@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345683" DiaChi="Bình Thạnh, TP.HCM" NgayTao="2024-07-20T11:30:00" TrangThai="1" />
+			<Row HoTen="Hồ Văn O" Email="user14@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345684" DiaChi="Gò Vấp, TP.HCM" NgayTao="2024-08-05T16:00:00" TrangThai="1" />
+			<Row HoTen="Võ Thị P" Email="user15@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345685" DiaChi="Quận 7, TP.HCM" NgayTao="2024-08-15T09:45:00" TrangThai="1" />
+			<Row HoTen="Trương Văn Q" Email="user16@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345686" DiaChi="Tân Bình, TP.HCM" NgayTao="2024-09-01T13:10:00" TrangThai="1" />
+			<Row HoTen="Đinh Thị R" Email="user17@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345687" DiaChi="Đống Đa, Hà Nội" NgayTao="2024-09-10T10:25:00" TrangThai="1" />
+			<Row HoTen="Lâm Văn S" Email="user18@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345688" DiaChi="Hoàn Kiếm, Hà Nội" NgayTao="2024-09-20T15:55:00" TrangThai="1" />
+			<Row HoTen="Châu Thị T" Email="user19@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345689" DiaChi="Ba Đình, Hà Nội" NgayTao="2024-10-01T08:40:00" TrangThai="1" />
+			<Row HoTen="Vương Văn U" Email="user20@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345690" DiaChi="Hai Bà Trưng, Hà Nội" NgayTao="2024-10-15T11:50:00" TrangThai="1" />
+			<Row HoTen="Tạ Thị V" Email="user21@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345691" DiaChi="Long Biên, Hà Nội" NgayTao="2024-10-25T14:05:00" TrangThai="1" />
+			<Row HoTen="Phan Văn X" Email="user22@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345692" DiaChi="Tây Hồ, Hà Nội" NgayTao="2024-11-01T09:15:00" TrangThai="1" />
+			<Row HoTen="Cao Thị Y" Email="user23@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345693" DiaChi="Hà Đông, Hà Nội" NgayTao="2024-11-10T13:35:00" TrangThai="1" />
+			<Row HoTen="Đoàn Văn Z" Email="user24@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345694" DiaChi="Nam Từ Liêm, Hà Nội" NgayTao="2024-11-15T16:20:00" TrangThai="1" />
+			<Row HoTen="Hà Thị Lan" Email="user25@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345695" DiaChi="Thanh Xuân, Hà Nội" NgayTao="2024-11-20T10:50:00" TrangThai="1" />
+			<Row HoTen="Khương Văn Nam" Email="user26@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345696" DiaChi="Bắc Từ Liêm, Hà Nội" NgayTao="2024-11-25T15:10:00" TrangThai="1" />
+			<Row HoTen="Quách Thị Mai" Email="user27@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345697" DiaChi="Hoàng Mai, Hà Nội" NgayTao="2024-11-28T09:00:00" TrangThai="1" />
+			<Row HoTen="Tống Văn Long" Email="user28@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345698" DiaChi="Cầu Giấy, Hà Nội" NgayTao="2024-12-01T14:30:00" TrangThai="1" />
+			<Row HoTen="Lục Thị Hoa" Email="user29@gmail.com" MatKhauHash="5f4dcc3b5aa765d61d8327deb882cf99" VaiTro="Customer" SoDienThoai="0912345699" DiaChi="Đống Đa, Hà Nội" NgayTao="2024-12-02T08:00:00" TrangThai="1" />
+		</NguoiDung>
+
+		<!-- 4. Bảng Sản Phẩm (Khoảng 50 rows chất lượng) -->
+		<SanPham>
+			<!-- Apple (Brand 1) - Phones (4) & Tablets (5) & Laptops (1) -->
+			<Row TenSanPham="MacBook Air M1 2020" MoTa="Chip M1 mạnh mẽ, pin trâu" ChiTiet="RAM 8GB, SSD 256GB, Màn hình Retina" Gia="18990000.00" GiaKhuyenMai="17990000.00" DuongDanAnh="https://loremflickr.com/320/240/macbook" SoLuongTon="50" MaLoai="1" MaThuongHieu="1" HienThi="1" />
+			<Row TenSanPham="MacBook Pro 14 M3" MoTa="Hiệu năng đỉnh cao cho Pro" ChiTiet="Chip M3 Pro, RAM 18GB, SSD 512GB" Gia="49990000.00" DuongDanAnh="https://loremflickr.com/320/240/macbookpro" SoLuongTon="20" MaLoai="3" MaThuongHieu="1" HienThi="1" />
+			<Row TenSanPham="iPhone 15 Pro Max" MoTa="Titanium, Chip A17 Pro" ChiTiet="256GB, Natural Titanium" Gia="34990000.00" GiaKhuyenMai="33990000.00" DuongDanAnh="https://loremflickr.com/320/240/iphone" SoLuongTon="100" MaLoai="4" MaThuongHieu="1" HienThi="1" />
+			<Row TenSanPham="iPhone 14 Plus" MoTa="Màn hình lớn, pin lâu" ChiTiet="128GB, Blue" Gia="21990000.00" DuongDanAnh="https://loremflickr.com/320/240/iphone14" SoLuongTon="40" MaLoai="4" MaThuongHieu="1" HienThi="1" />
+			<Row TenSanPham="iPad Air 5 M1" MoTa="Sức mạnh M1 trên iPad" ChiTiet="WiFi 64GB, Blue" Gia="13990000.00" DuongDanAnh="https://loremflickr.com/320/240/ipad" SoLuongTon="30" MaLoai="5" MaThuongHieu="1" HienThi="1" />
+
+			<!-- Samsung (Brand 2) - Phones (4) -->
+			<Row TenSanPham="Samsung Galaxy S24 Ultra" MoTa="Quyền năng AI" ChiTiet="12GB/256GB, Titanium Grey" Gia="31990000.00" GiaKhuyenMai="29990000.00" DuongDanAnh="https://loremflickr.com/320/240/samsung" SoLuongTon="80" MaLoai="4" MaThuongHieu="2" HienThi="1" />
+			<Row TenSanPham="Samsung Galaxy Z Fold5" MoTa="Gập mở linh hoạt" ChiTiet="12GB/512GB, Icy Blue" Gia="39990000.00" DuongDanAnh="https://loremflickr.com/320/240/galaxyfold" SoLuongTon="15" MaLoai="4" MaThuongHieu="2" HienThi="1" />
+			<Row TenSanPham="Samsung Galaxy Tab S9" MoTa="Máy tính bảng kháng nước" ChiTiet="WiFi 128GB, Graphite" Gia="19990000.00" DuongDanAnh="https://loremflickr.com/320/240/galaxytab" SoLuongTon="25" MaLoai="5" MaThuongHieu="2" HienThi="1" />
+
+			<!-- Dell (Brand 3) - Laptops (1,3) -->
+			<Row TenSanPham="Dell XPS 13 9315" MoTa="Siêu mỏng nhẹ, sang trọng" ChiTiet="Core i5-1230U, RAM 16GB, SSD 512GB" Gia="29990000.00" GiaKhuyenMai="27990000.00" DuongDanAnh="https://loremflickr.com/320/240/dellxps" SoLuongTon="10" MaLoai="1" MaThuongHieu="3" HienThi="1" />
+			<Row TenSanPham="Dell Inspiron 16 5630" MoTa="Laptop văn phòng màn lớn" ChiTiet="Core i5-1340P, RAM 16GB, SSD 512GB" Gia="21490000.00" DuongDanAnh="https://loremflickr.com/320/240/dell" SoLuongTon="35" MaLoai="1" MaThuongHieu="3" HienThi="1" />
+			<Row TenSanPham="Dell Alienware m15 R7" MoTa="Cỗ máy chiến game" ChiTiet="Ryzen 7 6800H, RTX 3060, RAM 16GB" Gia="45990000.00" DuongDanAnh="https://loremflickr.com/320/240/alienware" SoLuongTon="5" MaLoai="2" MaThuongHieu="3" HienThi="1" />
+
+			<!-- HP (Brand 4) -->
+			<Row TenSanPham="HP Envy x360 13" MoTa="Xoay gập 360 độ" ChiTiet="Core i7-1250U, RAM 16GB, OLED Touch" Gia="26990000.00" DuongDanAnh="https://loremflickr.com/320/240/hpenvy" SoLuongTon="12" MaLoai="1" MaThuongHieu="4" HienThi="1" />
+			<Row TenSanPham="HP Victus 15" MoTa="Gaming giá rẻ" ChiTiet="Core i5-12450H, RTX 3050, 144Hz" Gia="19990000.00" GiaKhuyenMai="18490000.00" DuongDanAnh="https://loremflickr.com/320/240/hpvictus" SoLuongTon="45" MaLoai="2" MaThuongHieu="4" HienThi="1" />
+
+			<!-- Asus (Brand 5) -->
+			<Row TenSanPham="Asus ROG Zephyrus G14" MoTa="Gaming nhỏ gọn mạnh mẽ" ChiTiet="Ryzen 9 7940HS, RTX 4060, AnimeMatrix" Gia="42990000.00" DuongDanAnh="https://loremflickr.com/320/240/rog" SoLuongTon="8" MaLoai="2" MaThuongHieu="5" HienThi="1" />
+			<Row TenSanPham="Asus Zenbook 14 OLED" MoTa="Màn hình OLED tuyệt đẹp" ChiTiet="Core i5-1340P, 2.8K OLED 90Hz" Gia="24990000.00" DuongDanAnh="https://loremflickr.com/320/240/zenbook" SoLuongTon="30" MaLoai="1" MaThuongHieu="5" HienThi="1" />
+			<Row TenSanPham="Asus TUF Gaming F15" MoTa="Bền bỉ chuẩn quân đội" ChiTiet="Core i7-12700H, RTX 4050" Gia="25990000.00" DuongDanAnh="https://loremflickr.com/320/240/tuf" SoLuongTon="50" MaLoai="2" MaThuongHieu="5" HienThi="1" />
+
+			<!-- Lenovo (Brand 6) -->
+			<Row TenSanPham="Lenovo Legion 5" MoTa="Ông vua Gaming tầm trung" ChiTiet="Ryzen 7 7735H, RTX 4060, 165Hz" Gia="31990000.00" GiaKhuyenMai="29990000.00" DuongDanAnh="https://loremflickr.com/320/240/legion" SoLuongTon="25" MaLoai="2" MaThuongHieu="6" HienThi="1" />
+			<Row TenSanPham="Lenovo ThinkPad X1 Carbon" MoTa="Doanh nhân đẳng cấp" ChiTiet="Gen 11, Core i7-1355U, 16GB, 512GB" Gia="48990000.00" DuongDanAnh="https://loremflickr.com/320/240/thinkpad" SoLuongTon="10" MaLoai="1" MaThuongHieu="6" HienThi="1" />
+
+			<!-- MSI (Brand 7) -->
+			<Row TenSanPham="MSI Katana 15" MoTa="Sắc bén như kiếm Katana" ChiTiet="Core i7-13620H, RTX 4050" Gia="27990000.00" DuongDanAnh="https://loremflickr.com/320/240/msi" SoLuongTon="18" MaLoai="2" MaThuongHieu="7" HienThi="1" />
+			<Row TenSanPham="MSI Modern 14" MoTa="Mỏng nhẹ cho sinh viên" ChiTiet="Core i3-1215U, RAM 8GB, SSD 512GB" Gia="10990000.00" DuongDanAnh="https://loremflickr.com/320/240/msimodern" SoLuongTon="60" MaLoai="1" MaThuongHieu="7" HienThi="1" />
+
+			<!-- Acer (Brand 8) -->
+			<Row TenSanPham="Acer Nitro 5 Tiger" MoTa="Quốc dân Gaming" ChiTiet="Core i5-12500H, RTX 3050Ti" Gia="20490000.00" GiaKhuyenMai="18990000.00" DuongDanAnh="https://loremflickr.com/320/240/nitro5" SoLuongTon="40" MaLoai="2" MaThuongHieu="8" HienThi="1" />
+			<Row TenSanPham="Acer Swift 3" MoTa="Mỏng nhẹ thời trang" ChiTiet="Core i5-1135G7, RAM 16GB" Gia="16990000.00" DuongDanAnh="https://loremflickr.com/320/240/swift3" SoLuongTon="22" MaLoai="1" MaThuongHieu="8" HienThi="1" />
+
+			<!-- Sony (Brand 9) -->
+			<Row TenSanPham="Sony WH-1000XM5" MoTa="Tai nghe chống ồn đỉnh cao" ChiTiet="Chống ồn chủ động, Pin 30h" Gia="8490000.00" DuongDanAnh="https://loremflickr.com/320/240/sonyheadphones" SoLuongTon="30" MaLoai="8" MaThuongHieu="9" HienThi="1" />
+			<Row TenSanPham="Sony Xperia 1 V" MoTa="Điện thoại chuẩn điện ảnh" ChiTiet="Màn hình 4K OLED 21:9" Gia="29990000.00" DuongDanAnh="https://loremflickr.com/320/240/xperia" SoLuongTon="8" MaLoai="4" MaThuongHieu="9" HienThi="1" />
+
+			<!-- LG (Brand 10) -->
+			<Row TenSanPham="LG Gram 2023" MoTa="Nhẹ vô địch" ChiTiet="14 inch, nặng 999g, Core i5-1340P" Gia="32990000.00" GiaKhuyenMai="30990000.00" DuongDanAnh="https://loremflickr.com/320/240/lggram" SoLuongTon="12" MaLoai="1" MaThuongHieu="10" HienThi="1" />
+			<Row TenSanPham="Màn hình LG UltraGear 27" MoTa="Màn hình Gaming 144Hz" ChiTiet="27 inch IPS, 1ms, G-Sync" Gia="6590000.00" DuongDanAnh="https://loremflickr.com/320/240/monitor" SoLuongTon="20" MaLoai="7" MaThuongHieu="10" HienThi="1" />
+
+			<!-- Logitech (Brand 11) - Accessories (6) -->
+			<Row TenSanPham="Chuột Logitech MX Master 3S" MoTa="Chuột văn phòng tốt nhất" ChiTiet="Cảm biến 8K DPI, Click không tiếng" Gia="2490000.00" DuongDanAnh="https://loremflickr.com/320/240/mouse" SoLuongTon="50" MaLoai="6" MaThuongHieu="11" HienThi="1" />
+			<Row TenSanPham="Bàn phím Logitech MX Keys S" MoTa="Gõ êm ái, đèn nền thông minh" ChiTiet="Kết nối 3 thiết bị, Pin sạc" Gia="2890000.00" DuongDanAnh="https://loremflickr.com/320/240/keyboard" SoLuongTon="40" MaLoai="6" MaThuongHieu="11" HienThi="1" />
+
+			<!-- Razer (Brand 12) -->
+			<Row TenSanPham="Chuột Razer DeathAdder V3" MoTa="Huyền thoại Gaming" ChiTiet="Siêu nhẹ 63g, 30K DPI" Gia="3690000.00" DuongDanAnh="https://loremflickr.com/320/240/razer" SoLuongTon="25" MaLoai="6" MaThuongHieu="12" HienThi="1" />
+
+			<!-- Corsair (Brand 13) -->
+			<Row TenSanPham="RAM Corsair Vengeance RGB" MoTa="RAM DDR5 tốc độ cao" ChiTiet="32GB (2x16GB) 6000MHz" Gia="3590000.00" DuongDanAnh="https://loremflickr.com/320/240/ram" SoLuongTon="30" MaLoai="7" MaThuongHieu="13" HienThi="1" />
+
+			<!-- Microsoft (Brand 14) -->
+			<Row TenSanPham="Surface Pro 9" MoTa="Laptop lai Tablet" ChiTiet="Core i5, 8GB, 256GB, Platinum" Gia="28990000.00" DuongDanAnh="https://loremflickr.com/320/240/surface" SoLuongTon="15" MaLoai="1" MaThuongHieu="14" HienThi="1" />
+
+			<!-- Xiaomi (Brand 15) -->
+			<Row TenSanPham="Xiaomi 14" MoTa="Leica Camera" ChiTiet="Snapdragon 8 Gen 3, 12GB/256GB" Gia="20990000.00" GiaKhuyenMai="19990000.00" DuongDanAnh="https://loremflickr.com/320/240/xiaomi" SoLuongTon="40" MaLoai="4" MaThuongHieu="15" HienThi="1" />
+			<Row TenSanPham="Màn hình Xiaomi Gaming G27i" MoTa="Màn hình giá rẻ 165Hz" ChiTiet="27 inch FHD, Fast IPS" Gia="3290000.00" DuongDanAnh="https://loremflickr.com/320/240/xiaomimonitor" SoLuongTon="60" MaLoai="7" MaThuongHieu="15" HienThi="1" />
+		</SanPham>
+
+		<!-- 5. Bảng Phương Thức Thanh Toán -->
+		<PhuongThucThanhToan>
+			<Row MaNguoiDung="2" TenGoiNho="Thẻ VISA Chính" MaThe="tok_visa_123" BonSoCuoi="4242" />
+			<Row MaNguoiDung="2" TenGoiNho="Ví MoMo" MaThe="tok_momo_456" BonSoCuoi="8888" />
+			<Row MaNguoiDung="3" TenGoiNho="Thẻ Master" MaThe="tok_master_789" BonSoCuoi="1234" />
+			<Row MaNguoiDung="5" TenGoiNho="ZaloPay" MaThe="tok_zalo_000" BonSoCuoi="9999" />
+			<Row MaNguoiDung="10" TenGoiNho="Thẻ ATM" MaThe="tok_atm_111" BonSoCuoi="5678" />
+		</PhuongThucThanhToan>
+
+		<!-- 6. Bảng Bài Viết -->
+		<BaiViet>
+			<Row TieuDe="Đánh giá iPhone 15 Pro Max sau 3 tháng" HinhAnh="https://loremflickr.com/320/240/review" TomTat="Liệu có đáng nâng cấp?" NoiDung="Nội dung chi tiết bài viết..." NgayDang="2024-11-20T09:00:00" MaNguoiViet="1" HienThi="1" />
+			<Row TieuDe="Top 5 Laptop Gaming dưới 30 triệu" HinhAnh="https://loremflickr.com/320/240/gaming" TomTat="Lựa chọn tốt nhất cho sinh viên" NoiDung="Nội dung chi tiết..." NgayDang="2024-11-25T14:30:00" MaNguoiViet="1" HienThi="1" />
+			<Row TieuDe="Hướng dẫn vệ sinh Laptop tại nhà" HinhAnh="https://loremflickr.com/320/240/cleaning" TomTat="Bảo dưỡng máy tính bền bỉ" NoiDung="Các bước thực hiện..." NgayDang="2024-11-28T10:00:00" MaNguoiViet="1" HienThi="1" />
+			<Row TieuDe="So sánh Chip M3 và M2" HinhAnh="https://loremflickr.com/320/240/chip" TomTat="Khác biệt hiệu năng" NoiDung="Benchmark và thực tế..." NgayDang="2024-12-01T08:00:00" MaNguoiViet="1" HienThi="1" />
+			<Row TieuDe="Khuyến mãi Giáng Sinh 2024" HinhAnh="https://loremflickr.com/320/240/xmas" TomTat="Săn sale cuối năm" NoiDung="Danh sách deal hot..." NgayDang="2024-12-02T00:00:00" MaNguoiViet="1" HienThi="1" />
+		</BaiViet>
+
+		<!-- 7. Bảng Banner -->
+		<Banner>
+			<Row TenBanner="Banner iPhone 15" HinhAnh="https://loremflickr.com/1200/400/iphone" LienKet="/san-pham/iphone-15" ThuTu="1" HienThi="1" />
+			<Row TenBanner="Banner Laptop Gaming" HinhAnh="https://loremflickr.com/1200/400/gaming" LienKet="/danh-muc/laptop-gaming" ThuTu="2" HienThi="1" />
+			<Row TenBanner="Banner Phụ kiện" HinhAnh="https://loremflickr.com/1200/400/accessories" LienKet="/danh-muc/phu-kien" ThuTu="3" HienThi="1" />
+			<Row TenBanner="Sale Tết 2025" HinhAnh="https://loremflickr.com/1200/400/tet" LienKet="/khuyen-mai" ThuTu="4" HienThi="1" />
+		</Banner>
+
+		<!-- 8. Bảng Liên Hệ -->
+		<LienHe>
+			<Row HoTen="Nguyễn Văn Khách" Email="guest1@gmail.com" SoDienThoai="0901234567" NoiDung="Tư vấn mua laptop Dell" NgayGui="2024-11-30T10:00:00" DaXem="0" />
+			<Row HoTen="Trần Thị Khách" Email="guest2@gmail.com" SoDienThoai="0901234568" NoiDung="Hỏi về bảo hành iPhone" NgayGui="2024-12-01T15:30:00" DaXem="1" />
+			<Row HoTen="Lê Văn Khách" Email="guest3@gmail.com" SoDienThoai="0901234569" NoiDung="Khi nào có hàng S24?" NgayGui="2024-12-02T09:00:00" DaXem="0" />
+		</LienHe>
+
+		<!-- 9. Bảng Giỏ Hàng (Mỗi user 1 giỏ) -->
+		<GioHang>
+			<Row MaNguoiDung="2" NgayCapNhat="2024-11-20T10:00:00" />
+			<Row MaNguoiDung="3" NgayCapNhat="2024-11-25T14:00:00" />
+			<Row MaNguoiDung="4" NgayCapNhat="2024-12-01T09:30:00" />
+			<Row MaNguoiDung="5" NgayCapNhat="2024-12-02T08:00:00" />
+		</GioHang>
+
+		<!-- 10. Bảng Chi Tiết Giỏ Hàng (Mapping Cart ID 1->User 2, Cart ID 2->User 3...) -->
+		<ChiTietGioHang>
+			<Row MaGioHang="1" MaSanPham="1" DonGia="18990000.00" SoLuong="1" />
+			<!-- User 2 mua Macbook -->
+			<Row MaGioHang="1" MaSanPham="30" DonGia="2490000.00" SoLuong="1" />
+			<!-- Kèm chuột -->
+			<Row MaGioHang="2" MaSanPham="6" DonGia="29990000.00" SoLuong="1" />
+			<!-- User 3 mua S24 -->
+			<Row MaGioHang="3" MaSanPham="15" DonGia="25990000.00" SoLuong="2" />
+			<!-- User 4 mua 2 TUF -->
+			<Row MaGioHang="4" MaSanPham="3" DonGia="33990000.00" SoLuong="1" />
+			<!-- User 5 mua iPhone -->
+		</ChiTietGioHang>
+
+		<!-- 11. Bảng Đơn Hàng (Đã thanh toán) -->
+		<DonHang>
+			<Row MaNguoiDung="2" NgayDatHang="2024-10-15T10:00:00" TrangThaiDonHang="3" NguoiNhan_Ten="Nguyễn Văn An" NguoiNhan_SDT="0912345671" DiaChi_Duong="Số 10" DiaChi_ThanhPho="Hà Nội" DiaChi_Tinh="Hà Nội" TongTien="21480000.00" GhiChu="Giao giờ hành chính" />
+			<Row MaNguoiDung="3" NgayDatHang="2024-11-01T14:30:00" TrangThaiDonHang="2" NguoiNhan_Ten="Trần Thị Bích" NguoiNhan_SDT="0912345672" DiaChi_Duong="25 Lê Lợi" DiaChi_ThanhPho="HCM" DiaChi_Tinh="TP.HCM" TongTien="34990000.00" GhiChu="" />
+			<Row MaNguoiDung="4" NgayDatHang="2024-11-20T09:15:00" TrangThaiDonHang="1" NguoiNhan_Ten="Lê Hoàng Cường" NguoiNhan_SDT="0912345673" DiaChi_Duong="12 Trần Hưng Đạo" DiaChi_ThanhPho="Đà Nẵng" DiaChi_Tinh="Đà Nẵng" TongTien="18990000.00" GhiChu="Gọi trước khi giao" />
+		</DonHang>
+
+		<!-- 12. Bảng Chi Tiết Đơn Hàng -->
+		<ChiTietDonHang>
+			<!-- Đơn 1 (User 2): Mua Macbook Air + Chuột -->
+			<Row MaDonHang="1" ItemOrdered_MaSanPham="1" ItemOrdered_TenSanPham="MacBook Air M1 2020" ItemOrdered_DuongDanAnh="https://loremflickr.com/320/240/macbook" DonGia="18990000.00" SoLuong="1" />
+			<Row MaDonHang="1" ItemOrdered_MaSanPham="30" ItemOrdered_TenSanPham="Chuột Logitech MX Master 3S" ItemOrdered_DuongDanAnh="https://loremflickr.com/320/240/mouse" DonGia="2490000.00" SoLuong="1" />
+
+			<!-- Đơn 2 (User 3): Mua iPhone 15 PM -->
+			<Row MaDonHang="2" ItemOrdered_MaSanPham="3" ItemOrdered_TenSanPham="iPhone 15 Pro Max" ItemOrdered_DuongDanAnh="https://loremflickr.com/320/240/iphone" DonGia="34990000.00" SoLuong="1" />
+	
+			<!-- Đơn 3 (User 4): Mua Macbook Air -->
+			<Row MaDonHang="3" ItemOrdered_MaSanPham="1" ItemOrdered_TenSanPham="MacBook Air M1 2020" ItemOrdered_DuongDanAnh="https://loremflickr.com/320/240/macbook" DonGia="18990000.00" SoLuong="1" />
+		</ChiTietDonHang>
+	</DataSeeder>
 </Schema>

@@ -23,7 +23,6 @@ namespace _125CNX03_Nhom6_CK.GUI
                 // Gọi hàm khởi tạo từ lớp DAL
                 // Hàm này sẽ đọc db_schema.xml và db_config.xml để tạo CSDL
                 DbInitializer.Initialize();
-                // SeederData
                 DataSeeder.Seed();
             }
             catch (Exception ex)

@@ -1,34 +1,30 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
-using System.Xml.Linq; // Thư viện LINQ to XML quan trọng
+using System.Linq;
+using System.Text;
+using System.Xml.Linq;
 
 namespace _125CNX03_Nhom6_CK.DAL
 {
     public class DbInitializer
     {
-        // Đường dẫn tương đối đến file XML cấu trúc (đã copy ra bin/Debug)
         private const string SchemaFilePath = "Data/db_schema.xml";
 
         public static void Initialize()
         {
-            // 1. Kiểm tra file XML tồn tại không
             if (!File.Exists(SchemaFilePath))
-            {
-                throw new Exception($"LỖI: Không tìm thấy file cấu trúc tại '{Path.GetFullPath(SchemaFilePath)}'. Hãy chắc chắn bạn đã chọn 'Copy to Output Directory = Copy always' cho file xml.");
-            }
+                throw new Exception($"Không tìm thấy file: {Path.GetFullPath(SchemaFilePath)}");
 
-            // 2. Đọc nội dung XML
             XDocument doc = XDocument.Load(SchemaFilePath);
-
-            // Lấy tên Database từ XML (để đồng bộ)
             string dbName = doc.Element("Schema").Element("DatabaseName").Value;
 
-            // 3. Kết nối Master để tạo DB nếu chưa có
+            // 1. Tạo Database
             CreateDatabaseIfNotExists(dbName);
 
-            // 4. Kết nối vào DB vừa tạo để chạy lệnh tạo bảng
-            CreateTables(doc);
+            // 2. Tạo Bảng (Logic MỚI: Dịch từ thẻ XML -> SQL)
+            CreateTablesDynamic(doc);
         }
 
         private static void CreateDatabaseIfNotExists(string dbName)
@@ -36,53 +32,112 @@ namespace _125CNX03_Nhom6_CK.DAL
             using (var conn = new SqlConnection(DbConnection.GetMasterConnectionString()))
             {
                 conn.Open();
-                // Kiểm tra DB tồn tại chưa
                 string checkSql = $"SELECT COUNT(*) FROM sys.databases WHERE name = '{dbName}'";
                 using (var cmd = new SqlCommand(checkSql, conn))
                 {
-                    int exists = (int)cmd.ExecuteScalar();
-                    if (exists == 0)
+                    if ((int)cmd.ExecuteScalar() == 0)
                     {
-                        // Tạo mới nếu chưa có
-                        string createSql = $"CREATE DATABASE {dbName}";
-                        using (var createCmd = new SqlCommand(createSql, conn))
+                        new SqlCommand($"CREATE DATABASE {dbName}", conn).ExecuteNonQuery();
+                    }
+                }
+            }
+        }
+
+        // --- CORE: BIẾN XML THUẦN SANG SQL CREATE TABLE ---
+        private static void CreateTablesDynamic(XDocument doc)
+        {
+            using (var conn = DbConnection.GetConnection())
+            {
+                conn.Open();
+                // Lấy tất cả thẻ con trực tiếp trong <Tables> (ThuongHieu, SanPham...)
+                var tableNodes = doc.Element("Schema").Element("Tables").Elements();
+
+                // Giai đoạn 1: Tạo bảng sơ khai (chưa có FK)
+                foreach (var tableNode in tableNodes)
+                {
+                    string tableName = tableNode.Name.LocalName; // <ThuongHieu> -> "ThuongHieu"
+
+                    // Kiểm tra bảng tồn tại chưa
+                    if (CheckTableExists(conn, tableName)) continue;
+
+                    StringBuilder sql = new StringBuilder();
+                    sql.AppendLine($"CREATE TABLE [{tableName}] (");
+
+                    List<string> columnsSql = new List<string>();
+
+                    // Duyệt các thẻ con bên trong (Chính là các cột: <Id>, <Ten>...)
+                    foreach (var colNode in tableNode.Elements())
+                    {
+                        string colName = colNode.Name.LocalName; // <Id> -> "Id"
+
+                        // Lấy thuộc tính Type, nếu không có thì mặc định NVARCHAR(MAX)
+                        string colType = colNode.Attribute("Type")?.Value ?? "NVARCHAR(MAX)";
+
+                        string line = $"[{colName}] {colType}";
+
+                        // Đọc các thuộc tính cấu hình cột từ XML
+                        if (colNode.Attribute("PK")?.Value == "true") line += " PRIMARY KEY";
+                        if (colNode.Attribute("Identity")?.Value == "true") line += " IDENTITY(1,1)";
+                        if (colNode.Attribute("NotNull")?.Value == "true") line += " NOT NULL";
+                        if (colNode.Attribute("Unique")?.Value == "true") line += " UNIQUE";
+
+                        var defVal = colNode.Attribute("Default")?.Value;
+                        if (defVal != null) line += $" DEFAULT {defVal}";
+
+                        columnsSql.Add(line);
+                    }
+
+                    sql.AppendLine(string.Join(",\n", columnsSql));
+                    sql.AppendLine(");");
+
+                    // Chạy lệnh tạo bảng
+                    try
+                    {
+                        new SqlCommand(sql.ToString(), conn).ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception($"Lỗi tạo bảng {tableName}: {ex.Message}");
+                    }
+                }
+
+                // Giai đoạn 2: Bổ sung Khóa Ngoại (Foreign Keys)
+                foreach (var tableNode in tableNodes)
+                {
+                    string tableName = tableNode.Name.LocalName;
+
+                    foreach (var colNode in tableNode.Elements())
+                    {
+                        // Tìm thuộc tính FK="Bang.Cot" (Ví dụ: FK="LoaiSanPham.Id")
+                        var fkAttr = colNode.Attribute("FK");
+                        if (fkAttr != null)
                         {
-                            createCmd.ExecuteNonQuery();
+                            string[] parts = fkAttr.Value.Split('.');
+                            if (parts.Length == 2)
+                            {
+                                string refTable = parts[0];
+                                string refCol = parts[1];
+                                string colName = colNode.Name.LocalName;
+                                string fkName = $"FK_{tableName}_{colName}";
+
+                                string sqlFK = $@"
+                                    IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE name = '{fkName}')
+                                    ALTER TABLE [{tableName}] 
+                                    ADD CONSTRAINT [{fkName}] 
+                                    FOREIGN KEY ([{colName}]) REFERENCES [{refTable}]([{refCol}])";
+
+                                try { new SqlCommand(sqlFK, conn).ExecuteNonQuery(); } catch { }
+                            }
                         }
                     }
                 }
             }
         }
 
-        private static void CreateTables(XDocument doc)
+        private static bool CheckTableExists(SqlConnection conn, string tableName)
         {
-            // Lấy danh sách thẻ <Table> trong XML
-            var tables = doc.Descendants("Table");
-
-            using (var conn = DbConnection.GetConnection())
-            {
-                conn.Open();
-                foreach (var table in tables)
-                {
-                    string tableName = table.Attribute("Name")?.Value;
-                    string script = table.Element("Script")?.Value;
-
-                    if (!string.IsNullOrEmpty(script))
-                    {
-                        try
-                        {
-                            using (var cmd = new SqlCommand(script, conn))
-                            {
-                                cmd.ExecuteNonQuery();
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            throw new Exception($"Lỗi khi tạo bảng '{tableName}': {ex.Message}");
-                        }
-                    }
-                }
-            }
+            string sql = $"SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(N'[{tableName}]') AND type in (N'U')";
+            return (int)new SqlCommand(sql, conn).ExecuteScalar() > 0;
         }
     }
 }
