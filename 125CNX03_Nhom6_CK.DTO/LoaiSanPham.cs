@@ -13,9 +13,7 @@ namespace _125CNX03_Nhom6_CK.DTO
         [XmlElement("Name")]
         public string TenLoai { get; set; }
 
-        [XmlIgnore]
+        [XmlIgnore] // Không cần xuất ra XML
         public bool HienThi { get; set; }
-
-        public LoaiSanPham() { }
     }
 }

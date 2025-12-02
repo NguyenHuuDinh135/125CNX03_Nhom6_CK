@@ -15,7 +15,5 @@ namespace _125CNX03_Nhom6_CK.DTO
 
         [XmlElement("Logo")]
         public string HinhAnh { get; set; }
-
-        public ThuongHieu() { }
     }
 }
