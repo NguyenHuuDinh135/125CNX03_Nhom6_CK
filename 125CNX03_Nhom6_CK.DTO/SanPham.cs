@@ -4,23 +4,20 @@ using System.Xml.Serialization;
 namespace _125CNX03_Nhom6_CK.DTO
 {
     [Serializable]
-    [XmlRoot("Product")] // Tên thẻ gốc khi làm việc với XML
+    [XmlRoot("Product")]
     public class SanPham
     {
-        // --- Mapping với SQL Server ---
-        [XmlIgnore] // Không đọc/ghi trường này vào XML nhập hàng
+        [XmlIgnore]
         public int Id { get; set; }
 
-        // --- Mapping với XML & SQL ---
-
-        [XmlElement("Name")] // <Name>Tên Sản Phẩm</Name>
+        [XmlElement("Name")]
         public string TenSanPham { get; set; }
 
         [XmlElement("Description")]
         public string MoTa { get; set; }
 
-        [XmlElement("Detail")]
-        public string ChiTiet { get; set; }
+        [XmlElement("DetailHtml")]
+        public string ChiTiet { get; set; } // Nội dung HTML
 
         [XmlElement("Price")]
         public decimal Gia { get; set; }
@@ -34,15 +31,13 @@ namespace _125CNX03_Nhom6_CK.DTO
         [XmlElement("Stock")]
         public int SoLuongTon { get; set; }
 
-        [XmlAttribute("CatID")] // <Product CatID="1">
+        [XmlAttribute("CategoryId")]
         public int MaLoai { get; set; }
 
-        [XmlAttribute("BrandID")]
+        [XmlAttribute("BrandId")]
         public int MaThuongHieu { get; set; }
 
         [XmlIgnore]
-        public bool HienThi { get; set; } = true;
-
-        public SanPham() { }
+        public bool HienThi { get; set; }
     }
 }
