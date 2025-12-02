@@ -4,31 +4,31 @@ using System.Xml.Serialization;
 namespace _125CNX03_Nhom6_CK.DTO
 {
     [Serializable]
-    [XmlRoot("Article")]
+    [XmlRoot("BaiViet")]
     public class BaiViet
     {
-        [XmlAttribute("Id")]
+        [XmlElement("Id")]
         public int Id { get; set; }
 
-        [XmlElement("Title")]
+        [XmlElement("TieuDe")]
         public string TieuDe { get; set; }
 
-        [XmlElement("Image")]
+        [XmlElement("HinhAnh")]
         public string HinhAnh { get; set; }
 
-        [XmlElement("Summary")]
+        [XmlElement("TomTat")]
         public string TomTat { get; set; }
 
-        [XmlElement("Content")]
-        public string NoiDung { get; set; } // HTML
+        [XmlElement("NoiDung")]
+        public string NoiDung { get; set; }
 
-        [XmlElement("PublishDate")]
+        [XmlElement("NgayDang")]
         public DateTime NgayDang { get; set; }
 
-        [XmlAttribute("AuthorId")]
+        [XmlElement("MaNguoiViet")]
         public int MaNguoiViet { get; set; }
 
-        [XmlIgnore]
+        [XmlElement("HienThi")]
         public bool HienThi { get; set; }
     }
 }

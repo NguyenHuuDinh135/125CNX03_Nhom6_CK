@@ -116,20 +116,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\125CNX03_Nhom6_CK.BLL\125CNX03_Nhom6_CK.BLL.csproj">
-      <Project>{29965ba0-83d5-4780-857b-0e9df3dd785d}</Project>
-      <Name>125CNX03_Nhom6_CK.BLL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\125CNX03_Nhom6_CK.DAL\125CNX03_Nhom6_CK.DAL.csproj">
-      <Project>{32bc1457-7ad8-4ca4-ab48-be264ff86e1e}</Project>
-      <Name>125CNX03_Nhom6_CK.DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\125CNX03_Nhom6_CK.DTO\125CNX03_Nhom6_CK.DTO.csproj">
-      <Project>{c04d0fd0-8ec0-4261-bff5-759a8f84cc16}</Project>
-      <Name>125CNX03_Nhom6_CK.DTO</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="bin\Debug\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

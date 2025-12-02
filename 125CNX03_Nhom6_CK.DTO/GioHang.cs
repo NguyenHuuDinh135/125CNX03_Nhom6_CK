@@ -5,21 +5,19 @@ using System.Xml.Serialization;
 namespace _125CNX03_Nhom6_CK.DTO
 {
     [Serializable]
-    [XmlRoot("Cart")]
+    [XmlRoot("GioHang")]
     public class GioHang
     {
-        [XmlAttribute("Id")]
+        [XmlElement("Id")]
         public int Id { get; set; }
 
-        [XmlAttribute("UserId")]
+        [XmlElement("MaNguoiDung")]
         public int MaNguoiDung { get; set; }
 
-        [XmlElement("LastUpdated")]
+        [XmlElement("NgayCapNhat")]
         public DateTime NgayCapNhat { get; set; }
 
-        // Một giỏ hàng chứa nhiều chi tiết
-        [XmlArray("CartItems")]
-        [XmlArrayItem("Item")]
+        [XmlIgnore] // Load riêng từ bảng ChiTietGioHang
         public List<ChiTietGioHang> ChiTiet { get; set; } = new List<ChiTietGioHang>();
     }
 }

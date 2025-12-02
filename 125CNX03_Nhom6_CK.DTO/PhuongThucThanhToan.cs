@@ -4,18 +4,22 @@ using System.Xml.Serialization;
 namespace _125CNX03_Nhom6_CK.DTO
 {
     [Serializable]
+    [XmlRoot("PhuongThucThanhToan")]
     public class PhuongThucThanhToan
     {
+        [XmlElement("Id")]
         public int Id { get; set; }
+
+        [XmlElement("MaNguoiDung")]
         public int MaNguoiDung { get; set; }
 
-        [XmlElement("Alias")]
-        public string TenGoiNho { get; set; } // Ví dụ: Thẻ VISA chính
+        [XmlElement("TenGoiNho")]
+        public string TenGoiNho { get; set; }
 
-        [XmlElement("CardToken")]
+        [XmlElement("MaThe")]
         public string MaThe { get; set; }
 
-        [XmlElement("Last4")]
+        [XmlElement("BonSoCuoi")]
         public string BonSoCuoi { get; set; }
     }
 }

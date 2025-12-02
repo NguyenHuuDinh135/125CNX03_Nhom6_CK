@@ -4,34 +4,36 @@ using System.Xml.Serialization;
 namespace _125CNX03_Nhom6_CK.DTO
 {
     [Serializable]
-    [XmlRoot("User")]
+    [XmlRoot("NguoiDung")]
     public class NguoiDung
     {
-        [XmlAttribute("Id")]
+        [XmlElement("Id")]
         public int Id { get; set; }
 
-        [XmlElement("FullName")]
+        [XmlElement("HoTen")]
         public string HoTen { get; set; }
 
         [XmlElement("Email")]
         public string Email { get; set; }
 
-        [XmlIgnore] // Mật khẩu tuyệt đối không xuất ra XML
+        // Đã bỏ XmlIgnore để có thể lưu và đọc mật khẩu từ DB
+        [XmlElement("MatKhauHash")]
         public string MatKhauHash { get; set; }
 
-        [XmlElement("Phone")]
+        [XmlElement("SoDienThoai")]
         public string SoDienThoai { get; set; }
 
-        [XmlElement("Address")]
+        [XmlElement("DiaChi")]
         public string DiaChi { get; set; }
 
-        [XmlAttribute("Role")]
-        public string VaiTro { get; set; } // Admin, Customer
+        [XmlElement("VaiTro")]
+        public string VaiTro { get; set; } // "Admin" hoặc "Customer"
 
-        [XmlElement("CreatedDate")]
+        [XmlElement("NgayTao")]
         public DateTime NgayTao { get; set; }
 
-        [XmlIgnore]
+        // Đã bỏ XmlIgnore để quản lý trạng thái khóa/mở
+        [XmlElement("TrangThai")]
         public bool TrangThai { get; set; }
     }
 }

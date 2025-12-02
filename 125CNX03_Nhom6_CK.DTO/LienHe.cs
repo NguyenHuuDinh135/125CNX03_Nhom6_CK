@@ -4,28 +4,28 @@ using System.Xml.Serialization;
 namespace _125CNX03_Nhom6_CK.DTO
 {
     [Serializable]
-    [XmlRoot("Contact")]
+    [XmlRoot("LienHe")]
     public class LienHe
     {
-        [XmlAttribute("Id")]
+        [XmlElement("Id")]
         public int Id { get; set; }
 
-        [XmlElement("SenderName")]
+        [XmlElement("HoTen")]
         public string HoTen { get; set; }
 
         [XmlElement("Email")]
         public string Email { get; set; }
 
-        [XmlElement("Phone")]
+        [XmlElement("SoDienThoai")]
         public string SoDienThoai { get; set; }
 
-        [XmlElement("Message")]
+        [XmlElement("NoiDung")]
         public string NoiDung { get; set; }
 
-        [XmlElement("SentDate")]
+        [XmlElement("NgayGui")]
         public DateTime NgayGui { get; set; }
 
-        [XmlAttribute("IsRead")]
+        [XmlElement("DaXem")]
         public bool DaXem { get; set; }
     }
 }

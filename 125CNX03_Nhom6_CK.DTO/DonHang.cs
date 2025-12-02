@@ -5,41 +5,49 @@ using System.Xml.Serialization;
 namespace _125CNX03_Nhom6_CK.DTO
 {
     [Serializable]
-    [XmlRoot("OrderInvoice")] // Tên thẻ gốc của file XML hóa đơn
+    [XmlRoot("DonHang")]
     public class DonHang
     {
-        [XmlElement("OrderId")]
+        [XmlElement("Id")]
         public int Id { get; set; }
 
-        [XmlIgnore]
+        [XmlElement("MaNguoiDung")]
         public int MaNguoiDung { get; set; }
 
-        [XmlElement("CustomerName")]
+        [XmlElement("NguoiNhan_Ten")]
         public string NguoiNhan_Ten { get; set; }
 
-        [XmlElement("Phone")]
+        [XmlElement("NguoiNhan_SDT")]
         public string NguoiNhan_SDT { get; set; }
 
-        [XmlElement("Address")]
-        public string DiaChi_GiaoHang { get; set; }
+        // --- Sửa đổi để khớp với Schema XML (Tách 3 trường) ---
+        [XmlElement("DiaChi_Duong")]
+        public string DiaChi_Duong { get; set; }
 
-        [XmlElement("OrderDate")]
+        [XmlElement("DiaChi_ThanhPho")]
+        public string DiaChi_ThanhPho { get; set; }
+
+        [XmlElement("DiaChi_Tinh")]
+        public string DiaChi_Tinh { get; set; }
+
+        // Thuộc tính phụ trợ để hiển thị (không lưu vào XML)
+        [XmlIgnore]
+        public string DiaChi_DayDu => $"{DiaChi_Duong}, {DiaChi_ThanhPho}, {DiaChi_Tinh}";
+
+        [XmlElement("NgayDatHang")]
         public DateTime NgayDatHang { get; set; }
 
-        [XmlElement("TotalAmount")]
+        [XmlElement("TongTien")]
         public decimal TongTien { get; set; }
 
-        [XmlElement("Status")]
+        [XmlElement("TrangThaiDonHang")]
         public int TrangThaiDonHang { get; set; }
 
-        [XmlElement("Note")]
+        [XmlElement("GhiChu")]
         public string GhiChu { get; set; }
 
-        // --- DANH SÁCH CHI TIẾT ĐƠN HÀNG ---
-        // Khi xuất XML sẽ tạo cấu trúc lồng nhau:
-        // <Items> <Item>...</Item> </Items>
-        [XmlArray("Items")]
-        [XmlArrayItem("Item")]
+        // Danh sách chi tiết (Dùng khi load object đầy đủ, nhưng trong bảng DB XML thì nó nằm bảng riêng)
+        [XmlIgnore]
         public List<ChiTietDonHang> ChiTiet { get; set; } = new List<ChiTietDonHang>();
 
         public DonHang() { }

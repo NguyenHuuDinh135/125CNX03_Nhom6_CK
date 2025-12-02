@@ -4,16 +4,16 @@ using System.Xml.Serialization;
 namespace _125CNX03_Nhom6_CK.DTO
 {
     [Serializable]
-    [XmlRoot("Brand")]
+    [XmlRoot("ThuongHieu")]
     public class ThuongHieu
     {
-        [XmlAttribute("Id")]
+        [XmlElement("Id")]
         public int Id { get; set; }
 
-        [XmlElement("Name")]
+        [XmlElement("TenThuongHieu")]
         public string TenThuongHieu { get; set; }
 
-        [XmlElement("Logo")]
+        [XmlElement("HinhAnh")]
         public string HinhAnh { get; set; }
     }
 }

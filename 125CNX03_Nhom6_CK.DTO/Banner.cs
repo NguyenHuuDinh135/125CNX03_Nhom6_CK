@@ -4,23 +4,25 @@ using System.Xml.Serialization;
 namespace _125CNX03_Nhom6_CK.DTO
 {
     [Serializable]
-    [XmlRoot("BannerItem")]
+    [XmlRoot("Banner")]
     public class Banner
     {
+        [XmlElement("Id")]
         public int Id { get; set; }
 
-        [XmlElement("Name")]
+        [XmlElement("TenBanner")]
         public string TenBanner { get; set; }
 
-        [XmlElement("ImageUrl")]
+        [XmlElement("HinhAnh")]
         public string HinhAnh { get; set; }
 
-        [XmlElement("Link")]
+        [XmlElement("LienKet")]
         public string LienKet { get; set; }
 
-        [XmlAttribute("Order")]
+        [XmlElement("ThuTu")]
         public int ThuTu { get; set; }
 
+        [XmlElement("HienThi")]
         public bool HienThi { get; set; }
     }
 }

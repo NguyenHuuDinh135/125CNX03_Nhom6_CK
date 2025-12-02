@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+	<xs:schema xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="NewDataSet">
+		<xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+			<xs:complexType>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="GioHang">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Id" type="xs:int" minOccurs="0"/>
+								<xs:element name="MaNguoiDung" type="xs:int" minOccurs="0"/>
+								<xs:element name="NgayCapNhat" type="xs:dateTime" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>
+			</xs:complexType>
+		</xs:element>
+	</xs:schema>
+	<GioHang>
+		<Id>1</Id>
+		<MaNguoiDung>2</MaNguoiDung>
+		<NgayCapNhat>2024-11-20T10:00:00</NgayCapNhat>
+	</GioHang>
+	<GioHang>
+		<Id>2</Id>
+		<MaNguoiDung>3</MaNguoiDung>
+		<NgayCapNhat>2024-11-25T14:00:00</NgayCapNhat>
+	</GioHang>
+	<GioHang>
+		<Id>3</Id>
+		<MaNguoiDung>4</MaNguoiDung>
+		<NgayCapNhat>2024-12-01T09:30:00</NgayCapNhat>
+	</GioHang>
+	<GioHang>
+		<Id>4</Id>
+		<MaNguoiDung>5</MaNguoiDung>
+		<NgayCapNhat>2024-12-02T08:00:00</NgayCapNhat>
+	</GioHang>
+</NewDataSet>

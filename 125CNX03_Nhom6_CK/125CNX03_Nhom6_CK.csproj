@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D6506738-666B-4462-AC2F-1A7D10B57B48}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>_125CNX03_Nhom6_CK</RootNamespace>
+    <AssemblyName>125CNX03_Nhom6_CK</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLL\Services\BaiVietService.cs" />
+    <Compile Include="BLL\Services\BannerService.cs" />
+    <Compile Include="BLL\Services\ChiTietDonHangService.cs" />
+    <Compile Include="BLL\Services\ChiTietGioHangService.cs" />
+    <Compile Include="BLL\Services\DonHangService.cs" />
+    <Compile Include="BLL\Services\GioHangService.cs" />
+    <Compile Include="BLL\Interfaces\IBaiVietService.cs" />
+    <Compile Include="BLL\Interfaces\IBannerService.cs" />
+    <Compile Include="BLL\Interfaces\IChiTietDonHangService.cs" />
+    <Compile Include="BLL\Interfaces\IChiTietGioHangService.cs" />
+    <Compile Include="BLL\Interfaces\IDonHangService.cs" />
+    <Compile Include="BLL\Interfaces\IGioHangService.cs" />
+    <Compile Include="BLL\Interfaces\ILienHeService.cs" />
+    <Compile Include="BLL\Interfaces\ILoaiSanPhamService.cs" />
+    <Compile Include="BLL\Interfaces\INguoiDungService.cs" />
+    <Compile Include="BLL\Interfaces\IPhuongThucThanhToanService.cs" />
+    <Compile Include="BLL\Interfaces\ISanPhamService.cs" />
+    <Compile Include="BLL\Interfaces\IThuongHieuService.cs" />
+    <Compile Include="BLL\Services\LienHeService.cs" />
+    <Compile Include="BLL\Services\LoaiSanPhamService.cs" />
+    <Compile Include="BLL\Services\NguoiDungService.cs" />
+    <Compile Include="BLL\Services\PhuongThucThanhToanService.cs" />
+    <Compile Include="BLL\Services\SanPhamService.cs" />
+    <Compile Include="BLL\Services\ThuongHieuService.cs" />
+    <Compile Include="DAL\Repositories\BaiVietRepository.cs" />
+    <Compile Include="DAL\Repositories\BannerRepository.cs" />
+    <Compile Include="DAL\Repositories\BaseRepository.cs" />
+    <Compile Include="DAL\Repositories\ChiTietDonHangRepository.cs" />
+    <Compile Include="DAL\Repositories\ChiTietGioHangRepository.cs" />
+    <Compile Include="DAL\Repositories\DonHangRepository.cs" />
+    <Compile Include="DAL\Repositories\GioHangRepository.cs" />
+    <Compile Include="DAL\Interfaces\IBaiVietRepository.cs" />
+    <Compile Include="DAL\Interfaces\IBannerRepository.cs" />
+    <Compile Include="DAL\Interfaces\IBaseRepository.cs" />
+    <Compile Include="DAL\Interfaces\IChiTietDonHangRepository.cs" />
+    <Compile Include="DAL\Interfaces\IChiTietGioHangRepository.cs" />
+    <Compile Include="DAL\Interfaces\IDonHangRepository.cs" />
+    <Compile Include="DAL\Interfaces\IGioHangRepository.cs" />
+    <Compile Include="DAL\Interfaces\ILienHeRepository.cs" />
+    <Compile Include="DAL\Interfaces\ILoaiSanPhamRepository.cs" />
+    <Compile Include="DAL\Interfaces\INguoiDungRepository.cs" />
+    <Compile Include="DAL\Interfaces\IPhuongThucThanhToanRepository.cs" />
+    <Compile Include="DAL\Interfaces\ISanPhamRepository.cs" />
+    <Compile Include="DAL\Interfaces\IThuongHieuRepository.cs" />
+    <Compile Include="DAL\Repositories\LienHeRepository.cs" />
+    <Compile Include="DAL\Repositories\LoaiSanPhamRepository.cs" />
+    <Compile Include="DAL\Repositories\NguoiDungRepository.cs" />
+    <Compile Include="DAL\Repositories\PhuongThucThanhToanRepository.cs" />
+    <Compile Include="DAL\Repositories\SanPhamRepository.cs" />
+    <Compile Include="DAL\Repositories\ThuongHieuRepository.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\UserControls\BrandCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\BrandCard.Designer.cs">
+      <DependentUpon>BrandCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\UserControls\CartItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\CartItem.Designer.cs">
+      <DependentUpon>CartItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\UserControls\CategoryCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\CategoryCard.Designer.cs">
+      <DependentUpon>CategoryCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\UserControls\OrderCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\OrderCard.Designer.cs">
+      <DependentUpon>OrderCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\UserControls\ProductCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\UserControls\ProductCard.Designer.cs">
+      <DependentUpon>ProductCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\BaiViet.xml" />
+    <Content Include="Data\Banner.xml" />
+    <Content Include="Data\ChiTietDonHang.xml" />
+    <Content Include="Data\ChiTietGioHang.xml" />
+    <Content Include="Data\DonHang.xml" />
+    <Content Include="Data\GioHang.xml" />
+    <Content Include="Data\LienHe.xml" />
+    <Content Include="Data\LoaiSanPham.xml" />
+    <Content Include="Data\NguoiDung.xml" />
+    <Content Include="Data\PhuongThucThanhToan.xml" />
+    <Content Include="Data\SanPham.xml" />
+    <Content Include="Data\ThuongHieu.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GUI\Forms\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

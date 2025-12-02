@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+	<xs:schema xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="NewDataSet">
+		<xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+			<xs:complexType>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="Banner">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Id" type="xs:int" minOccurs="0"/>
+								<xs:element name="TenBanner" type="xs:string" minOccurs="0"/>
+								<xs:element name="HinhAnh" type="xs:string" minOccurs="0"/>
+								<xs:element name="LienKet" type="xs:string" minOccurs="0"/>
+								<xs:element name="ThuTu" type="xs:int" minOccurs="0"/>
+								<xs:element name="HienThi" type="xs:boolean" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>
+			</xs:complexType>
+		</xs:element>
+	</xs:schema>
+	<Banner>
+		<Id>1</Id>
+		<TenBanner>Banner iPhone 15</TenBanner>
+		<HinhAnh>https://loremflickr.com/1200/400/iphone    </HinhAnh>
+		<LienKet>/san-pham/iphone-15</LienKet>
+		<ThuTu>1</ThuTu>
+		<HienThi>true</HienThi>
+	</Banner>
+	<Banner>
+		<Id>2</Id>
+		<TenBanner>Banner Laptop Gaming</TenBanner>
+		<HinhAnh>https://loremflickr.com/1200/400/gaming    </HinhAnh>
+		<LienKet>/danh-muc/laptop-gaming</LienKet>
+		<ThuTu>2</ThuTu>
+		<HienThi>true</HienThi>
+	</Banner>
+	<Banner>
+		<Id>3</Id>
+		<TenBanner>Banner Phụ kiện</TenBanner>
+		<HinhAnh>https://loremflickr.com/1200/400/accessories    </HinhAnh>
+		<LienKet>/danh-muc/phu-kien</LienKet>
+		<ThuTu>3</ThuTu>
+		<HienThi>true</HienThi>
+	</Banner>
+	<Banner>
+		<Id>4</Id>
+		<TenBanner>Sale Tết 2025</TenBanner>
+		<HinhAnh>https://loremflickr.com/1200/400/tet    </HinhAnh>
+		<LienKet>/khuyen-mai</LienKet>
+		<ThuTu>4</ThuTu>
+		<HienThi>true</HienThi>
+	</Banner>
+</NewDataSet>

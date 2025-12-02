@@ -4,40 +4,42 @@ using System.Xml.Serialization;
 namespace _125CNX03_Nhom6_CK.DTO
 {
     [Serializable]
-    [XmlRoot("Product")]
+    [XmlRoot("SanPham")]
     public class SanPham
     {
-        [XmlIgnore]
+        // Phải có Id để định danh sản phẩm
+        [XmlElement("Id")]
         public int Id { get; set; }
 
-        [XmlElement("Name")]
+        [XmlElement("TenSanPham")]
         public string TenSanPham { get; set; }
 
-        [XmlElement("Description")]
+        [XmlElement("MoTa")]
         public string MoTa { get; set; }
 
-        [XmlElement("DetailHtml")]
-        public string ChiTiet { get; set; } // Nội dung HTML
+        [XmlElement("ChiTiet")]
+        public string ChiTiet { get; set; } // Nội dung HTML hoặc text dài
 
-        [XmlElement("Price")]
+        [XmlElement("Gia")]
         public decimal Gia { get; set; }
 
-        [XmlElement("SalePrice")]
+        [XmlElement("GiaKhuyenMai")]
         public decimal GiaKhuyenMai { get; set; }
 
-        [XmlElement("Image")]
+        [XmlElement("DuongDanAnh")]
         public string DuongDanAnh { get; set; }
 
-        [XmlElement("Stock")]
+        [XmlElement("SoLuongTon")]
         public int SoLuongTon { get; set; }
 
-        [XmlAttribute("CategoryId")]
+        [XmlElement("MaLoai")]
         public int MaLoai { get; set; }
 
-        [XmlAttribute("BrandId")]
+        [XmlElement("MaThuongHieu")]
         public int MaThuongHieu { get; set; }
 
-        [XmlIgnore]
+        // Cần thiết để ẩn/hiện sản phẩm trên web
+        [XmlElement("HienThi")]
         public bool HienThi { get; set; }
     }
 }

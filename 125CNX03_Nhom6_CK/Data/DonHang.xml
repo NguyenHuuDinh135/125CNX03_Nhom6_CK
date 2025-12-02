@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+	<xs:schema xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="NewDataSet">
+		<xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+			<xs:complexType>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="DonHang">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Id" type="xs:int" minOccurs="0"/>
+								<xs:element name="MaNguoiDung" type="xs:int" minOccurs="0"/>
+								<xs:element name="NgayDatHang" type="xs:dateTime" minOccurs="0"/>
+								<xs:element name="TrangThaiDonHang" type="xs:int" minOccurs="0"/>
+								<xs:element name="NguoiNhan_Ten" type="xs:string" minOccurs="0"/>
+								<xs:element name="NguoiNhan_SDT" type="xs:string" minOccurs="0"/>
+								<xs:element name="DiaChi_Duong" type="xs:string" minOccurs="0"/>
+								<xs:element name="DiaChi_ThanhPho" type="xs:string" minOccurs="0"/>
+								<xs:element name="DiaChi_Tinh" type="xs:string" minOccurs="0"/>
+								<xs:element name="TongTien" type="xs:decimal" minOccurs="0"/>
+								<xs:element name="GhiChu" type="xs:string" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>
+			</xs:complexType>
+		</xs:element>
+	</xs:schema>
+	<DonHang>
+		<Id>1</Id>
+		<MaNguoiDung>2</MaNguoiDung>
+		<NgayDatHang>2024-10-15T10:00:00</NgayDatHang>
+		<TrangThaiDonHang>3</TrangThaiDonHang>
+		<NguoiNhan_Ten>Nguyễn Văn An</NguoiNhan_Ten>
+		<NguoiNhan_SDT>0912345671</NguoiNhan_SDT>
+		<DiaChi_Duong>Số 10</DiaChi_Duong>
+		<DiaChi_ThanhPho>Hà Nội</DiaChi_ThanhPho>
+		<DiaChi_Tinh>Hà Nội</DiaChi_Tinh>
+		<TongTien>21480000.00</TongTien>
+		<GhiChu>Giao giờ hành chính</GhiChu>
+	</DonHang>
+	<DonHang>
+		<Id>2</Id>
+		<MaNguoiDung>3</MaNguoiDung>
+		<NgayDatHang>2024-11-01T14:30:00</NgayDatHang>
+		<TrangThaiDonHang>2</TrangThaiDonHang>
+		<NguoiNhan_Ten>Trần Thị Bích</NguoiNhan_Ten>
+		<NguoiNhan_SDT>0912345672</NguoiNhan_SDT>
+		<DiaChi_Duong>25 Lê Lợi</DiaChi_Duong>
+		<DiaChi_ThanhPho>HCM</DiaChi_ThanhPho>
+		<DiaChi_Tinh>TP.HCM</DiaChi_Tinh>
+		<TongTien>34990000.00</TongTien>
+		<GhiChu></GhiChu>
+	</DonHang>
+	<DonHang>
+		<Id>3</Id>
+		<MaNguoiDung>4</MaNguoiDung>
+		<NgayDatHang>2024-11-20T09:15:00</NgayDatHang>
+		<TrangThaiDonHang>1</TrangThaiDonHang>
+		<NguoiNhan_Ten>Lê Hoàng Cường</NguoiNhan_Ten>
+		<NguoiNhan_SDT>0912345673</NguoiNhan_SDT>
+		<DiaChi_Duong>12 Trần Hưng Đạo</DiaChi_Duong>
+		<DiaChi_ThanhPho>Đà Nẵng</DiaChi_ThanhPho>
+		<DiaChi_Tinh>Đà Nẵng</DiaChi_Tinh>
+		<TongTien>18990000.00</TongTien>
+		<GhiChu>Gọi trước khi giao</GhiChu>
+	</DonHang>
+</NewDataSet>

@@ -4,36 +4,33 @@ using System.Xml.Serialization;
 namespace _125CNX03_Nhom6_CK.DTO
 {
     [Serializable]
+    [XmlRoot("ChiTietDonHang")]
     public class ChiTietDonHang
     {
-        [XmlIgnore]
+        [XmlElement("Id")]
         public int Id { get; set; }
 
-        [XmlIgnore]
+        [XmlElement("MaDonHang")]
         public int MaDonHang { get; set; }
 
-        [XmlElement("ProductId")]
+        [XmlElement("ItemOrdered_MaSanPham")]
         public int ItemOrdered_MaSanPham { get; set; }
 
-        [XmlElement("ProductName")]
+        [XmlElement("ItemOrdered_TenSanPham")]
         public string ItemOrdered_TenSanPham { get; set; }
 
-        [XmlElement("ProductImage")]
+        [XmlElement("ItemOrdered_DuongDanAnh")]
         public string ItemOrdered_DuongDanAnh { get; set; }
 
-        [XmlElement("Price")]
+        [XmlElement("DonGia")]
         public decimal DonGia { get; set; }
 
-        [XmlElement("Quantity")]
+        [XmlElement("SoLuong")]
         public int SoLuong { get; set; }
 
-        // Thuộc tính tính toán (Thành tiền = Giá * Số lượng)
-        [XmlElement("SubTotal")]
-        public decimal ThanhTien
-        {
-            get { return DonGia * SoLuong; }
-            set { } // Cần setter rỗng để XML Serializer hoạt động
-        }
+        // Tính toán thành tiền (không cần lưu vì có thể tính lại)
+        [XmlIgnore]
+        public decimal ThanhTien => DonGia * SoLuong;
 
         public ChiTietDonHang() { }
     }
