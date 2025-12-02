@@ -77,8 +77,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\Data\db_config.xml" />
-    <Content Include="bin\Debug\Data\db_schema.xml" />
+    <Content Include="bin\Debug\Data\db_config.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bin\Debug\Data\db_schema.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\125CNX03_Nhom6_CK.BLL\125CNX03_Nhom6_CK.BLL.csproj">
