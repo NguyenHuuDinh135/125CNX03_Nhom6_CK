@@ -146,9 +146,12 @@ namespace _125CNX03_Nhom6_CK.DAL.Repositories
         public List<XElement> SearchProducts(string searchTerm)
         {
             return GetAll().Where(p =>
-                p.Element("TenSanPham")?.Value.Contains(searchTerm, System.StringComparison.OrdinalIgnoreCase) == true ||
-                p.Element("MoTa")?.Value.Contains(searchTerm, System.StringComparison.OrdinalIgnoreCase) == true ||
-                p.Element("ChiTiet")?.Value.Contains(searchTerm, System.StringComparison.OrdinalIgnoreCase) == true
+                p.Element("TenSanPham")?.Value
+                    .ToLower().Contains(searchTerm.ToLower()) == true ||
+                p.Element("MoTa")?.Value
+                    .ToLower().Contains(searchTerm.ToLower()) == true ||
+                p.Element("ChiTiet")?.Value
+                    .ToLower().Contains(searchTerm.ToLower()) == true
             ).ToList();
         }
     }

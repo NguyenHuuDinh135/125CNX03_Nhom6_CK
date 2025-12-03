@@ -128,14 +128,21 @@ namespace _125CNX03_Nhom6_CK.DAL.Repositories
 
         public List<XElement> SearchArticles(string searchTerm)
         {
-            return GetAll().Where(a =>
-                a.Element("HienThi") != null &&
-                bool.TryParse(a.Element("HienThi").Value, out var hienThi) &&
-                hienThi &&
-                (a.Element("TieuDe")?.Value.Contains(searchTerm, System.StringComparison.OrdinalIgnoreCase) == true ||
-                 a.Element("TomTat")?.Value.Contains(searchTerm, System.StringComparison.OrdinalIgnoreCase) == true ||
-                 a.Element("NoiDung")?.Value.Contains(searchTerm, System.StringComparison.OrdinalIgnoreCase) == true)
-            ).ToList();
+            string term = searchTerm ?? string.Empty;
+
+            return GetAll()
+                .Where(a =>
+                    a.Element("HienThi") != null &&
+                    bool.TryParse(a.Element("HienThi").Value, out var hienThi) &&
+                    hienThi &&
+                    (
+                        a.Element("TieuDe")?.Value?.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                        a.Element("TomTat")?.Value?.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                        a.Element("NoiDung")?.Value?.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0
+                    )
+                )
+                .ToList();
         }
+
     }
 }

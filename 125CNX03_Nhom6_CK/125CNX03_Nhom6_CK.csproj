@@ -96,11 +96,89 @@
     <Compile Include="DAL\Repositories\PhuongThucThanhToanRepository.cs" />
     <Compile Include="DAL\Repositories\SanPhamRepository.cs" />
     <Compile Include="DAL\Repositories\ThuongHieuRepository.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="GUI\Forms\BannerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="GUI\Forms\BannerForm.Designer.cs">
+      <DependentUpon>BannerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\BlogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\BlogForm.Designer.cs">
+      <DependentUpon>BlogForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\BrandManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\BrandManagementForm.Designer.cs">
+      <DependentUpon>BrandManagementForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\CartForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\CartForm.Designer.cs">
+      <DependentUpon>CartForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\CategoryManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\CategoryManagementForm.Designer.cs">
+      <DependentUpon>CategoryManagementForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\CheckoutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\CheckoutForm.Designer.cs">
+      <DependentUpon>CheckoutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\ContactForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\ContactForm.Designer.cs">
+      <DependentUpon>ContactForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\OrderManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\OrderManagementForm.Designer.cs">
+      <DependentUpon>OrderManagementForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\ProductDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\ProductDetailForm.Designer.cs">
+      <DependentUpon>ProductDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\ProductManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\ProductManagementForm.Designer.cs">
+      <DependentUpon>ProductManagementForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\RegisterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\RegisterForm.Designer.cs">
+      <DependentUpon>RegisterForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\UserManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\UserManagementForm.Designer.cs">
+      <DependentUpon>UserManagementForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\UserControls\BrandCard.cs">
       <SubType>UserControl</SubType>
@@ -142,6 +220,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -157,6 +236,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\Data\BaiViet.xml" />
+    <Content Include="bin\Debug\Data\Banner.xml" />
+    <Content Include="bin\Debug\Data\ChiTietDonHang.xml" />
+    <Content Include="bin\Debug\Data\ChiTietGioHang.xml" />
+    <Content Include="bin\Debug\Data\DonHang.xml" />
+    <Content Include="bin\Debug\Data\GioHang.xml" />
+    <Content Include="bin\Debug\Data\LienHe.xml" />
+    <Content Include="bin\Debug\Data\LoaiSanPham.xml" />
+    <Content Include="bin\Debug\Data\NguoiDung.xml" />
+    <Content Include="bin\Debug\Data\PhuongThucThanhToan.xml" />
+    <Content Include="bin\Debug\Data\SanPham.xml" />
+    <Content Include="bin\Debug\Data\ThuongHieu.xml" />
     <Content Include="Data\BaiViet.xml" />
     <Content Include="Data\Banner.xml" />
     <Content Include="Data\ChiTietDonHang.xml" />
@@ -170,8 +261,6 @@
     <Content Include="Data\SanPham.xml" />
     <Content Include="Data\ThuongHieu.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GUI\Forms\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
