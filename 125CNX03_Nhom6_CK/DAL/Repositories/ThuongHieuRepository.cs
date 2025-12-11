@@ -22,6 +22,17 @@ namespace _125CNX03_Nhom6_CK.DAL.Repositories
                 throw new Exception($"Error loading data from {_filePath}: {ex.Message}", ex);
             }
         }
+        private int GenerateNewId(List<XElement> all)
+        {
+            if (all == null || all.Count == 0)
+                return 1;
+
+            return all.Max(el =>
+            {
+                int.TryParse(el.Element("Id")?.Value, out int id);
+                return id;
+            }) + 1;
+        }
 
         public XElement GetById(int id)
         {
@@ -34,18 +45,22 @@ namespace _125CNX03_Nhom6_CK.DAL.Repositories
 
         public void Add(XElement entity)
         {
-            try
+            var doc = XDocument.Load(_filePath);
+            var root = doc.Root;
+
+            var all = root.Elements("ThuongHieu").ToList();
+
+            // Tự sinh Id nếu không có
+            if (entity.Element("Id") == null)
             {
-                var doc = XDocument.Load(_filePath);
-                var root = doc.Root ?? new XElement("NewDataSet");
-                root.Add(entity);
-                doc.Save(_filePath);
+                int newId = GenerateNewId(all);
+                entity.AddFirst(new XElement("Id", newId));
             }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error adding entity to {_filePath}: {ex.Message}", ex);
-            }
+
+            root.Add(entity);
+            doc.Save(_filePath);
         }
+
 
         public void Update(XElement entity)
         {

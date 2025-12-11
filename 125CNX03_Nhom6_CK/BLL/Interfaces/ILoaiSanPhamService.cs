@@ -11,5 +11,6 @@ namespace _125CNX03_Nhom6_CK.BLL
         void UpdateCategory(XElement category);
         void DeleteCategory(int id);
         List<XElement> GetActiveCategories();
+        int GenerateNewId();
     }
 }

@@ -12,5 +12,7 @@ namespace _125CNX03_Nhom6_CK.BLL
         void DeleteBanner(int id);
         List<XElement> GetActiveBanners();
         List<XElement> GetBannersByOrder();
+        int GenerateNewId();
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using _125CNX03_Nhom6_CK.DAL.Repositories;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace _125CNX03_Nhom6_CK.BLL
@@ -47,5 +48,15 @@ namespace _125CNX03_Nhom6_CK.BLL
         {
             return _bannerRepository.GetBannersByOrder();
         }
+        public int GenerateNewId()
+        {
+            var all = _bannerRepository.GetAll();
+
+            if (all == null || all.Count == 0)
+                return 1;
+
+            return all.Max(x => (int?)x.Element("Id") ?? 0) + 1;
+        }
+
     }
 }

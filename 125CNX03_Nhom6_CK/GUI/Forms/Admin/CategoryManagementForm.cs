@@ -185,7 +185,10 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
                 return;
             }
 
+            int newId = _categoryService.GenerateNewId();
+
             var newCat = new XElement("LoaiSanPham",
+                new XElement("Id", newId),
                 new XElement("TenLoai", txtCategoryName.Text.Trim()),
                 new XElement("MoTa", txtDescription.Text.Trim()),
                 new XElement("HienThi", chkDisplay.Checked)
@@ -196,6 +199,7 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
             ClearForm();
             MessageBox.Show("Thêm danh mục thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
 
         private void BtnUpdate_Click(object sender, EventArgs e)
         {

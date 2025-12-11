@@ -29,7 +29,7 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 
             // Create form panel
             Panel formPanel = new Panel();
-            formPanel.Size = new Size(this.Width - 40, 150);
+            formPanel.Size = new Size(this.Width - 40, 165);
             formPanel.Location = new Point(20, 20);
             formPanel.BackColor = Color.White;
             formPanel.BorderStyle = BorderStyle.FixedSingle;
@@ -186,6 +186,7 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
                 dataGridView.DataSource = null;
                 dataGridView.DataSource = ConvertToBannerTable(banners);
             }
+            ClearForm();
         }
 
         private System.Data.DataTable ConvertToBannerTable(List<XElement> elements)
@@ -216,23 +217,34 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
         private void DataGridView_SelectionChanged(object sender, EventArgs e)
         {
             var dataGridView = sender as DataGridView;
-            if (dataGridView != null && dataGridView.SelectedRows.Count > 0)
+            if (dataGridView == null) return;
+            if (dataGridView.SelectedRows.Count == 0) return;
+
+            var selectedRow = dataGridView.SelectedRows[0];
+
+            if (selectedRow.IsNewRow)
             {
-                var selectedRow = dataGridView.SelectedRows[0];
-
-                var bannerNameControl = this.Controls[0].Controls.Find("txtBannerName", true)[0] as TextBox;
-                var imageUrlControl = this.Controls[0].Controls.Find("txtImageUrl", true)[0] as TextBox;
-                var linkControl = this.Controls[0].Controls.Find("txtLink", true)[0] as TextBox;
-                var orderControl = this.Controls[0].Controls.Find("txtOrder", true)[0] as TextBox;
-                var displayControl = this.Controls[0].Controls.Find("chkDisplay", true)[0] as CheckBox;
-
-                if (bannerNameControl != null) bannerNameControl.Text = selectedRow.Cells["Tên banner"].Value?.ToString() ?? "";
-                if (imageUrlControl != null) imageUrlControl.Text = selectedRow.Cells["Đường dẫn ảnh"].Value?.ToString() ?? "";
-                if (linkControl != null) linkControl.Text = selectedRow.Cells["Liên kết"].Value?.ToString() ?? "";
-                if (orderControl != null) orderControl.Text = selectedRow.Cells["Thứ tự"].Value?.ToString() ?? "0";
-                if (displayControl != null) displayControl.Checked = bool.Parse(selectedRow.Cells["Hiển thị"].Value?.ToString() ?? "false");
+                ClearForm();
+                return;
             }
+
+
+            var bannerNameControl = this.Controls[0].Controls.Find("txtBannerName", true)[0] as TextBox;
+            var imageUrlControl = this.Controls[0].Controls.Find("txtImageUrl", true)[0] as TextBox;
+            var linkControl = this.Controls[0].Controls.Find("txtLink", true)[0] as TextBox;
+            var orderControl = this.Controls[0].Controls.Find("txtOrder", true)[0] as TextBox;
+            var displayControl = this.Controls[0].Controls.Find("chkDisplay", true)[0] as CheckBox;
+
+            bannerNameControl.Text = selectedRow.Cells["Tên banner"].Value?.ToString() ?? "";
+            imageUrlControl.Text = selectedRow.Cells["Đường dẫn ảnh"].Value?.ToString() ?? "";
+            linkControl.Text = selectedRow.Cells["Liên kết"].Value?.ToString() ?? "";
+            orderControl.Text = selectedRow.Cells["Thứ tự"].Value?.ToString() ?? "0";
+
+            bool display = false;
+            bool.TryParse(selectedRow.Cells["Hiển thị"].Value?.ToString(), out display);
+            displayControl.Checked = display;
         }
+
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
@@ -242,24 +254,28 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
             var orderControl = this.Controls[0].Controls.Find("txtOrder", true)[0] as TextBox;
             var displayControl = this.Controls[0].Controls.Find("chkDisplay", true)[0] as CheckBox;
 
-            if (string.IsNullOrEmpty(bannerNameControl?.Text) ||
-                string.IsNullOrEmpty(imageUrlControl?.Text))
+            if (string.IsNullOrWhiteSpace(bannerNameControl?.Text) ||
+                string.IsNullOrWhiteSpace(imageUrlControl?.Text))
             {
                 MessageBox.Show("Vui lòng nhập tên banner và đường dẫn ảnh!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
+            int newId = _bannerService.GenerateNewId();
+
             var newBanner = new XElement("Banner",
+                new XElement("Id", newId),
                 new XElement("TenBanner", bannerNameControl.Text),
                 new XElement("HinhAnh", imageUrlControl.Text),
                 new XElement("LienKet", linkControl?.Text ?? ""),
-                new XElement("ThuTu", int.Parse(orderControl?.Text ?? "0")),
-                new XElement("HienThi", displayControl?.Checked.ToString() ?? "false")
+                new XElement("ThuTu", int.TryParse(orderControl?.Text, out var tt) ? tt : 0),
+                new XElement("HienThi", displayControl?.Checked ?? true)
             );
 
             _bannerService.AddBanner(newBanner);
             LoadData();
             ClearForm();
+
             MessageBox.Show("Thêm banner thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

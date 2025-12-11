@@ -1,5 +1,6 @@
 ﻿using _125CNX03_Nhom6_CK.DAL.Repositories;
 using System.Collections.Generic;
+using System.Linq;            
 using System.Xml.Linq;
 
 namespace _125CNX03_Nhom6_CK.BLL
@@ -41,6 +42,20 @@ namespace _125CNX03_Nhom6_CK.BLL
         public List<XElement> GetActiveCategories()
         {
             return _categoryRepository.GetAll();
+        }
+
+        public int GenerateNewId()
+        {
+            var all = _categoryRepository.GetAll();
+
+            if (all == null || all.Count == 0)
+                return 1;
+
+            return all.Max(x =>
+            {
+                int.TryParse(x.Element("Id")?.Value, out int id);
+                return id;
+            }) + 1;
         }
     }
 }

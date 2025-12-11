@@ -259,6 +259,12 @@
     <Compile Include="GUI\Forms\User\UserEventArgs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUI\Forms\Admin\CategoryManagementForm.resx">
+      <DependentUpon>CategoryManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\Admin\ProductManagementForm.resx">
+      <DependentUpon>ProductManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -283,42 +289,20 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\Data\BaiViet.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bin\Debug\Data\Banner.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bin\Debug\Data\ChiTietDonHang.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bin\Debug\Data\ChiTietGioHang.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="bin\Debug\Data\BaiViet.xml" />
+    <Content Include="bin\Debug\Data\Banner.xml" />
+    <Content Include="bin\Debug\Data\ChiTietDonHang.xml" />
+    <Content Include="bin\Debug\Data\ChiTietGioHang.xml" />
     <Content Include="bin\Debug\Data\DonHang.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
-    <Content Include="bin\Debug\Data\GioHang.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bin\Debug\Data\LienHe.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bin\Debug\Data\LoaiSanPham.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bin\Debug\Data\NguoiDung.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bin\Debug\Data\PhuongThucThanhToan.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bin\Debug\Data\SanPham.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bin\Debug\Data\ThuongHieu.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="bin\Debug\Data\GioHang.xml" />
+    <Content Include="bin\Debug\Data\LienHe.xml" />
+    <Content Include="bin\Debug\Data\LoaiSanPham.xml" />
+    <Content Include="bin\Debug\Data\NguoiDung.xml" />
+    <Content Include="bin\Debug\Data\PhuongThucThanhToan.xml" />
+    <Content Include="bin\Debug\Data\SanPham.xml" />
+    <Content Include="bin\Debug\Data\ThuongHieu.xml" />
     <Content Include="Data\BaiViet.xml" />
     <Content Include="Data\Banner.xml" />
     <Content Include="Data\ChiTietDonHang.xml" />
