@@ -1,5 +1,4 @@
 ﻿using _125CNX03_Nhom6_CK.GUI.Forms.Admin;
-using _125CNX03_Nhom6_CK.GUI.Forms.User;
 using _125CNX03_Nhom6_CK.GUI.UserControls.Admin;
 using System;
 using System.Drawing;
@@ -22,6 +21,7 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
         private ContactForm _contactForm;
         private XElement _currentUser;
         private Panel _contentPanel;
+        private HeaderControl _headerControl;
 
         public MainForm(XElement user)
         {
@@ -45,12 +45,12 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
             sidebar.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             this.Controls.Add(sidebar);
 
-            // Header
-            HeaderControl header = new HeaderControl();
-            header.Location = new Point(250, 0);
-            header.Size = new Size(this.ClientSize.Width - 250, 80);
-            header.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            this.Controls.Add(header);
+            // Header (store reference so we can update Title)
+            _headerControl = new HeaderControl();
+            _headerControl.Location = new Point(250, 0);
+            _headerControl.Size = new Size(this.ClientSize.Width - 250, 80);
+            _headerControl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            this.Controls.Add(_headerControl);
 
             // Content Panel
             _contentPanel = new Panel();
@@ -107,6 +107,8 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 
         private void ShowDashboardForm()
         {
+            _headerControl.Title = "Bảng điều khiển";
+
             if (_dashboardForm == null)
                 _dashboardForm = new DashboardForm();
 
@@ -116,6 +118,8 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 
         private void ShowProductManagementForm()
         {
+            _headerControl.Title = "Quản lý sản phẩm";
+
             if (_productManagementForm == null)
                 _productManagementForm = new ProductManagementForm();
 
@@ -124,6 +128,8 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 
         private void ShowCategoryManagementForm()
         {
+            _headerControl.Title = "Quản lý danh mục";
+
             if (_categoryManagementForm == null)
                 _categoryManagementForm = new CategoryManagementForm();
             LoadFormIntoPanel(_categoryManagementForm);
@@ -131,7 +137,8 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 
         private void ShowBrandManagementForm()
         {
-            
+            _headerControl.Title = "Quản lý thương hiệu";
+
             if (_brandManagementForm == null)
                 _brandManagementForm = new BrandManagementForm();
             LoadFormIntoPanel(_brandManagementForm);
@@ -139,7 +146,8 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 
         private void ShowUserManagementForm()
         {
-           
+            _headerControl.Title = "Quản lý người dùng";
+
             if (_userManagementForm == null)
                 _userManagementForm = new UserManagementForm();
             LoadFormIntoPanel(_userManagementForm);
@@ -147,7 +155,8 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 
         private void ShowOrderManagementForm()
         {
-            
+            _headerControl.Title = "Quản lý đơn hàng";
+
             if (_orderManagementForm == null)
                 _orderManagementForm = new OrderManagementForm();
             LoadFormIntoPanel(_orderManagementForm);
@@ -155,7 +164,8 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 
         private void ShowBannerForm()
         {
-            
+            _headerControl.Title = "Quản lý banner";
+
             if (_bannerForm == null)
                 _bannerForm = new BannerForm();
             LoadFormIntoPanel(_bannerForm);
@@ -163,7 +173,8 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 
         private void ShowBlogForm()
         {
-            
+            _headerControl.Title = "Quản lý bài viết";
+
             if (_blogForm == null)
                 _blogForm = new BlogManagementForm();
             LoadFormIntoPanel(_blogForm);
@@ -171,7 +182,8 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 
         private void ShowContactForm()
         {
-            
+            _headerControl.Title = "Liên hệ";
+
             if (_contactForm == null)
                 _contactForm = new ContactForm();
             LoadFormIntoPanel(_contactForm);
