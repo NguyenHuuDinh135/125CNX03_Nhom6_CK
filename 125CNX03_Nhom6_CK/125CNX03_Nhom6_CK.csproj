@@ -33,8 +33,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,6 +47,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\Services\BaiVietService.cs" />
@@ -96,120 +100,163 @@
     <Compile Include="DAL\Repositories\PhuongThucThanhToanRepository.cs" />
     <Compile Include="DAL\Repositories\SanPhamRepository.cs" />
     <Compile Include="DAL\Repositories\ThuongHieuRepository.cs" />
-    <Compile Include="GUI\Forms\BannerForm.cs">
+    <Compile Include="GUI\Forms\Admin\BannerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\BannerForm.Designer.cs">
+    <Compile Include="GUI\Forms\Admin\BannerForm.Designer.cs">
       <DependentUpon>BannerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\BlogForm.cs">
+    <Compile Include="GUI\Forms\Admin\BlogManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\BlogForm.Designer.cs">
-      <DependentUpon>BlogForm.cs</DependentUpon>
+    <Compile Include="GUI\Forms\Admin\BlogManagementForm.Designer.cs">
+      <DependentUpon>BlogManagementForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\BrandManagementForm.cs">
+    <Compile Include="GUI\Forms\Admin\BrandManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\BrandManagementForm.Designer.cs">
+    <Compile Include="GUI\Forms\Admin\BrandManagementForm.Designer.cs">
       <DependentUpon>BrandManagementForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\CartForm.cs">
+    <Compile Include="GUI\Forms\Admin\CategoryManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\CartForm.Designer.cs">
-      <DependentUpon>CartForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\Forms\CategoryManagementForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Forms\CategoryManagementForm.Designer.cs">
+    <Compile Include="GUI\Forms\Admin\CategoryManagementForm.Designer.cs">
       <DependentUpon>CategoryManagementForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\CheckoutForm.cs">
+    <Compile Include="GUI\Forms\Admin\ContactForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\CheckoutForm.Designer.cs">
-      <DependentUpon>CheckoutForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\Forms\ContactForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Forms\ContactForm.Designer.cs">
+    <Compile Include="GUI\Forms\Admin\ContactForm.Designer.cs">
       <DependentUpon>ContactForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\LoginForm.cs">
+    <Compile Include="GUI\Forms\Admin\DashboardForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\LoginForm.Designer.cs">
-      <DependentUpon>LoginForm.cs</DependentUpon>
+    <Compile Include="GUI\Forms\Admin\DashboardForm.Designer.cs">
+      <DependentUpon>DashboardForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\MainForm.cs">
+    <Compile Include="GUI\Forms\Admin\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\MainForm.Designer.cs">
+    <Compile Include="GUI\Forms\Admin\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\OrderManagementForm.cs">
+    <Compile Include="GUI\Forms\Admin\OrderManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\OrderManagementForm.Designer.cs">
+    <Compile Include="GUI\Forms\Admin\OrderManagementForm.Designer.cs">
       <DependentUpon>OrderManagementForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\ProductDetailForm.cs">
+    <Compile Include="GUI\Forms\Admin\ProductManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\ProductDetailForm.Designer.cs">
-      <DependentUpon>ProductDetailForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\Forms\ProductManagementForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Forms\ProductManagementForm.Designer.cs">
+    <Compile Include="GUI\Forms\Admin\ProductManagementForm.Designer.cs">
       <DependentUpon>ProductManagementForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\RegisterForm.cs">
+    <Compile Include="GUI\Forms\Admin\UserManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\RegisterForm.Designer.cs">
-      <DependentUpon>RegisterForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\Forms\UserManagementForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Forms\UserManagementForm.Designer.cs">
+    <Compile Include="GUI\Forms\Admin\UserManagementForm.Designer.cs">
       <DependentUpon>UserManagementForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\UserControls\BrandCard.cs">
+    <Compile Include="GUI\Forms\UserControls\Admin\HeaderControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\UserControls\BrandCard.Designer.cs">
-      <DependentUpon>BrandCard.cs</DependentUpon>
+    <Compile Include="GUI\Forms\UserControls\Admin\HeaderControl.Designer.cs">
+      <DependentUpon>HeaderControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\UserControls\CartItem.cs">
+    <Compile Include="GUI\Forms\UserControls\Admin\SidebarControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\UserControls\CartItem.Designer.cs">
+    <Compile Include="GUI\Forms\UserControls\Admin\SidebarControl.Designer.cs">
+      <DependentUpon>SidebarControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\Auth\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\Auth\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\Auth\RegisterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\Auth\RegisterForm.Designer.cs">
+      <DependentUpon>RegisterForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\User\CartForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\User\CartForm.Designer.cs">
+      <DependentUpon>CartForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\User\CartItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\User\CartItem.Designer.cs">
       <DependentUpon>CartItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\UserControls\CategoryCard.cs">
+    <Compile Include="GUI\Forms\User\ChangePasswordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\User\ChangePasswordForm.Designer.cs">
+      <DependentUpon>ChangePasswordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\User\HomeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\User\HomeForm.Designer.cs">
+      <DependentUpon>HomeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\User\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\User\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\User\OrderDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\User\OrderDetailForm.Designer.cs">
+      <DependentUpon>OrderDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\User\OrderHistoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\User\OrderHistoryForm.Designer.cs">
+      <DependentUpon>OrderHistoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\User\OrderItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\UserControls\CategoryCard.Designer.cs">
-      <DependentUpon>CategoryCard.cs</DependentUpon>
+    <Compile Include="GUI\Forms\User\OrderItem.Designer.cs">
+      <DependentUpon>OrderItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\UserControls\OrderCard.cs">
+    <Compile Include="GUI\Forms\User\ProductCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\UserControls\OrderCard.Designer.cs">
-      <DependentUpon>OrderCard.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\UserControls\ProductCard.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="GUI\UserControls\ProductCard.Designer.cs">
+    <Compile Include="GUI\Forms\User\ProductCard.Designer.cs">
       <DependentUpon>ProductCard.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Forms\User\ProductCatalogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\User\ProductCatalogForm.Designer.cs">
+      <DependentUpon>ProductCatalogForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\User\ProductDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\User\ProductDetailForm.Designer.cs">
+      <DependentUpon>ProductDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\User\ProfileForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\User\ProfileForm.Designer.cs">
+      <DependentUpon>ProfileForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\User\UserEventArgs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

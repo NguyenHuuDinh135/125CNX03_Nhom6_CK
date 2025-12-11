@@ -1,4 +1,5 @@
 ﻿using _125CNX03_Nhom6_CK.GUI.Forms;
+using _125CNX03_Nhom6_CK.GUI.Forms.Admin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace _125CNX03_Nhom6_CK
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new LoginForm());
         }
     }
 }
