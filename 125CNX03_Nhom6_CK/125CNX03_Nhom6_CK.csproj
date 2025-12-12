@@ -308,34 +308,34 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Data\BaiViet.xml" />
+    <Content Include="bin\Data\Banner.xml" />
+    <Content Include="bin\Data\ChiTietDonHang.xml" />
+    <Content Include="bin\Data\ChiTietGioHang.xml" />
+    <Content Include="bin\Data\DonHang.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="bin\Data\GioHang.xml" />
+    <Content Include="bin\Data\LienHe.xml" />
+    <Content Include="bin\Data\LoaiSanPham.xml" />
+    <Content Include="bin\Data\NguoiDung.xml" />
+    <Content Include="bin\Data\PhuongThucThanhToan.xml" />
+    <Content Include="bin\Data\SanPham.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="bin\Data\ThuongHieu.xml" />
     <Content Include="bin\Debug\Data\BaiViet.xml" />
     <Content Include="bin\Debug\Data\Banner.xml" />
     <Content Include="bin\Debug\Data\ChiTietDonHang.xml" />
     <Content Include="bin\Debug\Data\ChiTietGioHang.xml" />
-    <Content Include="bin\Debug\Data\DonHang.xml">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="bin\Debug\Data\DonHang.xml" />
     <Content Include="bin\Debug\Data\GioHang.xml" />
     <Content Include="bin\Debug\Data\LienHe.xml" />
     <Content Include="bin\Debug\Data\LoaiSanPham.xml" />
     <Content Include="bin\Debug\Data\NguoiDung.xml" />
     <Content Include="bin\Debug\Data\PhuongThucThanhToan.xml" />
-    <Content Include="bin\Debug\Data\SanPham.xml">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="bin\Debug\Data\SanPham.xml" />
     <Content Include="bin\Debug\Data\ThuongHieu.xml" />
-    <Content Include="Data\BaiViet.xml" />
-    <Content Include="Data\Banner.xml" />
-    <Content Include="Data\ChiTietDonHang.xml" />
-    <Content Include="Data\ChiTietGioHang.xml" />
-    <Content Include="Data\DonHang.xml" />
-    <Content Include="Data\GioHang.xml" />
-    <Content Include="Data\LienHe.xml" />
-    <Content Include="Data\LoaiSanPham.xml" />
-    <Content Include="Data\NguoiDung.xml" />
-    <Content Include="Data\PhuongThucThanhToan.xml" />
-    <Content Include="Data\SanPham.xml" />
-    <Content Include="Data\ThuongHieu.xml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
