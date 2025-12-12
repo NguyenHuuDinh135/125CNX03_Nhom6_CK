@@ -127,7 +127,7 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 
         private Button CreateButton(string text, Point loc, Color color, EventHandler click)
         {
-            return new Button
+            var btn = new Button
             {
                 Text = text,
                 Location = loc,
@@ -139,7 +139,12 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
                 Cursor = Cursors.Hand,
                 FlatAppearance = { BorderSize = 0 }
             };
+
+            btn.Click += click;   // <-- QUAN TRỌNG: gán sự kiện click
+
+            return btn;
         }
+
 
         private void LoadData()
         {
@@ -204,7 +209,10 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
                 return;
             }
 
+            int newId = _articleService.GenerateNewId();
+
             var newArticle = new XElement("BaiViet",
+                new XElement("Id", newId),
                 new XElement("TieuDe", txtTitle.Text.Trim()),
                 new XElement("TomTat", txtSummary.Text.Trim()),
                 new XElement("NoiDung", txtContent.Text),
@@ -219,6 +227,7 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
             ClearForm();
             MessageBox.Show("Thêm bài viết thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
 
         private void BtnUpdate_Click(object sender, EventArgs e)
         {

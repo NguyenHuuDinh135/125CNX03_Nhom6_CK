@@ -18,7 +18,32 @@ namespace _125CNX03_Nhom6_CK
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm());
+
+            while (true)
+            {
+                using (var loginForm = new LoginForm())
+                {
+                    var result = loginForm.ShowDialog(); // ShowDialog để chặn luồng
+
+                    if (result == DialogResult.OK && loginForm.LoggedInUser != null)
+                    {
+                        var user = loginForm.LoggedInUser;
+                        if (user.Element("VaiTro").Value == "Admin")
+                        {
+                            Application.Run(new MainForm(user));
+                        }
+                        else
+                        {
+                            Application.Run(new _125CNX03_Nhom6_CK.GUI.Forms.User.MainForm(user));
+                        }
+                    }
+                    else
+                    {
+                        // Nếu đóng login hoặc login không thành công => thoát
+                        break;
+                    }
+                }
+            }
         }
     }
 }

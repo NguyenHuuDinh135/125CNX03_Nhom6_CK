@@ -264,24 +264,104 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
         {
             var items = _orderItemService.GetOrderItemsByOrderId(orderId);
 
-            var dt = new System.Data.DataTable();
-            dt.Columns.Add("Sản phẩm");
-            dt.Columns.Add("Đơn giá");
-            dt.Columns.Add("Số lượng");
-            dt.Columns.Add("Thành tiền");
+            // Xóa cột cũ
+            dgvOrderItems.Columns.Clear();
+            dgvOrderItems.AutoGenerateColumns = false;
+            dgvOrderItems.RowTemplate.Height = 80;
+
+            // Thêm cột ảnh
+            var imgCol = new DataGridViewImageColumn()
+            {
+                Name = "Ảnh",
+                Width = 80,
+                ImageLayout = DataGridViewImageCellLayout.Zoom
+            };
+            dgvOrderItems.Columns.Add(imgCol);
+
+            // Thêm các cột khác
+            dgvOrderItems.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Sản phẩm", Width = 200 });
+            dgvOrderItems.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Đơn giá" });
+            dgvOrderItems.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Số lượng" });
+            dgvOrderItems.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Thành tiền" });
+
+            dgvOrderItems.Rows.Clear();
 
             foreach (var item in items)
             {
                 string name = item.Element("ItemOrdered_TenSanPham")?.Value ?? "";
+                string imageUrl = item.Element("ItemOrdered_DuongDanAnh")?.Value ?? "";
 
                 decimal.TryParse(item.Element("DonGia")?.Value, out decimal price);
                 int.TryParse(item.Element("SoLuong")?.Value, out int qty);
 
-                dt.Rows.Add(name, $"{price:N0} đ", qty, $"{price * qty:N0} đ");
-            }
+                Image img = CreatePlaceholderImage(70, 70);
 
-            dgvOrderItems.DataSource = dt;
+                if (!string.IsNullOrEmpty(imageUrl))
+                {
+                    try
+                    {
+                        using (var client = new System.Net.Http.HttpClient())
+                        {
+                            var bytes = client.GetByteArrayAsync(imageUrl).Result;
+                            using (var ms = new System.IO.MemoryStream(bytes))
+                            {
+                                var original = Image.FromStream(ms);
+                                img = ResizeImage(original, 70, 70);
+                                original.Dispose();
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        img = CreatePlaceholderImage(70, 70);
+                    }
+                }
+
+                dgvOrderItems.Rows.Add(img, name, $"{price:N0} đ", qty, $"{price * qty:N0} đ");
+            }
         }
+
+        // Hàm Resize ảnh an toàn
+        private Image ResizeImage(Image image, int width, int height)
+        {
+            var ratioX = (double)width / image.Width;
+            var ratioY = (double)height / image.Height;
+            var ratio = Math.Min(ratioX, ratioY);
+
+            var newWidth = (int)(image.Width * ratio);
+            var newHeight = (int)(image.Height * ratio);
+
+            var newImage = new Bitmap(width, height);
+            using (var g = Graphics.FromImage(newImage))
+            {
+                g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                g.Clear(Color.White);
+
+                var destRect = new Rectangle((width - newWidth) / 2, (height - newHeight) / 2, newWidth, newHeight);
+                g.DrawImage(image, destRect);
+            }
+            return newImage;
+        }
+
+        // Placeholder image khi không có ảnh
+        private Image CreatePlaceholderImage(int width, int height)
+        {
+            var bmp = new Bitmap(width, height);
+            using (var g = Graphics.FromImage(bmp))
+            {
+                g.Clear(Color.FromArgb(240, 240, 240));
+                g.DrawRectangle(Pens.Gray, 0, 0, width - 1, height - 1);
+                string text = "No Image";
+                var font = new Font("Segoe UI", 8);
+                var size = g.MeasureString(text, font);
+                g.DrawString(text, font, Brushes.DarkGray,
+                    (width - size.Width) / 2, (height - size.Height) / 2);
+            }
+            return bmp;
+        }
+
 
 
         // ======================================

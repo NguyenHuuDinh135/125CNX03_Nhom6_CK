@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using System.Linq;
 
 namespace _125CNX03_Nhom6_CK.BLL
 {
@@ -51,9 +52,26 @@ namespace _125CNX03_Nhom6_CK.BLL
             return _contactRepository.GetReadMessages();
         }
 
+        public int GenerateNewId()
+        {
+            var all = _contactRepository.GetAll();
+
+            if (all == null || !all.Any())
+            {
+                return 1;
+            }
+
+            int maxId = all
+                .Select(x => x.Element("Id"))
+                .Where(element => element != null)
+                .Max(element => (int)element);
+
+            return maxId + 1;
+        }
+
         public void MarkMessageAsRead(int id)
         {
-            _contactRepository.MarkAsRead(id);
+            throw new NotImplementedException();
         }
     }
 }

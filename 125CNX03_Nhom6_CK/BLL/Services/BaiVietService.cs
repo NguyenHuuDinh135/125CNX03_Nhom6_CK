@@ -1,6 +1,7 @@
 ﻿using _125CNX03_Nhom6_CK.DAL.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace _125CNX03_Nhom6_CK.BLL
@@ -58,6 +59,22 @@ namespace _125CNX03_Nhom6_CK.BLL
         public List<XElement> SearchArticles(string searchTerm)
         {
             return _articleRepository.SearchArticles(searchTerm);
+        }
+        public int GenerateNewId()
+        {
+            var all = _articleRepository.GetAll();
+
+            if (all == null || !all.Any())
+            {
+                return 1;
+            }
+
+            int maxId = all
+                .Select(x => x.Element("Id"))
+                .Where(element => element != null)
+                .Max(element => (int)element);
+
+            return maxId + 1;
         }
     }
 }

@@ -102,6 +102,9 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
                 case "Contact":
                     ShowContactForm();
                     break;
+                case "Logout":
+                    this.Close(); // đóng MainForm
+                    break;
             }
         }
 

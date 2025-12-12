@@ -90,6 +90,7 @@ namespace _125CNX03_Nhom6_CK.GUI.UserControls.Admin
             AddMenu(menuPanel, "Banner", "\uE7AD", "BannerManagement");
             AddMenu(menuPanel, "Bài viết", "\uE8A5", "Blog");
             AddMenu(menuPanel, "Liên hệ", "\uE715", "Contact");
+            AddLogoutButton(menuPanel);
 
             if (_items.Count > 0)
                 SetActive(_items[0]);
@@ -113,6 +114,21 @@ namespace _125CNX03_Nhom6_CK.GUI.UserControls.Admin
             parent.Controls.Add(item);
             parent.Controls.SetChildIndex(item, 0);
             _items.Add(item);
+        }
+        private void AddLogoutButton(Panel parent)
+        {
+            var logoutItem = new SidebarItem("Đăng xuất", "\uE8AC") // biểu tượng Logout
+            {
+                Dock = DockStyle.Bottom,
+                Height = 48
+            };
+
+            logoutItem.Click += (s, e) =>
+            {
+                MenuItemClicked?.Invoke(this, "Logout");
+            };
+
+            parent.Controls.Add(logoutItem);
         }
 
         private void SetActive(SidebarItem item)
