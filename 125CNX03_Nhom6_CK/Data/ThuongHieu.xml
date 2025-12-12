@@ -25,7 +25,7 @@
 	<ThuongHieu>
 		<Id>2</Id>
 		<TenThuongHieu>Samsung</TenThuongHieu>
-		<HinhAnh>https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg    </HinhAnh>
+		<HinhAnh>https://upload.wikimedia.org/wikipedia/commons/f/f7/Samsung_Galaxy_logo.svg</HinhAnh>
 	</ThuongHieu>
 	<ThuongHieu>
 		<Id>3</Id>
@@ -50,7 +50,7 @@
 	<ThuongHieu>
 		<Id>7</Id>
 		<TenThuongHieu>MSI</TenThuongHieu>
-		<HinhAnh>https://upload.wikimedia.org/wikipedia/commons/8/8c/MSI_Logo_2019.svg    </HinhAnh>
+		<HinhAnh>https://upload.wikimedia.org/wikipedia/commons/9/91/Micro-Star_International_logo.svg</HinhAnh>
 	</ThuongHieu>
 	<ThuongHieu>
 		<Id>8</Id>
@@ -60,17 +60,17 @@
 	<ThuongHieu>
 		<Id>9</Id>
 		<TenThuongHieu>Sony</TenThuongHieu>
-		<HinhAnh>https://upload.wikimedia.org/wikipedia/commons/c/c3/Sony_logo.svg    </HinhAnh>
+		<HinhAnh>https://upload.wikimedia.org/wikipedia/commons/c/ca/Sony_logo.svg</HinhAnh>
 	</ThuongHieu>
 	<ThuongHieu>
 		<Id>10</Id>
 		<TenThuongHieu>LG</TenThuongHieu>
-		<HinhAnh>https://upload.wikimedia.org/wikipedia/commons/b/bf/LG_logo_%282015%29.svg    </HinhAnh>
+		<HinhAnh>https://en.wikipedia.org/wiki/LG#/media/File:LG_logo_(2014).svg</HinhAnh>
 	</ThuongHieu>
 	<ThuongHieu>
 		<Id>11</Id>
 		<TenThuongHieu>Logitech</TenThuongHieu>
-		<HinhAnh>https://upload.wikimedia.org/wikipedia/commons/ce/Logitech_logo.svg    </HinhAnh>
+		<HinhAnh>https://upload.wikimedia.org/wikipedia/commons/1/17/Logitech_logo.svg</HinhAnh>
 	</ThuongHieu>
 	<ThuongHieu>
 		<Id>12</Id>
@@ -80,7 +80,7 @@
 	<ThuongHieu>
 		<Id>13</Id>
 		<TenThuongHieu>Corsair</TenThuongHieu>
-		<HinhAnh>https://upload.wikimedia.org/wikipedia/commons/a/a2/Corsair_Components_logo.svg    </HinhAnh>
+		<HinhAnh>https://upload.wikimedia.org/wikipedia/commons/0/01/Corsairlogo.svg</HinhAnh>
 	</ThuongHieu>
 	<ThuongHieu>
 		<Id>14</Id>

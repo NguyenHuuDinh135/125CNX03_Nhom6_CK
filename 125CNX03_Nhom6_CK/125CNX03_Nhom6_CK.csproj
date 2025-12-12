@@ -301,7 +301,9 @@
     <Content Include="bin\Debug\Data\LoaiSanPham.xml" />
     <Content Include="bin\Debug\Data\NguoiDung.xml" />
     <Content Include="bin\Debug\Data\PhuongThucThanhToan.xml" />
-    <Content Include="bin\Debug\Data\SanPham.xml" />
+    <Content Include="bin\Debug\Data\SanPham.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="bin\Debug\Data\ThuongHieu.xml" />
     <Content Include="Data\BaiViet.xml" />
     <Content Include="Data\Banner.xml" />
