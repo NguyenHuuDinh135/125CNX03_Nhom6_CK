@@ -7,6 +7,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -92,9 +93,9 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
             // CHECKBOX "HIỂN THỊ" DỜI XUỐNG DƯỚI, NGANG HÀNG VỚI CÁC NÚT
             chkDisplay = new CheckBox
             {
-                Text = "Hiển thị trên trang chủ",
-                Location = new Point(650, 208),
-                Size = new Size(220, 30),
+                Text = "Hiển thị",
+                Location = new Point(800, 200),
+                Size = new Size(120, 30),
                 Checked = true,
                 Font = new Font("Segoe UI", 10F, FontStyle.Bold),
                 ForeColor = Color.FromArgb(0, 123, 255),
@@ -104,10 +105,11 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
             // 4 NÚT + CHECKBOX NẰM CÙNG HÀNG ĐẸP MẮT
             formPanel.Controls.AddRange(new Control[]
             {
-        CreateButton("Thêm mới",   new Point(30,  200), Color.FromArgb(40, 167, 69),   BtnAdd_Click),
-        CreateButton("Cập nhật",  new Point(180, 200), Color.FromArgb(0, 123, 255),   BtnUpdate_Click),
-        CreateButton("Xóa",       new Point(330, 200), Color.FromArgb(220, 53, 69),   BtnDelete_Click),
-        CreateButton("Làm mới",   new Point(480, 200), Color.FromArgb(108, 117, 125), (s,e) => { ClearForm(); dgvProducts.ClearSelection(); })
+                CreateButton("Thêm mới",   new Point(30,  200), Color.FromArgb(40, 167, 69),   BtnAdd_Click),
+                CreateButton("Cập nhật",  new Point(180, 200), Color.FromArgb(0, 123, 255),   BtnUpdate_Click),
+                CreateButton("Xóa",       new Point(330, 200), Color.FromArgb(220, 53, 69),   BtnDelete_Click),
+                CreateButton("Làm mới",   new Point(480, 200), Color.FromArgb(108, 117, 125), (s,e) => { ClearForm(); dgvProducts.ClearSelection(); }),
+                CreateButton("Xuất HTML", new Point(630, 200), Color.FromArgb(23, 162, 184), BtnExportHtml_Click)
             });
 
             this.Controls.Add(formPanel);
@@ -184,6 +186,7 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
             btn.Click += click;
             return btn;
         }
+
         #endregion
 
         #region Load Data
@@ -359,9 +362,193 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
                 e.FormattingApplied = true;
             }
         }
+        private string GenerateDanhSachHtml(List<XElement> products)
+        {
+            var sb = new StringBuilder();
+
+            sb.Append(@"<!DOCTYPE html>
+<html lang='vi'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>Danh sách sản phẩm</title>
+<style>
+body { font-family: Arial; background:#f4f4f4; margin:0; padding:20px; }
+h1 { text-align:center; }
+
+.product-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+    max-width:1200px;
+    margin:auto;
+}
+
+.product-card {
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+    cursor:pointer;
+    box-shadow:0 4px 8px rgba(0,0,0,.1);
+    transition:.3s;
+}
+.product-card:hover { transform:translateY(-8px); }
+
+.product-img { width:100%; height:200px; object-fit:cover; }
+
+.product-info { padding:15px; text-align:center; }
+.price { color:#e91e63; font-size:18px; font-weight:bold; }
+
+/* DETAIL */
+#detail-view {
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.9);
+    z-index:1000;
+    overflow:auto;
+    padding:20px;
+}
+.old-price { text-decoration:line-through; color:#999; }
+.new-price { font-size:2em; color:#e91e63; }
+</style>
+</head>
+<body>
+
+<h1>DANH SÁCH SẢN PHẨM</h1>
+<div class='product-grid'>");
+
+            foreach (var p in products)
+            {
+                string id = p.Element("Id")?.Value ?? "";
+                string ten = EscapeJsString(p.Element("TenSanPham")?.Value ?? "");
+                string anh = p.Element("DuongDanAnh")?.Value ?? "";
+                decimal gia = decimal.TryParse(p.Element("Gia")?.Value, out var g) ? g : 0;
+
+                sb.Append($@"
+<div class='product-card' onclick=""openDetail('{id}')"">
+    <img src='{anh}' class='product-img'>
+    <div class='product-info'>
+        <h3>{ten}</h3>
+        <p class='price'>{gia:#,##0} ₫</p>
+    </div>
+</div>");
+            }
+
+            sb.Append(@"</div>
+
+<div id='detail-view'>
+  <div style='background:white;max-width:1100px;margin:auto;border-radius:16px;padding:30px'>
+    <a href='javascript:backToList()'>← Quay lại</a>
+    <h1 id='d-ten'></h1>
+    <img id='d-anh' style='max-width:400px;width:100%'>
+    <p id='d-mota'></p>
+    <h3>Thông tin chi tiết</h3>
+    <p id='d-chitiet'></p>
+    <div id='d-gia'></div>
+  </div>
+</div>
+
+<script>
+const products = {");
+
+            var list = products.ToList();
+            for (int i = 0; i < list.Count; i++)
+            {
+                var p = list[i];
+                bool isLast = i == list.Count - 1;
+
+                string id = p.Element("Id")?.Value ?? "";
+                string ten = EscapeJsString(p.Element("TenSanPham")?.Value ?? "");
+                string mota = EscapeJsString(p.Element("MoTa")?.Value ?? "");
+                string chitiet = EscapeJsString(p.Element("ChiTiet")?.Value ?? "");
+                string anh = p.Element("DuongDanAnh")?.Value ?? "";
+
+                decimal gia = decimal.TryParse(p.Element("Gia")?.Value, out var g) ? g : 0;
+                decimal giaKM = decimal.TryParse(p.Element("GiaKhuyenMai")?.Value, out var gkm) ? gkm : 0;
+
+                sb.Append($@"
+'{id}': {{
+  ten:`{ten}`,
+  mota:`{mota}`,
+  chitiet:`{chitiet}`,
+  gia:`{gia:#,##0} ₫`,
+  giakm:`{(giaKM > 0 ? giaKM.ToString("#,##0") + " ₫" : "")}`,
+  giaNum:{gia},
+  giakmNum:{giaKM},
+  anh:`{anh}`
+}}{(isLast ? "" : ",")}");
+            }
+
+            sb.Append(@"
+};
+
+function openDetail(id) {
+    const p = products[id];
+    if (!p) {
+        alert('Không tìm thấy sản phẩm ID: ' + id);
+        return;
+    }
+
+    // Ẩn danh sách
+    document.querySelector('.product-grid').style.display = 'none';
+
+    // Hiện chi tiết
+    const detailView = document.getElementById('detail-view');
+    detailView.style.display = 'block';
+    detailView.style.opacity = '1';
+
+    // LẤY DOM
+    const dTen = document.getElementById('d-ten');
+    const dMota = document.getElementById('d-mota');
+    const dChiTiet = document.getElementById('d-chitiet');
+    const dAnh = document.getElementById('d-anh');
+    const dGia = document.getElementById('d-gia');
+
+    // ĐỔ DỮ LIỆU
+    dTen.innerText = p.ten || '';
+    dMota.innerText = p.mota || 'Không có mô tả';
+    dChiTiet.innerHTML = (p.chitiet || '').replace(/\n/g, '<br>');
+    dAnh.src = p.anh || 'https://via.placeholder.com/400x400?text=No+Image';
+
+    // GIÁ
+    if (p.giakmNum > 0 && p.giakmNum < p.giaNum) {
+        dGia.innerHTML = `
+            <span class=""old-price"">${p.gia}</span>
+            <span class=""new-price"">${p.giakm}</span>
+        `;
+    } else {
+        dGia.innerHTML = `<span class=""new-price"">${p.gia}</span>`;
+    }
+}
+
+function backToList() {
+    document.getElementById('detail-view').style.display = 'none';
+    document.querySelector('.product-grid').style.display = 'grid';
+}
+
+</script>
+</body>
+</html>");
+
+            return sb.ToString();
+        }
+
+
         #endregion
 
         #region Events
+        private string EscapeJsString(string input)
+        {
+            if (string.IsNullOrEmpty(input)) return "";
+            return input
+                .Replace("\\", "\\\\")
+                .Replace("`", "\\`")
+                .Replace("$", "\\$")
+                .Replace("<", "&lt;")
+                .Replace(">", "&gt;");
+        }
+
         private void BtnAdd_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtProductName.Text))
@@ -471,6 +658,28 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
                 if (int.TryParse(product.Element("MaThuongHieu")?.Value, out int brandId))
                     cboBrand.SelectedValue = brandId;
             }
+        }
+
+        private void BtnExportHtml_Click(object sender, EventArgs e)
+        {
+            var products = _productService.GetAllProducts();
+
+            string html = GenerateDanhSachHtml(products);
+
+            // Tạo file HTML tạm
+            string tempPath = Path.Combine(
+                Path.GetTempPath(),
+                $"SanPham_{DateTime.Now:yyyyMMddHHmmss}.html"
+            );
+
+            File.WriteAllText(tempPath, html);
+
+            // Mở trình duyệt mặc định
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = tempPath,
+                UseShellExecute = true
+            });
         }
 
 
