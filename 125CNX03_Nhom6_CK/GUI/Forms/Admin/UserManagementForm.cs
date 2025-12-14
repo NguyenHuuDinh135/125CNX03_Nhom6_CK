@@ -1,16 +1,19 @@
 ﻿using _125CNX03_Nhom6_CK.BLL;
+using _125CNX03_Nhom6_CK.GUI.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using _125CNX03_Nhom6_CK.GUI.Interfaces;
 
 namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 {
-    public partial class UserManagementForm : Form
+    public partial class UserManagementForm : Form, ISearchableForm
     {
         private readonly INguoiDungService _userService;
+        private List<XElement> _allUsers;
 
         public UserManagementForm()
         {
@@ -158,14 +161,28 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
         // =====================
         private void LoadData()
         {
-            var users = _userService.GetAllUsers();
-            var dgv = this.Controls.Find("dgvUsers", true).FirstOrDefault() as DataGridView;
+            _allUsers = _userService.GetAllUsers();
+
+            var dgv = this.Controls.Find("dgvUsers", true)
+                                   .FirstOrDefault() as DataGridView;
 
             if (dgv != null)
             {
+                BindGrid(_allUsers);
+            }
+        }
+        private void BindGrid(List<XElement> users)
+        {
+            var dgv = this.Controls.Find("dgvUsers", true)
+                                   .FirstOrDefault() as DataGridView;
+
+            if (dgv != null)
+            {
+                dgv.DataSource = null;
                 dgv.DataSource = ConvertToUserTable(users);
             }
         }
+
 
         private System.Data.DataTable ConvertToUserTable(List<XElement> elements)
         {
@@ -351,5 +368,28 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
                 MessageBox.Show("Đã xóa user!");
             }
         }
+        public void OnSearch(string keyword)
+        {
+            if (_allUsers == null) return;
+
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                BindGrid(_allUsers);
+                return;
+            }
+
+            keyword = keyword.ToLower();
+
+            var filtered = _allUsers.Where(u =>
+                (u.Element("HoTen")?.Value.ToLower().Contains(keyword) ?? false) ||
+                (u.Element("Email")?.Value.ToLower().Contains(keyword) ?? false) ||
+                (u.Element("SoDienThoai")?.Value.ToLower().Contains(keyword) ?? false) ||
+                (u.Element("DiaChi")?.Value.ToLower().Contains(keyword) ?? false) ||
+                (u.Element("VaiTro")?.Value.ToLower().Contains(keyword) ?? false)
+            ).ToList();
+
+            BindGrid(filtered);
+        }
+
     }
 }

@@ -6,15 +6,18 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using _125CNX03_Nhom6_CK.BLL;
+using _125CNX03_Nhom6_CK.GUI.Interfaces;
 
 namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 {
-    public partial class ContactForm : Form
+    public partial class ContactForm : Form, ISearchableForm
     {
         private readonly ILienHeService _contactService;
         private DataGridView dgvContacts;
         private TextBox txtHoTen, txtEmail, txtSoDienThoai, txtNoiDung;
         private Button btnAdd, btnUpdate, btnDelete;
+
+        private List<XElement> _allContacts;
 
         public ContactForm()
         {
@@ -132,10 +135,15 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 
         private void LoadData()
         {
-            var contacts = _contactService.GetAllMessages();
-            dgvContacts.DataSource = ConvertToContactTable(contacts);
+            _allContacts = _contactService.GetAllMessages();
+            BindGrid(_allContacts);
         }
 
+        private void BindGrid(List<XElement> contacts)
+        {
+            dgvContacts.DataSource = null;
+            dgvContacts.DataSource = ConvertToContactTable(contacts);
+        }
         private DataTable ConvertToContactTable(List<XElement> elements)
         {
             var dt = new DataTable();
@@ -262,5 +270,27 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
             txtNoiDung.Clear();
             txtHoTen.Focus();
         }
+        public void OnSearch(string keyword)
+        {
+            if (_allContacts == null) return;
+
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                BindGrid(_allContacts);
+                return;
+            }
+
+            keyword = keyword.ToLower();
+
+            var filtered = _allContacts.Where(c =>
+                c.Elements().Any(e =>
+                    !string.IsNullOrEmpty(e.Value) &&
+                    e.Value.ToLower().Contains(keyword)
+                )
+            ).ToList();
+
+            BindGrid(filtered);
+        }
+
     }
 }

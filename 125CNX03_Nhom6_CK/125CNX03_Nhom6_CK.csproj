@@ -258,10 +258,17 @@
       <DependentUpon>ProfileForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Forms\User\UserEventArgs.cs" />
+    <Compile Include="GUI\Interfaces\ISearchableForm.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUI\Forms\Admin\BannerForm.resx">
+      <DependentUpon>BannerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\Admin\BlogManagementForm.resx">
       <DependentUpon>BlogManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\Admin\BrandManagementForm.resx">
+      <DependentUpon>BrandManagementForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\Admin\CategoryManagementForm.resx">
       <DependentUpon>CategoryManagementForm.cs</DependentUpon>
@@ -278,8 +285,14 @@
     <EmbeddedResource Include="GUI\Forms\Admin\ProductManagementForm.resx">
       <DependentUpon>ProductManagementForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\Admin\UserManagementForm.resx">
+      <DependentUpon>UserManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\Auth\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\UserControls\Admin\HeaderControl.resx">
+      <DependentUpon>HeaderControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\UserControls\Admin\SidebarControl.resx">
       <DependentUpon>SidebarControl.cs</DependentUpon>

@@ -1,16 +1,20 @@
-﻿using System;
+﻿using _125CNX03_Nhom6_CK.BLL;
+using _125CNX03_Nhom6_CK.GUI.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using _125CNX03_Nhom6_CK.BLL;
 
 namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 {
-    public partial class BlogManagementForm : Form
+    public partial class BlogManagementForm : Form, ISearchableForm
     {
         private readonly IBaiVietService _articleService;
+
+        private List<XElement> _allArticles;
 
         private TextBox txtTitle, txtSummary, txtImageUrl, txtContent;
         private CheckBox chkDisplay;
@@ -107,6 +111,12 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
             this.Controls.Add(gridPanel);
         }
 
+        private void BindGrid(List<XElement> articles)
+        {
+            dgvArticles.DataSource = null;
+            dgvArticles.DataSource = ToArticleTable(articles);
+        }
+
         private void CreateControl(string label, out TextBox tb, int y, Panel panel)
         {
             new Label
@@ -150,8 +160,8 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
         {
             try
             {
-                var articles = _articleService.GetAllArticles();
-                dgvArticles.DataSource = ToArticleTable(articles);
+                _allArticles = _articleService.GetAllArticles();
+                BindGrid(_allArticles);
             }
             catch (Exception ex)
             {
@@ -228,7 +238,6 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
             MessageBox.Show("Thêm bài viết thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-
         private void BtnUpdate_Click(object sender, EventArgs e)
         {
             if (dgvArticles.SelectedRows.Count == 0)
@@ -282,5 +291,26 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
             chkDisplay.Checked = true;
             txtTitle.Focus();
         }
+        public void OnSearch(string keyword)
+            {
+                if (_allArticles == null) return;
+
+                if (string.IsNullOrWhiteSpace(keyword))
+                {
+                    BindGrid(_allArticles);
+                    return;
+                }
+
+                keyword = keyword.Trim().ToLower();
+
+                var filtered = _allArticles.Where(a =>
+                    a.Elements().Any(e =>
+                        !string.IsNullOrEmpty(e.Value) &&
+                        e.Value.ToLower().Contains(keyword)
+                    )
+                ).ToList();
+
+                BindGrid(filtered);
+            }
     }
 }

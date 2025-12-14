@@ -1,15 +1,18 @@
-﻿using System;
+﻿using _125CNX03_Nhom6_CK.BLL;
+using _125CNX03_Nhom6_CK.GUI.Interfaces;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using _125CNX03_Nhom6_CK.BLL;
-using System.Collections.Generic;
 
 namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 {
-    public partial class BannerForm : Form
+    public partial class BannerForm : Form, ISearchableForm
     {
         private readonly IBannerService _bannerService;
+        private List<XElement> _allBanners;
 
         public BannerForm()
         {
@@ -179,13 +182,8 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 
         private void LoadData()
         {
-            var banners = _bannerService.GetAllBanners();
-            var dataGridView = this.Controls[1].Controls[1] as DataGridView;
-            if (dataGridView != null)
-            {
-                dataGridView.DataSource = null;
-                dataGridView.DataSource = ConvertToBannerTable(banners);
-            }
+            _allBanners = _bannerService.GetAllBanners();
+            BindGrid(_allBanners);
             ClearForm();
         }
 
@@ -350,6 +348,36 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
             if (linkControl != null) linkControl.Clear();
             if (orderControl != null) orderControl.Text = "0";
             if (displayControl != null) displayControl.Checked = true;
+        }
+        private void BindGrid(List<XElement> banners)
+        {
+            var dataGridView = this.Controls[1].Controls[1] as DataGridView;
+            if (dataGridView == null) return;
+
+            dataGridView.DataSource = null;
+            dataGridView.DataSource = ConvertToBannerTable(banners);
+        }
+        public void OnSearch(string keyword)
+        {
+            if (_allBanners == null) return;
+
+            // Nếu rỗng → hiển thị lại toàn bộ
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                BindGrid(_allBanners);
+                return;
+            }
+
+            keyword = keyword.Trim().ToLower();
+
+            var filtered = _allBanners.Where(b =>
+                b.Elements().Any(e =>
+                    !string.IsNullOrEmpty(e.Value) &&
+                    e.Value.ToLower().Contains(keyword)
+                )
+            ).ToList();
+
+            BindGrid(filtered);
         }
     }
 }

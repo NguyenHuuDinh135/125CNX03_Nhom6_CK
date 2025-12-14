@@ -1,16 +1,19 @@
-﻿using System;
+﻿using _125CNX03_Nhom6_CK.BLL;
+using _125CNX03_Nhom6_CK.GUI.Interfaces;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using _125CNX03_Nhom6_CK.BLL;
-using System.Collections.Generic;
 
 namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 {
-    public partial class BrandManagementForm : Form
+    public partial class BrandManagementForm : Form, ISearchableForm
     {
         private readonly IThuongHieuService _brandService;
 
+        private List<XElement> _allBrands;
         public BrandManagementForm()
         {
             InitializeComponent();
@@ -139,13 +142,8 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 
         private void LoadData()
         {
-            var brands = _brandService.GetAllBrands();
-            var dataGridView = this.Controls[1].Controls[1] as DataGridView;
-            if (dataGridView != null)
-            {
-                dataGridView.DataSource = null;
-                dataGridView.DataSource = ConvertToBrandTable(brands);
-            }
+            _allBrands = _brandService.GetAllBrands();
+            BindGrid(_allBrands);
         }
 
         private System.Data.DataTable ConvertToBrandTable(List<XElement> elements)
@@ -165,6 +163,16 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
             }
 
             return dt;
+        }
+
+        private void BindGrid(List<XElement> brands)
+        {
+            var dataGridView = this.Controls[1].Controls[1] as DataGridView;
+            if (dataGridView != null)
+            {
+                dataGridView.DataSource = null;
+                dataGridView.DataSource = ConvertToBrandTable(brands);
+            }
         }
 
         private void DataGridView_SelectionChanged(object sender, EventArgs e)
@@ -264,5 +272,27 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
             if (brandNameControl != null) brandNameControl.Clear();
             if (imageUrlControl != null) imageUrlControl.Clear();
         }
+        public void OnSearch(string keyword)
+        {
+            if (_allBrands == null) return;
+
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                BindGrid(_allBrands);
+                return;
+            }
+
+            keyword = keyword.ToLower();
+
+            var filtered = _allBrands.Where(b =>
+                b.Elements().Any(e =>
+                    !string.IsNullOrEmpty(e.Value) &&
+                    e.Value.ToLower().Contains(keyword)
+                )
+            ).ToList();
+
+            BindGrid(filtered);
+        }
+
     }
 }

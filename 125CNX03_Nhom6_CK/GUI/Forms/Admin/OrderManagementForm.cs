@@ -5,16 +5,19 @@ using System.Xml.Linq;
 using _125CNX03_Nhom6_CK.BLL;
 using System.Collections.Generic;
 using System.Linq;
+using _125CNX03_Nhom6_CK.GUI.Interfaces;
 
 namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 {
-    public partial class OrderManagementForm : Form
+    public partial class OrderManagementForm : Form, ISearchableForm
     {
         private readonly IDonHangService _orderService;
         private readonly IChiTietDonHangService _orderItemService;
 
         private DataGridView dgvOrders;
         private DataGridView dgvOrderItems;
+
+        private List<XElement> _allOrders;
 
         private TextBox txtCustomer;
         private TextBox txtPhone;
@@ -179,8 +182,10 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
         // ======================================
         private void LoadData()
         {
-            var orders = _orderService.GetAllOrders();
-            dgvOrders.DataSource = ConvertToOrderTable(orders);
+            //var orders = _orderService.GetAllOrders();
+            //dgvOrders.DataSource = ConvertToOrderTable(orders);
+            _allOrders = _orderService.GetAllOrders();
+            dgvOrders.DataSource = ConvertToOrderTable(_allOrders);
         }
 
         private System.Data.DataTable ConvertToOrderTable(List<XElement> elements)
@@ -397,6 +402,27 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
                 case 4: return "Đã hủy";
                 default: return "Không xác định";
             }
+        }
+        public void OnSearch(string keyword)
+        {
+            if (_allOrders == null) return;
+
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                dgvOrders.DataSource = ConvertToOrderTable(_allOrders);
+                return;
+            }
+
+            keyword = keyword.Trim().ToLower();
+
+            var filtered = _allOrders.Where(x =>
+                x.Elements().Any(e =>
+                    !string.IsNullOrEmpty(e.Value) &&
+                    e.Value.ToLower().Contains(keyword)
+                )
+            ).ToList();
+
+            dgvOrders.DataSource = ConvertToOrderTable(filtered);
         }
 
 

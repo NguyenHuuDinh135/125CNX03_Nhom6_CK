@@ -11,10 +11,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using _125CNX03_Nhom6_CK.GUI.Interfaces;
 
 namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 {
-    public partial class ProductManagementForm : Form
+    public partial class ProductManagementForm : Form, ISearchableForm
     {
         private readonly ISanPhamService _productService;
         private readonly ILoaiSanPhamService _categoryService;
@@ -25,7 +26,7 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
         private CheckBox chkDisplay;
         private DataGridView dgvProducts;
         private PictureBox picProductImage; // Xem trước ảnh lớn
-
+        private List<XElement> _allProducts;
         public ProductManagementForm()
         {
             InitializeComponent();
@@ -209,8 +210,11 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 
         private async void LoadData()
         {
-            var products = _productService.GetAllProducts();
-
+            _allProducts = _productService.GetAllProducts();
+            await BindGrid(_allProducts);
+        }
+        private async Task BindGrid(List<XElement> products)
+        {
             var dt = new DataTable();
             dt.Columns.Add("Id", typeof(int));
             dt.Columns.Add("Ảnh", typeof(Image));
@@ -226,12 +230,13 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
             foreach (var p in products)
             {
                 decimal gia = decimal.Parse(p.Element("Gia").Value, CultureInfo.InvariantCulture);
-                decimal giaKM = p.Element("GiaKhuyenMai") != null && decimal.TryParse(p.Element("GiaKhuyenMai").Value, out decimal km)
-                    ? km : 0;
+                decimal giaKM = p.Element("GiaKhuyenMai") != null &&
+                                decimal.TryParse(p.Element("GiaKhuyenMai").Value, out decimal km)
+                                ? km : 0;
 
                 dt.Rows.Add(
                     (int)p.Element("Id"),
-                    null, // ảnh sẽ load sau
+                    null,
                     p.Element("TenSanPham")?.Value,
                     p.Element("MoTa")?.Value,
                     gia,
@@ -245,11 +250,9 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 
             dgvProducts.DataSource = dt;
 
-            // Sự kiện DataBindingComplete để cấu hình cột sau khi DataSource gán xong
-            dgvProducts.DataBindingComplete -= DgvProducts_DataBindingComplete; // tránh đăng ký nhiều lần
+            dgvProducts.DataBindingComplete -= DgvProducts_DataBindingComplete;
             dgvProducts.DataBindingComplete += DgvProducts_DataBindingComplete;
 
-            // Load ảnh bất đồng bộ
             await LoadImagesAsync(products);
         }
 
@@ -701,5 +704,29 @@ function backToList() {
 
         private string GetBrandName(int id) =>
             _brandService.GetBrandById(id)?.Element("TenThuongHieu")?.Value ?? "Chưa xác định";
+        public async void OnSearch(string keyword)
+        {
+            if (_allProducts == null) return;
+
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                await BindGrid(_allProducts);
+                return;
+            }
+
+            keyword = keyword.ToLower();
+
+            var filtered = _allProducts.Where(p =>
+                (p.Element("TenSanPham")?.Value.ToLower().Contains(keyword) ?? false) ||
+                (p.Element("MoTa")?.Value.ToLower().Contains(keyword) ?? false) ||
+                (GetCategoryName((int)p.Element("MaLoai")).ToLower().Contains(keyword)) ||
+                (GetBrandName((int)p.Element("MaThuongHieu")).ToLower().Contains(keyword)) ||
+                (p.Element("Gia")?.Value.Contains(keyword) ?? false) ||
+                (p.Element("GiaKhuyenMai")?.Value.Contains(keyword) ?? false)
+            ).ToList();
+
+            await BindGrid(filtered);
+        }
+
     }
 }

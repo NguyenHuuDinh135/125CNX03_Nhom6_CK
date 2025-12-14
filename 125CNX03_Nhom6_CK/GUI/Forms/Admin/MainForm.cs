@@ -1,4 +1,5 @@
 ﻿using _125CNX03_Nhom6_CK.GUI.Forms.Admin;
+using _125CNX03_Nhom6_CK.GUI.Interfaces;
 using _125CNX03_Nhom6_CK.GUI.UserControls.Admin;
 using System;
 using System.Drawing;
@@ -22,6 +23,8 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
         private XElement _currentUser;
         private Panel _contentPanel;
         private HeaderControl _headerControl;
+
+        private Form _currentForm;
 
         public MainForm(XElement user)
         {
@@ -59,10 +62,20 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
             _contentPanel.BackColor = Color.White;
             _contentPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             this.Controls.Add(_contentPanel);
+
+            // Search event
+            _headerControl.SearchTextChanged += (s, keyword) =>
+            {
+                if (_currentForm is ISearchableForm searchable)
+                {
+                    searchable.OnSearch(keyword);
+                }
+            };
         }
         private void LoadFormIntoPanel(Form frm)
         {
             _contentPanel.Controls.Clear();
+            _currentForm = frm;
             frm.TopLevel = false;
             frm.FormBorderStyle = FormBorderStyle.None;
             frm.Dock = DockStyle.Fill;
