@@ -48,7 +48,7 @@ namespace _125CNX03_Nhom6_CK.BLL
             // Update product quantities
             foreach (var item in orderItems)
             {
-                var productId = int.Parse(item.Element("ItemOrdered_MaSanPham").Value);
+                var productId = int.Parse(item.Element("MaSanPham").Value);
                 var quantity = int.Parse(item.Element("SoLuong").Value);
                 var product = _productRepository.GetById(productId);
                 if (product != null)
@@ -62,7 +62,7 @@ namespace _125CNX03_Nhom6_CK.BLL
             // Save order items
             foreach (var item in orderItems)
             {
-                item.Element("MaDonHang").Value = order.Element("Id").Value;
+                item.SetElementValue("MaDonHang", order.Element("Id")?.Value);
                 _orderItemRepository.Add(item);
             }
         }

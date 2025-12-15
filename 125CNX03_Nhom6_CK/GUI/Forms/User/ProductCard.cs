@@ -5,9 +5,22 @@ using System.Windows.Forms;
 
 namespace _125CNX03_Nhom6_CK.GUI.Forms.User
 {
+    // Custom EventArgs để truyền Id
+    public class ProductEventArgs : EventArgs
+    {
+        public string ProductId { get; set; }
+
+        public ProductEventArgs(string productId)
+        {
+            ProductId = productId;
+        }
+    }
+
     public partial class ProductCard : UserControl
     {
-        public event EventHandler<string> ItemClicked;
+        public event EventHandler<ProductEventArgs> ItemClicked;
+        public event EventHandler<ProductEventArgs> AddToCartClicked;
+
         public string Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -34,7 +47,7 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.User
             pictureBox.Location = new Point(0, 0);
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox.BackColor = Color.FromArgb(245, 245, 245);
-            pictureBox.Click += (s, e) => ItemClicked?.Invoke(this, Id);
+            pictureBox.Click += (s, e) => ItemClicked?.Invoke(this, new ProductEventArgs(Id));
             this.Controls.Add(pictureBox);
 
             // Content panel
@@ -45,48 +58,40 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.User
 
             // Title
             Label titleLabel = new Label();
+            titleLabel.Name = "lblTitle";
             titleLabel.Text = Title ?? "Tiêu đề sản phẩm";
             titleLabel.Font = new Font("Segoe UI", 9, FontStyle.Bold);
             titleLabel.Location = new Point(10, 5);
             titleLabel.Size = new Size(180, 30);
             titleLabel.MaximumSize = new Size(180, 30);
             titleLabel.AutoEllipsis = true;
-            titleLabel.Click += (s, e) => ItemClicked?.Invoke(this, Id);
+            titleLabel.Click += (s, e) => ItemClicked?.Invoke(this, new ProductEventArgs(Id));
             contentPanel.Controls.Add(titleLabel);
 
             // Price
             Label priceLabel = new Label();
+            priceLabel.Name = "lblPrice";
             priceLabel.Text = $"Giá: {Price}đ";
             priceLabel.Font = new Font("Segoe UI", 9);
-            priceLabel.Location = new Point(10, 35);
+            priceLabel.Location = new Point(10, 38);
             priceLabel.Size = new Size(180, 20);
-            priceLabel.Click += (s, e) => ItemClicked?.Invoke(this, Id);
+            priceLabel.Click += (s, e) => ItemClicked?.Invoke(this, new ProductEventArgs(Id));
             contentPanel.Controls.Add(priceLabel);
 
-            // Discount price
-            if (!string.IsNullOrEmpty(DiscountPrice) && decimal.Parse(DiscountPrice) > 0)
-            {
-                Label discountPriceLabel = new Label();
-                discountPriceLabel.Text = $"Giá khuyến mãi: {DiscountPrice}đ";
-                discountPriceLabel.Font = new Font("Segoe UI", 9, FontStyle.Bold);
-                discountPriceLabel.ForeColor = Color.Red;
-                discountPriceLabel.Location = new Point(10, 55);
-                discountPriceLabel.Size = new Size(180, 20);
-                discountPriceLabel.Click += (s, e) => ItemClicked?.Invoke(this, Id);
-                contentPanel.Controls.Add(discountPriceLabel);
-            }
-
-            // Category
+            // Category - moved down to make room
             Label categoryLabel = new Label();
+            categoryLabel.Name = "lblCategory";
             categoryLabel.Text = Category ?? "Danh mục";
             categoryLabel.Font = new Font("Segoe UI", 8);
+            categoryLabel.ForeColor = Color.Gray;
             categoryLabel.Location = new Point(10, 80);
             categoryLabel.Size = new Size(180, 20);
-            categoryLabel.Click += (s, e) => ItemClicked?.Invoke(this, Id);
+            categoryLabel.Click += (s, e) => ItemClicked?.Invoke(this, new ProductEventArgs(Id));
             contentPanel.Controls.Add(categoryLabel);
 
             // Add to cart button
             Button btnAddToCart = new Button();
+            btnAddToCart.Name = "btnAddToCart";
             btnAddToCart.Text = "Thêm vào giỏ";
             btnAddToCart.Font = new Font("Segoe UI", 8, FontStyle.Bold);
             btnAddToCart.Size = new Size(100, 25);
@@ -96,11 +101,7 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.User
             btnAddToCart.FlatStyle = FlatStyle.Flat;
             btnAddToCart.FlatAppearance.BorderSize = 0;
             btnAddToCart.Cursor = Cursors.Hand;
-            btnAddToCart.Click += (s, e) =>
-            {
-                // Add to cart logic
-                MessageBox.Show($"Đã thêm {Title} vào giỏ hàng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            };
+            btnAddToCart.Click += (s, e) => AddToCartClicked?.Invoke(this, new ProductEventArgs(Id));
             contentPanel.Controls.Add(btnAddToCart);
 
             this.Controls.Add(contentPanel);
@@ -117,7 +118,7 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.User
             Category = category;
 
             // Update UI
-            var pictureBox = this.Controls[0] as PictureBox;
+            var pictureBox = this.Controls.OfType<PictureBox>().FirstOrDefault();
             if (pictureBox != null)
             {
                 if (!string.IsNullOrEmpty(imageUrl))
@@ -128,43 +129,69 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.User
                     }
                     catch
                     {
-                        pictureBox.Image = Properties.Resources.DefaultProductImage;
+                        pictureBox.Image = Properties.Resources.DefaultProduct;
                     }
                 }
                 else
                 {
-                    pictureBox.Image = Properties.Resources.DefaultProductImage;
+                    pictureBox.Image = Properties.Resources.DefaultProduct;
                 }
             }
 
-            var contentPanel = this.Controls[1] as Panel;
+            var contentPanel = this.Controls.OfType<Panel>().FirstOrDefault();
             if (contentPanel != null)
             {
-                var titleLabel = contentPanel.Controls[0] as Label;
+                var titleLabel = contentPanel.Controls.Find("lblTitle", false).FirstOrDefault() as Label;
                 if (titleLabel != null) titleLabel.Text = title;
 
-                var priceLabel = contentPanel.Controls[1] as Label;
-                if (priceLabel != null) priceLabel.Text = $"Giá: {price}đ";
+                var priceLabel = contentPanel.Controls.Find("lblPrice", false).FirstOrDefault() as Label;
+                var categoryLabel = contentPanel.Controls.Find("lblCategory", false).FirstOrDefault() as Label;
 
                 // Remove existing discount price label if exists
-                var existingDiscountLabel = contentPanel.Controls.OfType<Label>().FirstOrDefault(l => l.Text.Contains("Giá khuyến mãi"));
+                var existingDiscountLabel = contentPanel.Controls.OfType<Label>().FirstOrDefault(l => l.Name == "lblDiscount");
                 if (existingDiscountLabel != null)
                     contentPanel.Controls.Remove(existingDiscountLabel);
 
-                // Add discount price if needed
-                if (!string.IsNullOrEmpty(discountPrice) && decimal.Parse(discountPrice) > 0)
+                // Check if we have a discount price
+                bool hasDiscount = !string.IsNullOrEmpty(discountPrice) &&
+                                   decimal.TryParse(discountPrice, out var dp) &&
+                                   dp > 0;
+
+                if (hasDiscount)
                 {
+                    // Show original price with strikethrough
+                    if (priceLabel != null)
+                    {
+                        priceLabel.Text = $"Giá: {price}đ";
+                        priceLabel.Font = new Font("Segoe UI", 8, FontStyle.Strikeout);
+                        priceLabel.ForeColor = Color.Gray;
+                    }
+
+                    // Add discount price in red
                     var discountPriceLabel = new Label();
+                    discountPriceLabel.Name = "lblDiscount";
                     discountPriceLabel.Text = $"Giá khuyến mãi: {discountPrice}đ";
                     discountPriceLabel.Font = new Font("Segoe UI", 9, FontStyle.Bold);
                     discountPriceLabel.ForeColor = Color.Red;
-                    discountPriceLabel.Location = new Point(10, 55);
+                    discountPriceLabel.Location = new Point(10, 58);
                     discountPriceLabel.Size = new Size(180, 20);
+                    discountPriceLabel.Click += (s, e) => ItemClicked?.Invoke(this, new ProductEventArgs(Id));
                     contentPanel.Controls.Add(discountPriceLabel);
+                    discountPriceLabel.BringToFront(); // Ensure it's visible
+                }
+                else
+                {
+                    // No discount, show regular price
+                    if (priceLabel != null)
+                    {
+                        priceLabel.Text = $"Giá: {price}đ";
+                        priceLabel.Font = new Font("Segoe UI", 9);
+                        priceLabel.ForeColor = Color.Black;
+                    }
                 }
 
-                var categoryLabel = contentPanel.Controls.OfType<Label>().FirstOrDefault(l => l.Text == Category || l.Text.StartsWith("Danh mục"));
-                if (categoryLabel != null) categoryLabel.Text = category;
+                if (categoryLabel != null)
+                    categoryLabel.Text = category;
             }
         }
     }
