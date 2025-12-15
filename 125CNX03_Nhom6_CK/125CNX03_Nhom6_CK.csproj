@@ -184,6 +184,15 @@
     <Compile Include="GUI\Forms\Auth\RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Forms\UserControls\User\HeaderControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\UserControls\User\SidebarControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\User\BlogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GUI\Forms\User\CartForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,6 +210,9 @@
     </Compile>
     <Compile Include="GUI\Forms\User\ChangePasswordForm.Designer.cs">
       <DependentUpon>ChangePasswordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\User\ContactForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\Forms\User\HomeForm.cs">
       <SubType>Form</SubType>
@@ -232,9 +244,7 @@
     <Compile Include="GUI\Forms\User\OrderItem.Designer.cs">
       <DependentUpon>OrderItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\User\ProductCard.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="GUI\Forms\User\ProductCard.cs" />
     <Compile Include="GUI\Forms\User\ProductCard.Designer.cs">
       <DependentUpon>ProductCard.cs</DependentUpon>
     </Compile>
@@ -255,6 +265,9 @@
     </Compile>
     <Compile Include="GUI\Forms\User\ProfileForm.Designer.cs">
       <DependentUpon>ProfileForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\User\UserBaseForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\Forms\User\UserEventArgs.cs" />
     <Compile Include="Program.cs" />

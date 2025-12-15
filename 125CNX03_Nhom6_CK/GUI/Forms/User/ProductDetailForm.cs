@@ -9,6 +9,7 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.User
     public partial class ProductDetailForm : Form
     {
         private readonly ISanPhamService _productService;
+        private readonly IGioHangService _cartService = new GioHangService();
         private XElement _currentProduct;
 
         public ProductDetailForm(string productId)
@@ -69,12 +70,12 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.User
                 }
                 catch
                 {
-                    pictureBox.Image = Properties.Resources.DefaultProductImage;
+                    pictureBox.Image = Properties.Resources.DefaultProduct;
                 }
             }
             else
             {
-                pictureBox.Image = Properties.Resources.DefaultProductImage;
+                pictureBox.Image = Properties.Resources.DefaultProduct;
             }
             mainPanel.Controls.Add(pictureBox);
 
@@ -169,8 +170,34 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.User
 
         private void BtnAddToCart_Click(object sender, EventArgs e)
         {
-            // Add to cart logic
-            MessageBox.Show($"Đã thêm {_currentProduct.Element("TenSanPham").Value} vào giỏ hàng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                // Try obtain current user from MdiParent (MainForm)
+                XElement currentUser = null;
+                if (this.MdiParent is MainForm mf)
+                    currentUser = mf.CurrentUser;
+
+                if (currentUser == null)
+                {
+                    MessageBox.Show("Vui lòng đăng nhập để thêm vào giỏ hàng.", "Yêu cầu đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                int userId = int.Parse(currentUser.Element("Id").Value);
+                int productId = int.Parse(_currentProduct.Element("Id").Value);
+
+                _cartService.AddProductToCart(userId, productId, 1);
+
+                // Ask parent to refresh cart count
+                if (this.MdiParent is MainForm main)
+                    main.RefreshCartCount();
+
+                MessageBox.Show($"Đã thêm {_currentProduct.Element("TenSanPham").Value} vào giỏ hàng!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Không thể thêm vào giỏ hàng: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
