@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -7,7 +8,9 @@ namespace _125CNX03_Nhom6_CK.DAL.Repositories
 {
     public class BaiVietRepository : IBaiVietRepository
     {
-        private readonly string _filePath = "Data/BaiViet.xml";
+        private readonly string _filePath =
+            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "BaiViet.xml");
+
         private readonly string _tableName = "BaiViet";
 
         public List<XElement> GetAll()

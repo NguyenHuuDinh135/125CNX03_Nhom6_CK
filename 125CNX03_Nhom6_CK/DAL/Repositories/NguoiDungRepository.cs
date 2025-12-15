@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -7,7 +8,8 @@ namespace _125CNX03_Nhom6_CK.DAL.Repositories
 {
     public class NguoiDungRepository : INguoiDungRepository
     {
-        private readonly string _filePath = "Data/NguoiDung.xml";
+        private readonly string _filePath =
+            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "NguoiDung.xml"); 
         private readonly string _tableName = "NguoiDung";
 
         public List<XElement> GetAll()

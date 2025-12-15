@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -7,7 +8,9 @@ namespace _125CNX03_Nhom6_CK.DAL.Repositories
 {
     public class ChiTietGioHangRepository : IChiTietGioHangRepository
     {
-        private readonly string _filePath = "Data/ChiTietGioHang.xml";
+        private readonly string _filePath =
+    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "ChiTietGioHang.xml");
+
         private readonly string _tableName = "ChiTietGioHang";
 
         public List<XElement> GetAll()
@@ -37,7 +40,25 @@ namespace _125CNX03_Nhom6_CK.DAL.Repositories
             try
             {
                 var doc = XDocument.Load(_filePath);
-                var root = doc.Root ?? new XElement("NewDataSet");
+
+                // ✅ ĐẢM BẢO ROOT TỒN TẠI
+                if (doc.Root == null)
+                {
+                    doc.Add(new XElement("NewDataSet"));
+                }
+
+                var root = doc.Root;
+
+                // ✅ TỰ SINH ID NẾU THIẾU
+                if (entity.Element("Id") == null)
+                {
+                    int nextId = root.Elements(_tableName)
+                        .Select(e => (int?)e.Element("Id"))
+                        .Max() ?? 0;
+
+                    entity.AddFirst(new XElement("Id", nextId + 1));
+                }
+
                 root.Add(entity);
                 doc.Save(_filePath);
             }
@@ -46,6 +67,8 @@ namespace _125CNX03_Nhom6_CK.DAL.Repositories
                 throw new Exception($"Error adding entity to {_filePath}: {ex.Message}", ex);
             }
         }
+
+
 
         public void Update(XElement entity)
         {

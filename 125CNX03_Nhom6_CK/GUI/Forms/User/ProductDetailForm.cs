@@ -188,9 +188,21 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.User
 
                 _cartService.AddProductToCart(userId, productId, 1);
 
-                // Ask parent to refresh cart count
+                // Refresh cart count trên MainForm
                 if (this.MdiParent is MainForm main)
+                {
                     main.RefreshCartCount();
+
+                    // Nếu CartForm đang mở, refresh nó luôn
+                    foreach (Form childForm in main.MdiChildren)
+                    {
+                        if (childForm is CartForm cartForm)
+                        {
+                            cartForm.LoadCart();
+                            break;
+                        }
+                    }
+                }
 
                 MessageBox.Show($"Đã thêm {_currentProduct.Element("TenSanPham").Value} vào giỏ hàng!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

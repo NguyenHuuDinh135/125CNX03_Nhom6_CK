@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -7,7 +8,9 @@ namespace _125CNX03_Nhom6_CK.DAL.Repositories
 {
     public class DonHangRepository : IDonHangRepository
     {
-        private readonly string _filePath = "Data/DonHang.xml";
+        private readonly string _filePath =
+    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "DonHang.xml");
+
         private readonly string _tableName = "DonHang";
 
         public List<XElement> GetAll()
@@ -31,13 +34,32 @@ namespace _125CNX03_Nhom6_CK.DAL.Repositories
                 int.TryParse(e.Element("Id").Value, out var elementId) &&
                 elementId == id);
         }
+        private int GetNextId(XDocument doc)
+        {
+            var maxId = doc.Descendants(_tableName)
+                .Select(e => (int?)e.Element("Id"))
+                .Max();
+
+            return (maxId ?? 0) + 1;
+        }
 
         public void Add(XElement entity)
         {
             try
             {
                 var doc = XDocument.Load(_filePath);
-                var root = doc.Root ?? new XElement("NewDataSet");
+                var root = doc.Root;
+
+                if (root == null)
+                {
+                    root = new XElement("NewDataSet");
+                    doc.Add(root);
+                }
+
+                // ⭐ TẠO ID
+                int newId = GetNextId(doc);
+                entity.AddFirst(new XElement("Id", newId));
+
                 root.Add(entity);
                 doc.Save(_filePath);
             }
@@ -46,6 +68,7 @@ namespace _125CNX03_Nhom6_CK.DAL.Repositories
                 throw new Exception($"Error adding entity to {_filePath}: {ex.Message}", ex);
             }
         }
+
 
         public void Update(XElement entity)
         {

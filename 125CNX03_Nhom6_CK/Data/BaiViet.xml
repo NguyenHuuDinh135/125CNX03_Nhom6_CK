@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+	<xs:schema xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="NewDataSet">
+		<xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+			<xs:complexType>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="BaiViet">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Id" type="xs:int" minOccurs="0"/>
+								<xs:element name="TieuDe" type="xs:string" minOccurs="0"/>
+								<xs:element name="HinhAnh" type="xs:string" minOccurs="0"/>
+								<xs:element name="TomTat" type="xs:string" minOccurs="0"/>
+								<xs:element name="NoiDung" type="xs:string" minOccurs="0"/>
+								<xs:element name="NgayDang" type="xs:dateTime" minOccurs="0"/>
+								<xs:element name="MaNguoiViet" type="xs:int" minOccurs="0"/>
+								<xs:element name="HienThi" type="xs:boolean" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>
+			</xs:complexType>
+		</xs:element>
+	</xs:schema>
+	<BaiViet>
+		<Id>1</Id>
+		<TieuDe>Đánh giá iPhone 15 Pro Max sau 3 tháng</TieuDe>
+		<HinhAnh>https://cdn.tgdd.vn/Files/2023/10/12/1551600/2copy-121023-205552.jpg</HinhAnh>
+		<TomTat>Liệu có đáng nâng cấp?</TomTat>
+		<NoiDung>Nội dung chi tiết bài viết...</NoiDung>
+		<NgayDang>2024-11-20T09:00:00</NgayDang>
+		<MaNguoiViet>1</MaNguoiViet>
+		<HienThi>true</HienThi>
+	</BaiViet>
+	<BaiViet>
+		<Id>2</Id>
+		<TieuDe>Top 5 Laptop Gaming dưới 30 triệu</TieuDe>
+		<HinhAnh>https://file.hstatic.net/1000233206/article/top5laptopgaming.jpg</HinhAnh>
+		<TomTat>Lựa chọn tốt nhất cho sinh viên</TomTat>
+		<NoiDung>Nội dung chi tiết...</NoiDung>
+		<NgayDang>2024-11-25T14:30:00</NgayDang>
+		<MaNguoiViet>1</MaNguoiViet>
+		<HienThi>true</HienThi>
+	</BaiViet>
+	<BaiViet>
+		<Id>3</Id>
+		<TieuDe>Hướng dẫn vệ sinh Laptop tại nhà</TieuDe>
+		<HinhAnh>https://cdn.tgdd.vn/Files/2018/07/12/1101094/ve-sinh-laptop-dung-cach-don-gian-tai-nha-8.jpg</HinhAnh>
+		<TomTat>Bảo dưỡng máy tính bền bỉ</TomTat>
+		<NoiDung>Các bước thực hiện...</NoiDung>
+		<NgayDang>2024-11-28T10:00:00</NgayDang>
+		<MaNguoiViet>1</MaNguoiViet>
+		<HienThi>true</HienThi>
+	</BaiViet>
+	<BaiViet>
+		<Id>4</Id>
+		<TieuDe>So sánh Chip M3 và M2</TieuDe>
+		<HinhAnh>https://cdn.tgdd.vn/News/1562486/20-1280x720.jpg</HinhAnh>
+		<TomTat>Khác biệt hiệu năng</TomTat>
+		<NoiDung>Benchmark và thực tế...</NoiDung>
+		<NgayDang>2024-12-01T08:00:00</NgayDang>
+		<MaNguoiViet>1</MaNguoiViet>
+		<HienThi>true</HienThi>
+	</BaiViet>
+	<BaiViet>
+		<Id>5</Id>
+		<TieuDe>Khuyến mãi Giáng Sinh 2024</TieuDe>
+		<HinhAnh>https://www.phucanh.vn/media/news/1712_KMTungbungNoel2020.jpg</HinhAnh>
+		<TomTat>Săn sale cuối năm</TomTat>
+		<NoiDung>Danh sách deal hot...</NoiDung>
+		<NgayDang>2024-12-02T00:00:00</NgayDang>
+		<MaNguoiViet>1</MaNguoiViet>
+		<HienThi>true</HienThi>
+	</BaiViet>
+</NewDataSet>

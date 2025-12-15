@@ -334,35 +334,45 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Data\BaiViet.xml" />
-    <Content Include="bin\Data\Banner.xml" />
-    <Content Include="bin\Data\ChiTietDonHang.xml" />
-    <Content Include="bin\Data\ChiTietGioHang.xml" />
-    <Content Include="bin\Data\DonHang.xml">
-      <SubType>Designer</SubType>
+    <Content Include="Data\BaiViet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="bin\Data\GioHang.xml" />
-    <Content Include="bin\Data\LienHe.xml" />
-    <Content Include="bin\Data\LoaiSanPham.xml" />
-    <Content Include="bin\Data\NguoiDung.xml" />
-    <Content Include="bin\Data\PhuongThucThanhToan.xml" />
-    <Content Include="bin\Data\SanPham.xml">
-      <SubType>Designer</SubType>
+    <Content Include="Data\Banner.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="bin\Data\ThuongHieu.xml" />
-    <Content Include="bin\Debug\Data\BaiViet.xml" />
-    <Content Include="bin\Debug\Data\Banner.xml" />
-    <Content Include="bin\Debug\Data\ChiTietDonHang.xml" />
-    <Content Include="bin\Debug\Data\ChiTietGioHang.xml" />
-    <Content Include="bin\Debug\Data\DonHang.xml" />
-    <Content Include="bin\Debug\Data\GioHang.xml" />
-    <Content Include="bin\Debug\Data\LienHe.xml" />
-    <Content Include="bin\Debug\Data\LoaiSanPham.xml" />
-    <Content Include="bin\Debug\Data\NguoiDung.xml" />
-    <Content Include="bin\Debug\Data\PhuongThucThanhToan.xml" />
-    <Content Include="bin\Debug\Data\SanPham.xml" />
-    <Content Include="bin\Debug\Data\ThuongHieu.xml" />
+    <Content Include="Data\ChiTietDonHang.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\ChiTietGioHang.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\DonHang.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\GioHang.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\LienHe.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\LoaiSanPham.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\NguoiDung.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\PhuongThucThanhToan.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\SanPham.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\ThuongHieu.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -99,5 +99,15 @@ namespace _125CNX03_Nhom6_CK.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DefaultProductImage {
+            get {
+                object obj = ResourceManager.GetObject("DefaultProductImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

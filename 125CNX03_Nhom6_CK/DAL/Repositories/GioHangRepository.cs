@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -7,7 +8,9 @@ namespace _125CNX03_Nhom6_CK.DAL.Repositories
 {
     public class GioHangRepository : IGioHangRepository
     {
-        private readonly string _filePath = "Data/GioHang.xml";
+        private readonly string _filePath =
+            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "GioHang.xml");
+
         private readonly string _tableName = "GioHang";
 
         public List<XElement> GetAll()

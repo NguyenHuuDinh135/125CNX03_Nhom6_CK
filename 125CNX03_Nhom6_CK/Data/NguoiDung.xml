@@ -1,0 +1,389 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<NewDataSet>
+  <xs:schema xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="NewDataSet">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="NguoiDung">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Id" type="xs:int" minOccurs="0" />
+                <xs:element name="HoTen" type="xs:string" minOccurs="0" />
+                <xs:element name="Email" type="xs:string" minOccurs="0" />
+                <xs:element name="MatKhauHash" type="xs:string" minOccurs="0" />
+                <xs:element name="SoDienThoai" type="xs:string" minOccurs="0" />
+                <xs:element name="DiaChi" type="xs:string" minOccurs="0" />
+                <xs:element name="VaiTro" type="xs:string" minOccurs="0" />
+                <xs:element name="NgayTao" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="TrangThai" type="xs:boolean" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <NguoiDung>
+    <Id>1</Id>
+    <HoTen>Quản Trị Viên</HoTen>
+    <Email>admin@shop.com</Email>
+    <MatKhauHash>e10adc3949ba59abbe56e057f20f883e</MatKhauHash>
+    <SoDienThoai>0909123456</SoDienThoai>
+    <DiaChi>Hà Nội</DiaChi>
+    <VaiTro>Admin</VaiTro>
+    <NgayTao>2024-01-01T08:00:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>2</Id>
+    <HoTen>Nguyễn Văn An</HoTen>
+    <Email>user01@gmail.com</Email>
+    <MatKhauHash>e10adc3949ba59abbe56e057f20f883e</MatKhauHash>
+    <SoDienThoai>0912345671</SoDienThoai>
+    <DiaChi>Số 10, Nguyễn Trãi, Thanh Xuân, Hà Nội</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-02-15T09:30:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>3</Id>
+    <HoTen>Trần Thị Bích</HoTen>
+    <Email>user02@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345672</SoDienThoai>
+    <DiaChi>25 Lê Lợi, Quận 1, TP.HCM</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-02-20T14:20:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>4</Id>
+    <HoTen>Lê Hoàng Cường</HoTen>
+    <Email>user03@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345673</SoDienThoai>
+    <DiaChi>12 Trần Hưng Đạo, Đà Nẵng</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-03-05T10:15:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>5</Id>
+    <HoTen>Phạm Minh Dũng</HoTen>
+    <Email>user04@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345674</SoDienThoai>
+    <DiaChi>88 Cầu Giấy, Hà Nội</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-03-10T16:45:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>6</Id>
+    <HoTen>Hoàng Thu E</HoTen>
+    <Email>user05@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345675</SoDienThoai>
+    <DiaChi>54 Nguyễn Văn Linh, Đà Nẵng</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-03-25T11:00:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>7</Id>
+    <HoTen>Vũ Văn F</HoTen>
+    <Email>user06@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345676</SoDienThoai>
+    <DiaChi>TP. Hải Phòng</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-04-01T08:30:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>8</Id>
+    <HoTen>Đặng Thị G</HoTen>
+    <Email>user07@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345677</SoDienThoai>
+    <DiaChi>TP. Cần Thơ</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-04-12T13:20:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>9</Id>
+    <HoTen>Bùi Văn H</HoTen>
+    <Email>user08@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345678</SoDienThoai>
+    <DiaChi>TP. Nha Trang</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-05-05T09:10:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>10</Id>
+    <HoTen>Đỗ Thị I</HoTen>
+    <Email>user09@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345679</SoDienThoai>
+    <DiaChi>TP. Vinh</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-05-20T15:40:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>11</Id>
+    <HoTen>Ngô Văn K</HoTen>
+    <Email>user10@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345680</SoDienThoai>
+    <DiaChi>TP. Huế</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-06-01T10:00:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>12</Id>
+    <HoTen>Dương Thị L</HoTen>
+    <Email>user11@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345681</SoDienThoai>
+    <DiaChi>Biên Hòa, Đồng Nai</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-06-15T14:50:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>13</Id>
+    <HoTen>Lý Văn M</HoTen>
+    <Email>user12@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345682</SoDienThoai>
+    <DiaChi>Thủ Đức, TP.HCM</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-07-01T08:15:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>14</Id>
+    <HoTen>Mai Thị N</HoTen>
+    <Email>user13@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345683</SoDienThoai>
+    <DiaChi>Bình Thạnh, TP.HCM</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-07-20T11:30:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>15</Id>
+    <HoTen>Hồ Văn O</HoTen>
+    <Email>user14@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345684</SoDienThoai>
+    <DiaChi>Gò Vấp, TP.HCM</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-08-05T16:00:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>16</Id>
+    <HoTen>Võ Thị P</HoTen>
+    <Email>user15@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345685</SoDienThoai>
+    <DiaChi>Quận 7, TP.HCM</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-08-15T09:45:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>17</Id>
+    <HoTen>Trương Văn Q</HoTen>
+    <Email>user16@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345686</SoDienThoai>
+    <DiaChi>Tân Bình, TP.HCM</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-09-01T13:10:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>18</Id>
+    <HoTen>Đinh Thị R</HoTen>
+    <Email>user17@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345687</SoDienThoai>
+    <DiaChi>Đống Đa, Hà Nội</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-09-10T10:25:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>19</Id>
+    <HoTen>Lâm Văn S</HoTen>
+    <Email>user18@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345688</SoDienThoai>
+    <DiaChi>Hoàn Kiếm, Hà Nội</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-09-20T15:55:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>20</Id>
+    <HoTen>Châu Thị T</HoTen>
+    <Email>user19@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345689</SoDienThoai>
+    <DiaChi>Ba Đình, Hà Nội</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-10-01T08:40:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>21</Id>
+    <HoTen>Vương Văn U</HoTen>
+    <Email>user20@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345690</SoDienThoai>
+    <DiaChi>Hai Bà Trưng, Hà Nội</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-10-15T11:50:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>22</Id>
+    <HoTen>Tạ Thị V</HoTen>
+    <Email>user21@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345691</SoDienThoai>
+    <DiaChi>Long Biên, Hà Nội</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-10-25T14:05:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>23</Id>
+    <HoTen>Phan Văn X</HoTen>
+    <Email>user22@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345692</SoDienThoai>
+    <DiaChi>Tây Hồ, Hà Nội</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-11-01T09:15:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>24</Id>
+    <HoTen>Cao Thị Y</HoTen>
+    <Email>user23@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345693</SoDienThoai>
+    <DiaChi>Hà Đông, Hà Nội</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-11-10T13:35:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>25</Id>
+    <HoTen>Đoàn Văn Z</HoTen>
+    <Email>user24@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345694</SoDienThoai>
+    <DiaChi>Nam Từ Liêm, Hà Nội</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-11-15T16:20:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>26</Id>
+    <HoTen>Hà Thị Lan</HoTen>
+    <Email>user25@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345695</SoDienThoai>
+    <DiaChi>Thanh Xuân, Hà Nội</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-11-20T10:50:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>27</Id>
+    <HoTen>Khương Văn Nam</HoTen>
+    <Email>user26@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345696</SoDienThoai>
+    <DiaChi>Bắc Từ Liêm, Hà Nội</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-11-25T15:10:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>28</Id>
+    <HoTen>Quách Thị Mai</HoTen>
+    <Email>user27@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345697</SoDienThoai>
+    <DiaChi>Hoàng Mai, Hà Nội</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-11-28T09:00:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>29</Id>
+    <HoTen>Tống Văn Long</HoTen>
+    <Email>user28@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345698</SoDienThoai>
+    <DiaChi>Cầu Giấy, Hà Nội</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-12-01T14:30:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>30</Id>
+    <HoTen>Lục Thị Hoa</HoTen>
+    <Email>user29@gmail.com</Email>
+    <MatKhauHash>5f4dcc3b5aa765d61d8327deb882cf99</MatKhauHash>
+    <SoDienThoai>0912345699</SoDienThoai>
+    <DiaChi>Đống Đa, Hà Nội</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2024-12-02T08:00:00</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>31</Id>
+    <HoTen>Thầy Quân</HoTen>
+    <Email>xml@gmail.com</Email>
+    <MatKhauHash>e10adc3949ba59abbe56e057f20f883e</MatKhauHash>
+    <SoDienThoai>1234567890</SoDienThoai>
+    <DiaChi>Cs2</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2025-12-15T14:43:09</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>32</Id>
+    <HoTen>test</HoTen>
+    <Email>test@gmail.com</Email>
+    <MatKhauHash>e10adc3949ba59abbe56e057f20f883e</MatKhauHash>
+    <SoDienThoai>1234567890</SoDienThoai>
+    <DiaChi>đâ</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2025-12-15T14:46:57</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+  <NguoiDung>
+    <Id>33</Id>
+    <HoTen>tssee</HoTen>
+    <Email>t@gmail.com</Email>
+    <MatKhauHash>e10adc3949ba59abbe56e057f20f883e</MatKhauHash>
+    <SoDienThoai>1234567890</SoDienThoai>
+    <DiaChi>q</DiaChi>
+    <VaiTro>Customer</VaiTro>
+    <NgayTao>2025-12-15T14:50:39</NgayTao>
+    <TrangThai>true</TrangThai>
+  </NguoiDung>
+</NewDataSet>

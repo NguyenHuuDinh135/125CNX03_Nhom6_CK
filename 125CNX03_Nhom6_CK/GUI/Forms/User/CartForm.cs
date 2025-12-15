@@ -12,6 +12,7 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.User
         private readonly IGioHangService _cartService;
         private readonly ISanPhamService _productService;
         private readonly IDonHangService _orderService;
+        private readonly IChiTietDonHangService _orderItemService;
         private XElement _currentUser;
         private int _cartId;
 
@@ -24,6 +25,7 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.User
             _cartService = new GioHangService();
             _productService = new SanPhamService();
             _orderService = new DonHangService();
+            _orderItemService = new ChiTietDonHangService();
             _currentUser = currentUser;
 
             InitializeUI();
@@ -73,7 +75,8 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.User
             this.Controls.Add(checkoutPanel);
         }
 
-        private void LoadCart()
+        // Change the access modifier of LoadCart from private to public
+        public void LoadCart()
         {
             if (_currentUser == null)
             {
@@ -101,10 +104,16 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.User
 
                 var cartItem = new CartItem();
                 cartItem.ProductId = int.Parse(item.Element("MaSanPham").Value);
-                cartItem.ProductName = product.Element("TenSanPham").Value;
-                cartItem.Price = item.Element("DonGia").Value;
+                cartItem.ProductName = product.Element("TenSanPham")?.Value;
+                cartItem.Price = item.Element("DonGia")?.Value;
                 cartItem.Quantity = int.Parse(item.Element("SoLuong").Value);
+
+                // 👇 ẢNH MẠNG
+                cartItem.ImageUrl = product.Element("DuongDanAnh")?.Value;
+
                 cartItem.RefreshUI();
+
+
 
                 // subscribe to events
                 cartItem.RemoveClicked += (pid) => CartItem_RemoveClicked(pid);
@@ -143,22 +152,56 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.User
                 MessageBox.Show("Giỏ hàng rỗng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+            var allOrders = _orderService.GetAllOrders();
+
+            int newOrderId = allOrders.Any()
+                ? allOrders.Max(o => (int?)o.Element("Id") ?? 0) + 1
+                : 1;
+            var allOrderDetails = _orderItemService.GetAllOrderItems();
+            int nextDetailId = allOrderDetails.Any()
+                ? allOrderDetails.Max(d => (int?)d.Element("Id") ?? 0) + 1
+                : 1;
 
             var order = new XElement("DonHang",
                 new XElement("MaNguoiDung", int.Parse(_currentUser.Element("Id").Value)),
                 new XElement("NgayDatHang", DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss")),
-                new XElement("TongTien", _cartService.GetCartTotal(_cartId).ToString()),
+                new XElement("TongTien", _cartService.GetCartTotal(_cartId)),
                 new XElement("TrangThaiDonHang", 0),
                 new XElement("NguoiNhan_Ten", _currentUser.Element("HoTen")?.Value ?? ""),
                 new XElement("NguoiNhan_DiaChi", _currentUser.Element("DiaChi")?.Value ?? ""),
                 new XElement("NguoiNhan_SDT", _currentUser.Element("SoDienThoai")?.Value ?? "")
             );
 
-            var orderItems = items.Select(i => new XElement("ChiTietDonHang",
-                new XElement("MaSanPham", int.Parse(i.Element("MaSanPham").Value)),
-                new XElement("DonGia", decimal.Parse(i.Element("DonGia").Value)),
-                new XElement("SoLuong", int.Parse(i.Element("SoLuong").Value))
-            )).ToList();
+
+            var orderItems = items.Select(i =>
+            {
+                var product = _productService.GetProductById(
+                    int.Parse(i.Element("MaSanPham").Value)
+                );
+
+                var detail = new XElement("ChiTietDonHang",
+                    new XElement("Id", nextDetailId++),
+                    new XElement("MaDonHang", newOrderId),
+
+                    new XElement("ItemOrdered_MaSanPham",
+                        int.Parse(i.Element("MaSanPham").Value)),
+
+                    new XElement("ItemOrdered_TenSanPham",
+                        product?.Element("TenSanPham")?.Value ?? ""),
+
+                    new XElement("ItemOrdered_DuongDanAnh",
+                        product?.Element("DuongDanAnh")?.Value ?? ""),
+
+                    new XElement("DonGia",
+                        decimal.Parse(i.Element("DonGia").Value)),
+
+                    new XElement("SoLuong",
+                        int.Parse(i.Element("SoLuong").Value))
+                );
+
+                return detail;
+            }).ToList();
+
 
             try
             {

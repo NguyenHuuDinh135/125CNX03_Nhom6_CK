@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<NewDataSet>
+  <xs:schema xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="NewDataSet">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="LienHe">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Id" type="xs:int" minOccurs="0" />
+                <xs:element name="HoTen" type="xs:string" minOccurs="0" />
+                <xs:element name="Email" type="xs:string" minOccurs="0" />
+                <xs:element name="SoDienThoai" type="xs:string" minOccurs="0" />
+                <xs:element name="NoiDung" type="xs:string" minOccurs="0" />
+                <xs:element name="NgayGui" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="DaXem" type="xs:boolean" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <LienHe>
+    <Id>2</Id>
+    <HoTen>Trần Thị Khách</HoTen>
+    <Email>guest2@gmail.com</Email>
+    <SoDienThoai>0901234568</SoDienThoai>
+    <NoiDung>Hỏi về bảo hành iPhone</NoiDung>
+    <NgayGui>2024-12-01T15:30:00</NgayGui>
+    <DaXem>true</DaXem>
+  </LienHe>
+  <LienHe>
+    <Id>3</Id>
+    <HoTen>Lê Văn Khách</HoTen>
+    <Email>guest3@gmail.com</Email>
+    <SoDienThoai>0901234569</SoDienThoai>
+    <NoiDung>Khi nào có hàng S24?</NoiDung>
+    <NgayGui>2024-12-02T09:00:00</NgayGui>
+    <DaXem>false</DaXem>
+  </LienHe>
+  <LienHe>
+    <Id>1</Id>
+    <HoTen>Nguyễn Văn Khách</HoTen>
+    <Email>guest1@gmail.com</Email>
+    <SoDienThoai>0901234567</SoDienThoai>
+    <NoiDung>Tư vấn mua laptop Dell</NoiDung>
+    <NgayGui>2024-11-30T10:00:00</NgayGui>
+    <DaXem>true</DaXem>
+  </LienHe>
+</NewDataSet>

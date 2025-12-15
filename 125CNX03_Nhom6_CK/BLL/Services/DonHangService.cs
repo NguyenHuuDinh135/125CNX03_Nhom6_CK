@@ -48,8 +48,14 @@ namespace _125CNX03_Nhom6_CK.BLL
             // Update product quantities
             foreach (var item in orderItems)
             {
-                var productId = int.Parse(item.Element("MaSanPham").Value);
-                var quantity = int.Parse(item.Element("SoLuong").Value);
+                var productIdElement =
+                    item.Element("MaSanPham") ??
+                    item.Element("ItemOrdered_MaSanPham");
+
+                if (productIdElement == null)
+                    continue; // bỏ qua record lỗi
+
+                var productId = int.Parse(productIdElement.Value); var quantity = int.Parse(item.Element("SoLuong").Value);
                 var product = _productRepository.GetById(productId);
                 if (product != null)
                 {

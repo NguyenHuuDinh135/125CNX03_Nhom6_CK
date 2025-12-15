@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<NewDataSet>
+  <xs:schema xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="NewDataSet">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="ChiTietDonHang">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Id" type="xs:int" minOccurs="0" />
+                <xs:element name="MaDonHang" type="xs:int" minOccurs="0" />
+                <xs:element name="ItemOrdered_MaSanPham" type="xs:int" minOccurs="0" />
+                <xs:element name="ItemOrdered_TenSanPham" type="xs:string" minOccurs="0" />
+                <xs:element name="ItemOrdered_DuongDanAnh" type="xs:string" minOccurs="0" />
+                <xs:element name="DonGia" type="xs:decimal" minOccurs="0" />
+                <xs:element name="SoLuong" type="xs:int" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <ChiTietDonHang>
+    <Id>1</Id>
+    <MaDonHang>1</MaDonHang>
+    <ItemOrdered_MaSanPham>1</ItemOrdered_MaSanPham>
+    <ItemOrdered_TenSanPham>MacBook Air M1 2020</ItemOrdered_TenSanPham>
+    <ItemOrdered_DuongDanAnh>https://cdn.tgdd.vn/Products/Images/44/231244/grey-1-750x500.jpg</ItemOrdered_DuongDanAnh>
+    <DonGia>18990000.00</DonGia>
+    <SoLuong>1</SoLuong>
+  </ChiTietDonHang>
+  <ChiTietDonHang>
+    <Id>2</Id>
+    <MaDonHang>1</MaDonHang>
+    <ItemOrdered_MaSanPham>30</ItemOrdered_MaSanPham>
+    <ItemOrdered_TenSanPham>Chuột Logitech MX Master 3S</ItemOrdered_TenSanPham>
+    <ItemOrdered_DuongDanAnh>https://cdn.ankhang.vn/media/lib/17-02-2023/mouse-logitech-mx-master-3s-silent-graphite-4.jpg</ItemOrdered_DuongDanAnh>
+    <DonGia>2490000.00</DonGia>
+    <SoLuong>1</SoLuong>
+  </ChiTietDonHang>
+  <ChiTietDonHang>
+    <Id>3</Id>
+    <MaDonHang>2</MaDonHang>
+    <ItemOrdered_MaSanPham>3</ItemOrdered_MaSanPham>
+    <ItemOrdered_TenSanPham>iPhone 15 Pro Max</ItemOrdered_TenSanPham>
+    <ItemOrdered_DuongDanAnh>https://cdn.tgdd.vn/Products/Images/42/305658/Slider/iphone-15-pro-max-thumb-youtube-1020x570.jpg</ItemOrdered_DuongDanAnh>
+    <DonGia>34990000.00</DonGia>
+    <SoLuong>1</SoLuong>
+  </ChiTietDonHang>
+  <ChiTietDonHang>
+    <Id>4</Id>
+    <MaDonHang>3</MaDonHang>
+    <ItemOrdered_MaSanPham>1</ItemOrdered_MaSanPham>
+    <ItemOrdered_TenSanPham>MacBook Air M1 2020</ItemOrdered_TenSanPham>
+    <ItemOrdered_DuongDanAnh>https://cdn.tgdd.vn/Products/Images/44/239552/Slider/thumb-macbook-air-2020-m1-grey-800x444-1.jpeg</ItemOrdered_DuongDanAnh>
+    <DonGia>18990000.00</DonGia>
+    <SoLuong>1</SoLuong>
+  </ChiTietDonHang>
+  <ChiTietDonHang>
+    <Id>5</Id>
+    <Id>5</Id>
+    <MaDonHang>6</MaDonHang>
+    <ItemOrdered_MaSanPham>3</ItemOrdered_MaSanPham>
+    <ItemOrdered_TenSanPham>iPhone 15 Pro Max</ItemOrdered_TenSanPham>
+    <ItemOrdered_DuongDanAnh>https://cdn.tgdd.vn/Products/Images/42/305658/iphone-15-pro-max-white-thumbnew-600x600.jpg</ItemOrdered_DuongDanAnh>
+    <DonGia>33990000.00</DonGia>
+    <SoLuong>2</SoLuong>
+  </ChiTietDonHang>
+  <ChiTietDonHang>
+    <Id>6</Id>
+    <Id>6</Id>
+    <MaDonHang>7</MaDonHang>
+    <ItemOrdered_MaSanPham>3</ItemOrdered_MaSanPham>
+    <ItemOrdered_TenSanPham>iPhone 15 Pro Max</ItemOrdered_TenSanPham>
+    <ItemOrdered_DuongDanAnh>https://cdn.tgdd.vn/Products/Images/42/305658/iphone-15-pro-max-white-thumbnew-600x600.jpg</ItemOrdered_DuongDanAnh>
+    <DonGia>33990000.00</DonGia>
+    <SoLuong>1</SoLuong>
+  </ChiTietDonHang>
+  <ChiTietDonHang>
+    <Id>7</Id>
+    <Id>7</Id>
+    <MaDonHang>7</MaDonHang>
+    <ItemOrdered_MaSanPham>1</ItemOrdered_MaSanPham>
+    <ItemOrdered_TenSanPham>MacBook Air M1 2020</ItemOrdered_TenSanPham>
+    <ItemOrdered_DuongDanAnh>https://cdn.tgdd.vn/Products/Images/44/231244/macbook-air-m1-2020-gray-600x600.jpg</ItemOrdered_DuongDanAnh>
+    <DonGia>17990000.00</DonGia>
+    <SoLuong>2</SoLuong>
+  </ChiTietDonHang>
+  <ChiTietDonHang>
+    <Id>8</Id>
+    <Id>8</Id>
+    <MaDonHang>7</MaDonHang>
+    <ItemOrdered_MaSanPham>6</ItemOrdered_MaSanPham>
+    <ItemOrdered_TenSanPham>Samsung Galaxy S24 Ultra</ItemOrdered_TenSanPham>
+    <ItemOrdered_DuongDanAnh>https://cdn.tgdd.vn/Products/Images/42/307174/samsung-galaxy-s24-ultra-grey-thumbnew-600x600.jpg</ItemOrdered_DuongDanAnh>
+    <DonGia>29990000.00</DonGia>
+    <SoLuong>1</SoLuong>
+  </ChiTietDonHang>
+  <ChiTietDonHang>
+    <Id>9</Id>
+    <Id>9</Id>
+    <MaDonHang>8</MaDonHang>
+    <ItemOrdered_MaSanPham>4</ItemOrdered_MaSanPham>
+    <ItemOrdered_TenSanPham>iPhone 14 Plus</ItemOrdered_TenSanPham>
+    <ItemOrdered_DuongDanAnh>https://cdn.tgdd.vn/Products/Images/42/245545/iPhone-14-plus-thumb-xanh-1-600x600.jpg</ItemOrdered_DuongDanAnh>
+    <DonGia>21990000.00</DonGia>
+    <SoLuong>1</SoLuong>
+  </ChiTietDonHang>
+  <ChiTietDonHang>
+    <Id>10</Id>
+    <Id>10</Id>
+    <MaDonHang>8</MaDonHang>
+    <ItemOrdered_MaSanPham>5</ItemOrdered_MaSanPham>
+    <ItemOrdered_TenSanPham>iPad Air 5 M1</ItemOrdered_TenSanPham>
+    <ItemOrdered_DuongDanAnh>https://cdn.tgdd.vn/Products/Images/522/274154/ipad-air-5-m1-wifi-256gb-290422-024423.jpg</ItemOrdered_DuongDanAnh>
+    <DonGia>13990000.00</DonGia>
+    <SoLuong>1</SoLuong>
+  </ChiTietDonHang>
+</NewDataSet>

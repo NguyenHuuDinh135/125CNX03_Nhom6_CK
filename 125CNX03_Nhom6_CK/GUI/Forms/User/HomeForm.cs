@@ -243,15 +243,18 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.User
 
             try
             {
-                string imagePath = product.Element("DuongDanAnh")?.Value ?? "";
-                if (!string.IsNullOrEmpty(imagePath) && System.IO.File.Exists(imagePath))
+                string imageUrl = product.Element("DuongDanAnh")?.Value;
+
+                if (!string.IsNullOrWhiteSpace(imageUrl)
+                    && Uri.IsWellFormedUriString(imageUrl, UriKind.Absolute))
                 {
-                    pictureBox.Image = Image.FromFile(imagePath);
+                    pictureBox.LoadAsync(imageUrl);
                 }
-                else if (Properties.Resources.ResourceManager.GetObject("DefaultProduct") != null)
+                else
                 {
-                    pictureBox.Image = (Image)Properties.Resources.ResourceManager.GetObject("DefaultProduct");
+                    pictureBox.Image = Properties.Resources.DefaultProduct;
                 }
+
             }
             catch { }
 

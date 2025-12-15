@@ -1,0 +1,434 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<NewDataSet>
+  <xs:schema xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="NewDataSet">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="SanPham">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Id" type="xs:int" minOccurs="0" />
+                <xs:element name="TenSanPham" type="xs:string" minOccurs="0" />
+                <xs:element name="MoTa" type="xs:string" minOccurs="0" />
+                <xs:element name="ChiTiet" type="xs:string" minOccurs="0" />
+                <xs:element name="Gia" type="xs:decimal" minOccurs="0" />
+                <xs:element name="GiaKhuyenMai" type="xs:decimal" minOccurs="0" />
+                <xs:element name="DuongDanAnh" type="xs:string" minOccurs="0" />
+                <xs:element name="SoLuongTon" type="xs:int" minOccurs="0" />
+                <xs:element name="MaLoai" type="xs:int" minOccurs="0" />
+                <xs:element name="MaThuongHieu" type="xs:int" minOccurs="0" />
+                <xs:element name="HienThi" type="xs:boolean" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <SanPham>
+    <Id>1</Id>
+    <TenSanPham>MacBook Air M1 2020</TenSanPham>
+    <MoTa>Chip M1 mạnh mẽ, pin trâu</MoTa>
+    <ChiTiet>RAM 8GB, SSD 256GB, Màn hình Retina</ChiTiet>
+    <Gia>1899000</Gia>
+    <GiaKhuyenMai>17990000.00</GiaKhuyenMai>
+    <DuongDanAnh>https://cdn.tgdd.vn/Products/Images/44/231244/macbook-air-m1-2020-gray-600x600.jpg</DuongDanAnh>
+    <SoLuongTon>47</SoLuongTon>
+    <MaLoai>1</MaLoai>
+    <MaThuongHieu>1</MaThuongHieu>
+    <HienThi>True</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>3</Id>
+    <TenSanPham>iPhone 15 Pro Max</TenSanPham>
+    <MoTa>Titanium, Chip A17 Pro</MoTa>
+    <ChiTiet>256GB, Natural Titanium</ChiTiet>
+    <Gia>34990000.00</Gia>
+    <GiaKhuyenMai>33990000.00</GiaKhuyenMai>
+    <DuongDanAnh>https://cdn.tgdd.vn/Products/Images/42/305658/iphone-15-pro-max-white-thumbnew-600x600.jpg</DuongDanAnh>
+    <SoLuongTon>97</SoLuongTon>
+    <MaLoai>4</MaLoai>
+    <MaThuongHieu>1</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>4</Id>
+    <TenSanPham>iPhone 14 Plus</TenSanPham>
+    <MoTa>Màn hình lớn, pin lâu</MoTa>
+    <ChiTiet>128GB, Blue</ChiTiet>
+    <Gia>21990000.00</Gia>
+    <DuongDanAnh>https://cdn.tgdd.vn/Products/Images/42/245545/iPhone-14-plus-thumb-xanh-1-600x600.jpg</DuongDanAnh>
+    <SoLuongTon>39</SoLuongTon>
+    <MaLoai>4</MaLoai>
+    <MaThuongHieu>1</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>5</Id>
+    <TenSanPham>iPad Air 5 M1</TenSanPham>
+    <MoTa>Sức mạnh M1 trên iPad</MoTa>
+    <ChiTiet>WiFi 64GB, Blue</ChiTiet>
+    <Gia>13990000.00</Gia>
+    <DuongDanAnh>https://cdn.tgdd.vn/Products/Images/522/274154/ipad-air-5-m1-wifi-256gb-290422-024423.jpg</DuongDanAnh>
+    <SoLuongTon>29</SoLuongTon>
+    <MaLoai>5</MaLoai>
+    <MaThuongHieu>1</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>6</Id>
+    <TenSanPham>Samsung Galaxy S24 Ultra</TenSanPham>
+    <MoTa>Quyền năng AI</MoTa>
+    <ChiTiet>12GB/256GB, Titanium Grey</ChiTiet>
+    <Gia>31990000.00</Gia>
+    <GiaKhuyenMai>29990000.00</GiaKhuyenMai>
+    <DuongDanAnh>https://cdn.tgdd.vn/Products/Images/42/307174/samsung-galaxy-s24-ultra-grey-thumbnew-600x600.jpg</DuongDanAnh>
+    <SoLuongTon>79</SoLuongTon>
+    <MaLoai>4</MaLoai>
+    <MaThuongHieu>2</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>7</Id>
+    <TenSanPham>Samsung Galaxy Z Fold5</TenSanPham>
+    <MoTa>Gập mở linh hoạt</MoTa>
+    <ChiTiet>12GB/512GB, Icy Blue</ChiTiet>
+    <Gia>39990000.00</Gia>
+    <DuongDanAnh>https://dbz-images.dubizzle.com/images/2025/12/10/18fee77ed3e74792bb4a86a1f494d6dc-.jpeg?impolicy=dpc</DuongDanAnh>
+    <SoLuongTon>15</SoLuongTon>
+    <MaLoai>4</MaLoai>
+    <MaThuongHieu>2</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>8</Id>
+    <TenSanPham>Samsung Galaxy Tab S9</TenSanPham>
+    <MoTa>Máy tính bảng kháng nước</MoTa>
+    <ChiTiet>WiFi 128GB, Graphite</ChiTiet>
+    <Gia>19990000.00</Gia>
+    <DuongDanAnh>data:image/jpeg;base64,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</DuongDanAnh>
+    <SoLuongTon>25</SoLuongTon>
+    <MaLoai>5</MaLoai>
+    <MaThuongHieu>2</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>9</Id>
+    <TenSanPham>Dell XPS 13 9315</TenSanPham>
+    <MoTa>Siêu mỏng nhẹ, sang trọng</MoTa>
+    <ChiTiet>Core i5-1230U, RAM 16GB, SSD 512GB</ChiTiet>
+    <Gia>29990000.00</Gia>
+    <GiaKhuyenMai>27990000.00</GiaKhuyenMai>
+    <DuongDanAnh>https://sm.pcmag.com/t/pcmag_au/review/d/dell-xps-1/dell-xps-13-9315_x2yv.3840.jpg</DuongDanAnh>
+    <SoLuongTon>10</SoLuongTon>
+    <MaLoai>1</MaLoai>
+    <MaThuongHieu>3</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>10</Id>
+    <TenSanPham>Dell Inspiron 16 5630</TenSanPham>
+    <MoTa>Laptop văn phòng màn lớn</MoTa>
+    <ChiTiet>Core i5-1340P, RAM 16GB, SSD 512GB</ChiTiet>
+    <Gia>21490000.00</Gia>
+    <DuongDanAnh>https://cdn.hoanghamobile.vn/Uploads/2024/03/02/dell-inspiron-16-5630-1.jpg</DuongDanAnh>
+    <SoLuongTon>35</SoLuongTon>
+    <MaLoai>1</MaLoai>
+    <MaThuongHieu>3</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>11</Id>
+    <TenSanPham>Dell Alienware m15 R7</TenSanPham>
+    <MoTa>Cỗ máy chiến game</MoTa>
+    <ChiTiet>Ryzen 7 6800H, RTX 3060, RAM 16GB</ChiTiet>
+    <Gia>45990000.00</Gia>
+    <DuongDanAnh>https://thegioiso365.vn/wp-content/uploads/2023/03/Dell-alienware-1.png</DuongDanAnh>
+    <SoLuongTon>5</SoLuongTon>
+    <MaLoai>2</MaLoai>
+    <MaThuongHieu>3</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>12</Id>
+    <TenSanPham>HP Envy x360 13</TenSanPham>
+    <MoTa>Xoay gập 360 độ</MoTa>
+    <ChiTiet>Core i7-1250U, RAM 16GB, OLED Touch</ChiTiet>
+    <Gia>26990000.00</Gia>
+    <DuongDanAnh>https://cdn.mos.cms.futurecdn.net/fPUqwbvkTMeoi6Me73hYTQ.jpg</DuongDanAnh>
+    <SoLuongTon>12</SoLuongTon>
+    <MaLoai>1</MaLoai>
+    <MaThuongHieu>4</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>13</Id>
+    <TenSanPham>HP Victus 15</TenSanPham>
+    <MoTa>Gaming giá rẻ</MoTa>
+    <ChiTiet>Core i5-12450H, RTX 3050, 144Hz</ChiTiet>
+    <Gia>19990000.00</Gia>
+    <GiaKhuyenMai>18490000.00</GiaKhuyenMai>
+    <DuongDanAnh>https://in-files.apjonlinecdn.com/landingpages/npi/hp-victus-15-laptop/intel/images/w100_slide1_v2.png</DuongDanAnh>
+    <SoLuongTon>45</SoLuongTon>
+    <MaLoai>2</MaLoai>
+    <MaThuongHieu>4</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>14</Id>
+    <TenSanPham>Asus ROG Zephyrus G14</TenSanPham>
+    <MoTa>Gaming nhỏ gọn mạnh mẽ</MoTa>
+    <ChiTiet>Ryzen 9 7940HS, RTX 4060, AnimeMatrix</ChiTiet>
+    <Gia>42990000.00</Gia>
+    <DuongDanAnh>https://assets2.rockpapershotgun.com/asus-rog-zephyrus-g14-2022-(1).jpg/BROK/thumbnail/1600x900/format/jpg/quality/80/asus-rog-zephyrus-g14-2022-(1).jpg</DuongDanAnh>
+    <SoLuongTon>8</SoLuongTon>
+    <MaLoai>2</MaLoai>
+    <MaThuongHieu>5</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>15</Id>
+    <TenSanPham>Asus Zenbook 14 OLED</TenSanPham>
+    <MoTa>Màn hình OLED tuyệt đẹp</MoTa>
+    <ChiTiet>Core i5-1340P, 2.8K OLED 90Hz</ChiTiet>
+    <Gia>24990000.00</Gia>
+    <DuongDanAnh>https://laptopmedia.com/wp-content/uploads/2021/09/2-6-e1630683013268.jpg</DuongDanAnh>
+    <SoLuongTon>30</SoLuongTon>
+    <MaLoai>1</MaLoai>
+    <MaThuongHieu>5</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>16</Id>
+    <TenSanPham>Asus TUF Gaming F15</TenSanPham>
+    <MoTa>Bền bỉ chuẩn quân đội</MoTa>
+    <ChiTiet>Core i7-12700H, RTX 4050</ChiTiet>
+    <Gia>25990000.00</Gia>
+    <DuongDanAnh>data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEhUQEBAVFRUXFRUQFRcXFRYXFRAVFRgWFxcXFRUYHSggGBolGxUVITEiJSkrLi4uFx8zODMtNygtLisBCgoKDg0OFQ8PFi0dHR0rKysrLSstKysrKy0tLS03Ky0tKzU3Ky0tLTcrKy0tKy0rLS0tLSs3LSs3KystKy0rLf/AABEIAOEA4QMBIgACEQEDEQH/xAAcAAEAAgIDAQAAAAAAAAAAAAAABAUDBwECBgj/xABOEAABAgMEAwkLCAkDBQEAAAABAAIDBBEFEiExE0FRBiJUYXGBkbGyBxQXIzJzkpPB0dIkMzRCU3KCoRUWJUNSYnTh8ESEwoOio7PxNf/EABcBAQEBAQAAAAAAAAAAAAAAAAABAgP/xAAaEQEBAQEBAQEAAAAAAAAAAAAAARESAiET/9oADAMBAAIRAxEAPwDeKIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIi4qg5REqgIiICIsM3Nw4TTEixGsaKAue4NaK4DEoMyKp/WeR4bL+uh+9P1nkeGy/rofvQWyKp/WeR4bL+uh+9P1nkeGy/rofvQWyKJIWpAj10EeHFu0vXHtddrlWhwyPQpaAiIgIiICIiAiIgIiICIiAiIgIiINIWjJzM1OTrhaEeEGTLoQa177oAa0igDgAMclDtHc7Psbeg2jGiEZtMWI0n7pvkE8RoriVfSatD+sidhishFQapjWpOscWPmplrhm0xYoI5QXLoLYnD/AKuY9dF+JbOtCzYUyLsVgcQMDk5vI4YjqXirV3KRYRJhkxG50oA9o5Bg7lHQgqRac5wyP66J8Syd/wA5w2P66J8S6NFP8613cEAWhOcNmPXRfiWGaix4rbsWZixG1rde97m120c4iuKmyURrXsc4VAcHOwrUA4ihzWwrLiy8w0vhwm0DruLGDGgOqu1BqQyXGOhcd5HaOhez3VT0CJSHCh3XMiODjca0GlRgQccVf95s7xro2173rW6K1uZ1pmg1aZI7R0LkyOFb35f3Wy9xUqwwCXMa46RwqWgnyW7VV7m4TXTsVpaCAItAQCBSINSDxkqYsIkwoz4ZOBLHOYXDYS0iqzfpSc4ZMeui/EtjWtakpLuEOJAFSLwuw2EUJI102LwVqxmxI0SJDFGOcS0UAoDxDJBH/Sk5w2P66L8SG15zhsf1sT4l0urqWIMhtac4bH9dE+JdDa83w2Y9dF+JWNlWBFj40uMrS+4HH7rc3dXGvaWNYkCXxa2r/wCN1C78IyZzY8aDz9i2JaUbfRZ2YgspUXosUxHbN5eFBy48SyWtZM3Bgxo36TmjomlwBfEF6mOd9ez0qqN2ET5FM+Zd1INv2W8ugwnONSYbCTtJaCSpSh2P8xB81D7IUxAREQEREBERAREQaUD6Tc/j/rH9limaZVUzEpOT/wDVxOy1ZtKqLKHMUNeZZYcQOceMAUPET71UmLxppUFJuxa0RmUAxDqnW6lyl468zmqpks4guAJDfKpjdrWlRswOKmbrIlYkI1+q+p52ZqVuZiUDz9z/AJKCnYF7ncUPEHzh6mqom7OhvxG8dtGR5W+5XW5OGYcNzHEV0hOBzFG4/kg8ZPDxsTzj+0V7k/QP9v8A8F4aed42J5x/aK9u53yD/bDsIMG4k/Jz513ZYqvcyfl0Y8Ub/wBgVjuJPiHedd2Wqt3N/TYv/V7YQXFsbnWTMQRHRC0htygAORJrjyrXj2Ykca9RuwlnRJhoY28dGObfPzJwCwydjsbjEN850HkDl1u/IcqDz4gOLTEDTdbQF2oEkCldZqQu9iOBmYYIBFXGhAIwa4jA8YCv90BGgdTDyABqAvtyAyXmrFPymH+PsOQbHERBFUHS8aaXjVRP0qqt1cSsnMeacu0aca0FznBrRm5xoAvI7o91LYkN8GC0uDgWue7DA53G+0/mg+lLH+Yg+ah9kKYodj/MQfNQ+yFMUUREQEREBERAREQaBtR9J6e/q39TV20yi25EpPT39S/qasQiqifpk0qg6VNKqK3dK+sSF91/W1SrCiUD/wAPtVXbr6xIf3XdbVKsmJg78PtUF4Zg8XSu0KZcDUYcYKhaVBFVHE5IhxLmmjiSSDkScSdoUyy90ESXboozC5oG8oRUDYDkW9SiaVV1rRcWfi6goPSTW6wvbcl4Tg84AmhpxgDMqHYd6A8xXEFxaW0rXEkGrnazh/dUVnxaRBjqKttKgs5idc81ca9XQsWlUHSppURxbsXxLuVnaaqCynfKIfK7suVnbMTxLuVvaCoYMcseH0rSuFaZgjPnRXuDH/zUOdU0/uka3ewhpHbf3bef63N0qkfGjzJunL+BuDQP5jr5SrSSsdjcYm+OwYNHKdf+ZqCqMGYm3VcS6ms72Gzk1D8yrGZsGHCl4r3G+8MNDiGtP8o18pV0H0AAwAwAAoByDUodtRPk8X7hQfRFj/MQfNQ+yFMUOx/mIPmofZCmICIiAiIgIiICIiD5y3TRKT87/Uv6gogipuvmmttKca40rMPNdWoZ6lF0isEvSJpFFvrnSYKoh2u6r2fdd1hSLNdS9ze1QbSdv2ch6ws8k/Pm9qirPSLnSKIYi50iqJJiKBaj8WcruoLM1/s/JQbTiYs5XdQUGWSd4wchVnpFSSkTfjkKsQ/29aRUrSJpFF0iCIqhab6wzyt7QVdLMa57Q4GhONDTUdalT794eUdoKHLHft5fYVkXzHBoutAaNgGFfaV2ERRRE412MVUSdIotrRKwIn3CuNKq+1rQZcdDrVxBFBjd5TqQfUVj/R4PmofZCmKHY/zEHzUPshTFFEREBERAREQEREHyx3QB+0pvz71SQI72YA4bDlzbFd7vz+0pvz7+tUIKCzgTzXYZHYdfIdazX1SuCQ51zMDvh+Y51dE2edv28h6ws8q/Pm9qrJiOHFpB1HmxGClyrs+b2qCffS+o9UqqiRfUO0H4s/F1LJVRJ52LefqQZJZ+/HIVP0iqZZ2/HIVOqis99c6TjWCq4a5Edpt29PN2go0u/fjl9hXabdvejrCiMjBrgTlX2KKur6wx51rPKOOwZlVkWfc7Bu9G3WfcowH+bedBKmZ578Abo2DM8p9yiFtAsi6POBQfX9j/AEeD5qH2Qpih2P8AR4PmofZCmICIiAiIgIiICIiD5W7oZ/aU359/WvPtK9Pu8H7Rm/PvVDTiQYA5dIlFKohCCE0Yqykcajk9qw0QHYgmVSqiXjtK4vHaUEyqh2g7yedcXjtWWI1tM6kcYpqyQR5Q7/mKn1VWYjtTTXHV7lmY8kY1qgnVRrlCvHaUvHaUGecO9PN1hVznKSXLiiCMCsjVlXKDC4rEXe3qUpdYmR5Cg+u7H+jwfNQ+yFMUOx/o8HzUPshTEBERAREQEREBEXmt3W6YSMCrSDGfVsIbDreRsH5miDQW7z/9Gb8+9efJV1aLIj3ve/Fzi57iXNqScXE48qqXgbB0KaOITHOcGtBc4kNAAJLicgAMyvZs7lVqkA6BgrjQxmAjlxzXmZGRNBFvmHra5oxrkKODhRTYDo5J+VR7rTdLtI7P0+RTqLlXXgotX7GH65ieCe1fsIfrmKna6OXUE1GLRSp0jsK5YaRcujRr4YybjOrX94+oA4g/FOoc1b+Ce1fsYfrmJ4J7V+xh+uYqWamYrcpqMcafOPBB5L5XDJiZP7+KMK0MZ4NNtC6quwyrrwTWr9jD9cxceCa1fsYfrmKmhzUw7KYibMYzxUjUKuXLZqZB+fi4EYmM+7xYk0KbDFv4JrW+xh+uYg7k1rfYw/XMVREnJmtDHi4DGkVwAFTmQaZ1XD5qYbnHinXhFecNuBTYYuvBNav2EP1zFwe5Nav2EP1zFUCYmKB3fEShqRWO7GnFeXSHOTLhURotMqmO4YjVS9WqbExdeCa1vsIfrmJ4JrW+wh+uYqVk1MmtIsTe4GswRTpdigmZomgixCc/pOFOI3qHkzTYuVdeCa1vsIfrmLylsWXGlYrpeZhmHEbmDrByc0jBzTtCsO+Zm8G6eJU1IpME5Z5OUSZZEe4aR180wLoodQDGlXZZ/mmwxW1XV+R5CrDvQg0o3K95TaU/wrJClTUtLRkPrtAFdqbDH1PY/wBHg+ah9kKYtc9yvdYYjBITDvGMaBCNa32NHk11kAZ6xyLYyqCIiAiIgIi4JQRbUtCHLwnx4rqMYLxPUBtJNAOVfP26G3Xzkw6YivDa71rajxbBWgoQa5nnJXpO6NurbMxu92EmBDJBun52IML3GActuK8Y+bbSl6JlSuBI/wC5SrGGeoGeUBtILG3qY53TXGmAU/c7BkowiGZnhAuijWi7dc1wxqRDqKYCtTU3sMlUunGfWdGoMGgFmXHljWp2LC+0YV4VdMFoq7y2h17JtAMABjrriuXrzbG9e8sSLZMCMGPmGTEKIyrYsVg8W5ppdZSHRzjUknAAALBuoiWU8Qu9ZiFCaHiFF0TRRrXEnSPeYeQpkBiSvGWha7H+RpW1bcLQ4NaRWpNMSXEYYmifpVtMIkzUZb9gyyqadSx+X3Wu3qLRs2zmNiPg2mXxA2+2G1rSYmGIF6GbhOGONF510VlKsitv4NB0jCDTIuGjxpsAChS00Kb6JHrUuN1zbtTiTis3fLK10kxWgaTfZkMhyLc8WM31GVrmE1iPoQCfLYHA5Fp3gpXPXqWQuBppHiuBqXtAdnR8MaMYDLEqMZluFYkY0xFXMNCdi5fNtIIvxqEUOLMQrzTYkGK0g1cC3EAmI27TDeuIh4u15rI6Jvt7EvCg8l7agnNxOiO9pgogn9elmOW+1csnQBdMWYoPJAiNoObUnNXYy32tAuRG0oS5oiMqRqDCYfWu7IzabyKxpqM4jaUd5RdWHn1KNCnhec5z4xrSh0gqaCgDtqRJ0F7XXoxpUGsQVAOd2mVaKc02JDIzM4bw0moxiAuJGDa+KoRs4lw6Kw0vOBIAaTpQA6tC67SFtzByXSLaDX1DnRy06tI3bUZ1WODalK34keuq7F1bCnNJ6jL32ahulb5Rc06QgMoKCpEPOhzHQszwS28Y7buGN+uJ47gzooUK0w0tAdG0YzbfFa54YUXaatRhBuaYO1Evb+dBVOKdQixcbwmYe9N5tIhrUbBc5s12mIlW3mvAIuxG1cfJNfK3ta5jCuvFdYdsAAb+YrrIi06MMlGhWgGgtD47W1JbdiAHHO8KUOOPOnNOoluiAtD2uaC0X8XgXmHDfbyrjm3YpRa1zREY5tQKnfNxYc6i4CXauUKv/SbaXWvjtGJwcKknEk7SdqyStoAAtvRiK3gb4qCfKqMjU0P/ANTmpqfKTLmPZFZGaHNN5rgWgjWDdAHOt+7i90jJ6XEUUERtGRW/wvpmP5TmP7L58ZNN1X861Ia41Na1BwI18RrtVvuS3ROkZhsZlSw72I3DxjD7RmORdPOs19FosElNsisbFhODmPAc0jIgrOtMiIiAtf8AdS3W97w+9ILvGxBvyDjChnqc7qrxL2NvT5l5aNMBt4w4b4gH8RaCaL5pn7TfGiOjRbznvJc47SfZqQCVhilcaf8Ald0Lo55P1T0IIsdRHKa+E46j0LEZR2w9BQRKrmqkGUdr6iuve/GEHMIYLugHGPzXNOMIOEXNOMLmnH1oOq5SnH1rm7x9aDquQVzd4+tKcfWgXljeslOMfmuC3jQYEKyaPjTR8aDCVwsuj41y2XJyx5kGIKRBXHerth6FkZBI1HoQSYZWYOUYE/wnoXcRf5T0INldyrddoYgko7vFRD4sn93EP1eJruvlW5l8n6f+Vy+g+5jbcSbkmvjeWxxgl2t4aBRzuOhx5EHrUREHV7AQQQCDgQcQRxha+3UdyyXjnSSru93k1LaVhO/Dm08mHEthog0s/uPTdd7MwCOPSA9F0rjwQTnCYHTE+BbqRBpXwQzvCJfpifCuR3IpzhEDpi/At0og03D7kEzTfTUEHia8jpNF38D8xwuF6Dvetwog094H5jhcL0H+9dIncgmfqzUEnja8dVVuREGnvA/McLheg/3p4H5jhcL0He9bhRBp7wPzHC4XoP8AengfmOFwvQf71uFEGnfA9McLheg/3p4HpjhcL0H+9biRBp3wPTHC4XoP9648DsxwyF6D/etxog0wO49NVxm4NNRuvqebV0rv4HZjhkL0H+9bkRBpvwOTHDIXoP8AeuD3HJjVOQvQf71uVEGkvA9O8Jl+mJ8CeB6d4RL9MT4Fu1EGkT3HJ3hMv0xPgXHgbneEy/8A5PhW70QapsLuOta+9OTGkaMmQwWB33nE1pxCnKtm2fIwoDBCgw2sY3ANaKAKSiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIg/9k=</DuongDanAnh>
+    <SoLuongTon>50</SoLuongTon>
+    <MaLoai>2</MaLoai>
+    <MaThuongHieu>5</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>17</Id>
+    <TenSanPham>Lenovo Legion 5</TenSanPham>
+    <MoTa>Ông vua Gaming tầm trung</MoTa>
+    <ChiTiet>Ryzen 7 7735H, RTX 4060, 165Hz</ChiTiet>
+    <Gia>31990000.00</Gia>
+    <GiaKhuyenMai>29990000.00</GiaKhuyenMai>
+    <DuongDanAnh>https://i.pcmag.com/imagery/reviews/032Ghc5tCjiCya7cxiW3B5O-11.jpg</DuongDanAnh>
+    <SoLuongTon>25</SoLuongTon>
+    <MaLoai>2</MaLoai>
+    <MaThuongHieu>6</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>18</Id>
+    <TenSanPham>Lenovo ThinkPad X1 Carbon</TenSanPham>
+    <MoTa>Doanh nhân đẳng cấp</MoTa>
+    <ChiTiet>Gen 11, Core i7-1355U, 16GB, 512GB</ChiTiet>
+    <Gia>48990000.00</Gia>
+    <DuongDanAnh>https://www.notebookcheck.net/fileadmin/Notebooks/Lenovo/ThinkPad_X1_Carbon_Gen_13_Aura_Edition/thinkpad_X1Carbon_G13_teaser.JPG</DuongDanAnh>
+    <SoLuongTon>10</SoLuongTon>
+    <MaLoai>1</MaLoai>
+    <MaThuongHieu>6</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>19</Id>
+    <TenSanPham>MSI Katana 15</TenSanPham>
+    <MoTa>Sắc bén như kiếm Katana</MoTa>
+    <ChiTiet>Core i7-13620H, RTX 4050</ChiTiet>
+    <Gia>27990000.00</Gia>
+    <DuongDanAnh>https://m.media-amazon.com/images/I/81-3FfpcwML._AC_.jpg</DuongDanAnh>
+    <SoLuongTon>18</SoLuongTon>
+    <MaLoai>2</MaLoai>
+    <MaThuongHieu>7</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>20</Id>
+    <TenSanPham>MSI Modern 14</TenSanPham>
+    <MoTa>Mỏng nhẹ cho sinh viên</MoTa>
+    <ChiTiet>Core i3-1215U, RAM 8GB, SSD 512GB</ChiTiet>
+    <Gia>10990000.00</Gia>
+    <DuongDanAnh>https://de2wfhoo6xqi5.cloudfront.net/size/600/64d/8ad/e18e60192583576a87d06c81c53f62435b.jpg</DuongDanAnh>
+    <SoLuongTon>60</SoLuongTon>
+    <MaLoai>1</MaLoai>
+    <MaThuongHieu>7</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>21</Id>
+    <TenSanPham>Acer Nitro 5 Tiger</TenSanPham>
+    <MoTa>Quốc dân Gaming</MoTa>
+    <ChiTiet>Core i5-12500H, RTX 3050Ti</ChiTiet>
+    <Gia>20490000.00</Gia>
+    <GiaKhuyenMai>18990000.00</GiaKhuyenMai>
+    <DuongDanAnh>https://product.hstatic.net/200000420363/product/laptop-gaming-acer-nitro-5-tiger_e1b13333dff84ac2855dd8c697dda8f8_master.png</DuongDanAnh>
+    <SoLuongTon>40</SoLuongTon>
+    <MaLoai>2</MaLoai>
+    <MaThuongHieu>8</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>22</Id>
+    <TenSanPham>Acer Swift 3</TenSanPham>
+    <MoTa>Mỏng nhẹ thời trang</MoTa>
+    <ChiTiet>Core i5-1135G7, RAM 16GB</ChiTiet>
+    <Gia>16990000.00</Gia>
+    <DuongDanAnh>data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEBISExMWFhUWFhcYFhcXFxgZFxgYFRUXGBUXFxgfHiggGBolHxcYITEiJSkrLjAuGR8zODMtNygtLjcBCgoKDg0OGxAQGi0mHSYtLS4rLS0tLS0rLzctLS8tLS0tKy8tLS0rLS0tLS0tLS0tLS0tLS0tLS0vLS0tLS0tLf/AABEIAOEA4QMBEQACEQEDEQH/xAAcAAEAAgMBAQEAAAAAAAAAAAAABAUDBgcCAQj/xABGEAABAwEFAwkEBwUGBwAAAAABAAIDEQQFEiExBkFREyIyYXGBkaGxB0JSwRQjYnKC0fBDorLh8RUzc5LCwxckNFRj0uL/xAAbAQEAAgMBAQAAAAAAAAAAAAAAAQUCBAYDB//EADgRAQACAQIEAgcGBgIDAQAAAAABAgMEEQUSITFBURMiMmFxgaEGQmKRwdEUFSOx4fBSckOi8TP/2gAMAwEAAhEDEQA/AO4oCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgxWmXC0upWm7tyCDnj/aBaA6hZD2c6o/e+SnZCRD7QJDrAw9jnD5FNhNi25O+z+En/AMJsJcW2TDrE/uLT+SbJS2bURH3Xjub/AOybDOzaCE73D8J+SjYZxfMJ9/8Add+SnYe23nEffHgR8lGwyttkZ0e3xCDIJm/EPEIPQKD6gICAgICAgICAgICAgICAgIMdpZVjhxB9MkH5r9pVgw2953Gv8RpThzS3yUyNeZKGigyA0plRQNj2PuWa0PEjnPEQ6IxOGM8dej69isNJpeb179vD3qTivEvRR6HFPrz393+XR3MawCNoxPPHOnWVYeipbrNY2+DnZ1eenSL23+MmY+rYcT/eduao9Bin1prGzKNdqq+rGSd/i9BxJwMOnTed3UFj/D4tt5r8npHEtX2jJPx6PrrZI6oiOQHSIrU9XUo/hMUdbQz/AJtq99q23+Ufs0HaTa+8LNNheIsJ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</DuongDanAnh>
+    <SoLuongTon>22</SoLuongTon>
+    <MaLoai>1</MaLoai>
+    <MaThuongHieu>8</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>23</Id>
+    <TenSanPham>Sony WH-1000XM5</TenSanPham>
+    <MoTa>Tai nghe chống ồn đỉnh cao</MoTa>
+    <ChiTiet>Chống ồn chủ động, Pin 30h</ChiTiet>
+    <Gia>8490000.00</Gia>
+    <DuongDanAnh>https://static1.pocketlintimages.com/wordpress/wp-content/uploads/wm/2023/04/img_9663.JPG</DuongDanAnh>
+    <SoLuongTon>30</SoLuongTon>
+    <MaLoai>8</MaLoai>
+    <MaThuongHieu>9</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>24</Id>
+    <TenSanPham>Sony Xperia 1 V</TenSanPham>
+    <MoTa>Điện thoại chuẩn điện ảnh</MoTa>
+    <ChiTiet>Màn hình 4K OLED 21:9</ChiTiet>
+    <Gia>29990000.00</Gia>
+    <DuongDanAnh>https://cdn.mos.cms.futurecdn.net/bwZzNzchLZDKfSBR5Yby4Y-1200-80.jpg</DuongDanAnh>
+    <SoLuongTon>8</SoLuongTon>
+    <MaLoai>4</MaLoai>
+    <MaThuongHieu>9</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>25</Id>
+    <TenSanPham>LG Gram 2023</TenSanPham>
+    <MoTa>Nhẹ vô địch</MoTa>
+    <ChiTiet>14 inch, nặng 999g, Core i5-1340P</ChiTiet>
+    <Gia>32990000.00</Gia>
+    <GiaKhuyenMai>30990000.00</GiaKhuyenMai>
+    <DuongDanAnh>data:image/jpeg;base64,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</DuongDanAnh>
+    <SoLuongTon>12</SoLuongTon>
+    <MaLoai>1</MaLoai>
+    <MaThuongHieu>10</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>26</Id>
+    <TenSanPham>Màn hình LG UltraGear 27</TenSanPham>
+    <MoTa>Màn hình Gaming 144Hz</MoTa>
+    <ChiTiet>27 inch IPS, 1ms, G-Sync</ChiTiet>
+    <Gia>6590000.00</Gia>
+    <DuongDanAnh>https://bizweb.dktcdn.net/100/329/122/products/man-hinh-lg-ultragear-27-inch-ips-144hz-27gn60r-b-atv-2.jpg?v=1685419664030</DuongDanAnh>
+    <SoLuongTon>20</SoLuongTon>
+    <MaLoai>7</MaLoai>
+    <MaThuongHieu>10</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>27</Id>
+    <TenSanPham>Chuột Logitech MX Master 3S</TenSanPham>
+    <MoTa>Chuột văn phòng tốt nhất</MoTa>
+    <ChiTiet>Cảm biến 8K DPI, Click không tiếng</ChiTiet>
+    <Gia>2490000.00</Gia>
+    <DuongDanAnh>https://product.hstatic.net/200000637319/product/ezgif-4-7c69368b68_02d49215388344aeacbb110ecbe08dd5_master.jpg</DuongDanAnh>
+    <SoLuongTon>50</SoLuongTon>
+    <MaLoai>6</MaLoai>
+    <MaThuongHieu>11</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>28</Id>
+    <TenSanPham>Bàn phím Logitech MX Keys S</TenSanPham>
+    <MoTa>Gõ êm ái, đèn nền thông minh</MoTa>
+    <ChiTiet>Kết nối 3 thiết bị, Pin sạc</ChiTiet>
+    <Gia>2890000.00</Gia>
+    <DuongDanAnh>data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhITExIRFhMSGBAYFxUVEx0XGBUbGBYXFxoTFxcaICggGholHxYVITEhJikrLi4uFx8zODMsNygtLisBCgoKDg0OFQ8NFSsZFRkrLS03Ky0rNys3Nys3Kys3Kys3KystKysrKy0rLSsrKzcrKys3KysrKysrKysrKysrK//AABEIALcBEwMBIgACEQEDEQH/xAAcAAEAAQUBAQAAAAAAAAAAAAAABwECAwQFCAb/xABCEAABAwIDAwgFCQcFAQAAAAABAAIRAyEEEjEiQVEFBxcyYXGS0RNTk7HSIzNCZHKBkaHBBhRSVGLh8RWistPiwv/EABYBAQEBAAAAAAAAAAAAAAAAAAABAv/EABYRAQEBAAAAAAAAAAAAAAAAAAARAf/aAAwDAQACEQMRAD8AnFERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEXI/arl6ngcNUxFQEhkANGr3OMNYO8kX3CSoar88fKBcS1mEa06N9G50dmbOJ74CRKnxFAHS/wApcMJ7F3/Yqjne5S4YT2Lv+xWFT8igPpd5R4YT2LvjVel3lHhhPZO+NIVPaKBhzuco8ML7J3xqo52uUOGF9k740hU8IoI6WuUOGF9k741cOdnlD6r7J3xpCp1RQX0sY/hhfZO+NV6V8f8AVfZO+NIVOaKDm86uPkT+6jt9E63b11lq86OOEQ7CGZ0pOt/vSFTYig/pVx/1X2R+NOlTH/VvZH40hU4IoP6VMf8AVvZH41XpVx/1b2R+NIVN6KD+lXH/AFb2R+NOlXH/AFb2R+NIVOCKDulbH/VfZO+NU6Vsf9V9k740hU5IoM6Vsf8AVfZO+NUPOxyh9V9k740hU6IoJHOpjxtZ8Mc30PQu2I4GRY95X1/N/wA47sXWGHxLKbajg4seyQ1xAksLSTBgSL3g6b5CpHRERRERAREQEREBWVX5Wlx0AJ/ASr1gx3zdT7L/AHFB5t/av9qK1esXvMk3AM5WA6MaN1t65B5Ufa9O/Ae+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</DuongDanAnh>
+    <SoLuongTon>40</SoLuongTon>
+    <MaLoai>6</MaLoai>
+    <MaThuongHieu>11</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>29</Id>
+    <TenSanPham>Chuột Razer DeathAdder V3</TenSanPham>
+    <MoTa>Huyền thoại Gaming</MoTa>
+    <ChiTiet>Siêu nhẹ 63g, 30K DPI</ChiTiet>
+    <Gia>3690000.00</Gia>
+    <DuongDanAnh>data:image/jpeg;base64,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</DuongDanAnh>
+    <SoLuongTon>25</SoLuongTon>
+    <MaLoai>6</MaLoai>
+    <MaThuongHieu>12</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>30</Id>
+    <TenSanPham>RAM Corsair Vengeance RGB</TenSanPham>
+    <MoTa>RAM DDR5 tốc độ cao</MoTa>
+    <ChiTiet>32GB (2x16GB) 6000MHz</ChiTiet>
+    <Gia>3590000.00</Gia>
+    <DuongDanAnh>https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6256/6256216_sd.jpg</DuongDanAnh>
+    <SoLuongTon>29</SoLuongTon>
+    <MaLoai>7</MaLoai>
+    <MaThuongHieu>13</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>31</Id>
+    <TenSanPham>Surface Pro 9</TenSanPham>
+    <MoTa>Laptop lai Tablet</MoTa>
+    <ChiTiet>Core i5, 8GB, 256GB, Platinum</ChiTiet>
+    <Gia>28990000.00</Gia>
+    <DuongDanAnh>https://sm.pcmag.com/t/pcmag_au/review/m/microsoft-/microsoft-surface-pro-9-intel_upxu.1920.jpg</DuongDanAnh>
+    <SoLuongTon>15</SoLuongTon>
+    <MaLoai>1</MaLoai>
+    <MaThuongHieu>14</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>32</Id>
+    <TenSanPham>Xiaomi 14</TenSanPham>
+    <MoTa>Leica Camera</MoTa>
+    <ChiTiet>Snapdragon 8 Gen 3, 12GB/256GB</ChiTiet>
+    <Gia>20990000.00</Gia>
+    <GiaKhuyenMai>19990000.00</GiaKhuyenMai>
+    <DuongDanAnh>https://i02.appmifile.com/mi-com-product/fly-birds/xiaomi-14/PC/headAss2_img.jpeg</DuongDanAnh>
+    <SoLuongTon>40</SoLuongTon>
+    <MaLoai>4</MaLoai>
+    <MaThuongHieu>15</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>33</Id>
+    <TenSanPham>Màn hình Xiaomi Gaming G27i</TenSanPham>
+    <MoTa>Màn hình giá rẻ 165Hz</MoTa>
+    <ChiTiet>27 inch FHD, Fast IPS</ChiTiet>
+    <Gia>3290000.00</Gia>
+    <DuongDanAnh>https://mygear.io.vn/media/product/6005-xiaomi-g27i.jpg</DuongDanAnh>
+    <SoLuongTon>60</SoLuongTon>
+    <MaLoai>7</MaLoai>
+    <MaThuongHieu>15</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+  <SanPham>
+    <Id>34</Id>
+    <TenSanPham>MacBook Air M1 2020</TenSanPham>
+    <MoTa>Chip M1 mạnh mẽ, pin trâu</MoTa>
+    <ChiTiet></ChiTiet>
+    <Gia>18990000</Gia>
+    <GiaKhuyenMai>0</GiaKhuyenMai>
+    <DuongDanAnh></DuongDanAnh>
+    <SoLuongTon>0</SoLuongTon>
+    <MaLoai>1</MaLoai>
+    <MaThuongHieu>1</MaThuongHieu>
+    <HienThi>true</HienThi>
+  </SanPham>
+</NewDataSet>

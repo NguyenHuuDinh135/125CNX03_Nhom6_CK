@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+	<xs:schema xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="NewDataSet">
+		<xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+			<xs:complexType>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="Banner">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Id" type="xs:int" minOccurs="0"/>
+								<xs:element name="TenBanner" type="xs:string" minOccurs="0"/>
+								<xs:element name="HinhAnh" type="xs:string" minOccurs="0"/>
+								<xs:element name="LienKet" type="xs:string" minOccurs="0"/>
+								<xs:element name="ThuTu" type="xs:int" minOccurs="0"/>
+								<xs:element name="HienThi" type="xs:boolean" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>
+			</xs:complexType>
+		</xs:element>
+	</xs:schema>
+	<Banner>
+		<Id>1</Id>
+		<TenBanner>Banner iPhone 15</TenBanner>
+		<HinhAnh>https://mir-s3-cdn-cf.behance.net/project_modules/1400/f3832e180145769.6505ae76214ca.jpg</HinhAnh>
+		<LienKet>/san-pham/iphone-15</LienKet>
+		<ThuTu>1</ThuTu>
+		<HienThi>true</HienThi>
+	</Banner>
+	<Banner>
+		<Id>2</Id>
+		<TenBanner>Banner Laptop Gaming</TenBanner>
+		<HinhAnh>https://nhatkhanhtech.com/wp-content/uploads/2019/10/Banner-gaming_laptops.jpg</HinhAnh>
+		<LienKet>/danh-muc/laptop-gaming</LienKet>
+		<ThuTu>2</ThuTu>
+		<HienThi>true</HienThi>
+	</Banner>
+	<Banner>
+		<Id>3</Id>
+		<TenBanner>Banner Phụ kiện</TenBanner>
+		<HinhAnh>https://img.pikbest.com/templates/20240725/sale-banner-template-decorates-the-super-booming-sale-of-phone-accessories_10681289.jpg!w700wp</HinhAnh>
+		<LienKet>/danh-muc/phu-kien</LienKet>
+		<ThuTu>3</ThuTu>
+		<HienThi>true</HienThi>
+	</Banner>
+	<Banner>
+		<Id>4</Id>
+		<TenBanner>Sale Tết 2025</TenBanner>
+		<HinhAnh>https://pc79.vn/wp-content/uploads/2025/01/2025.14.01-BUILD-PC-XIN-RINH-LOC-TET-LON-169-min.jpg</HinhAnh>
+		<LienKet>/khuyen-mai</LienKet>
+		<ThuTu>4</ThuTu>
+		<HienThi>true</HienThi>
+	</Banner>
+</NewDataSet>

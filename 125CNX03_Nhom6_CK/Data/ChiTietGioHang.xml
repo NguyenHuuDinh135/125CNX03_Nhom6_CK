@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<NewDataSet>
+  <xs:schema xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="NewDataSet">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="ChiTietGioHang">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Id" type="xs:int" minOccurs="0" />
+                <xs:element name="MaGioHang" type="xs:int" minOccurs="0" />
+                <xs:element name="MaSanPham" type="xs:int" minOccurs="0" />
+                <xs:element name="DonGia" type="xs:decimal" minOccurs="0" />
+                <xs:element name="SoLuong" type="xs:int" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <ChiTietGioHang>
+    <Id>3</Id>
+    <MaGioHang>2</MaGioHang>
+    <MaSanPham>6</MaSanPham>
+    <DonGia>29990000.00</DonGia>
+    <SoLuong>1</SoLuong>
+  </ChiTietGioHang>
+  <ChiTietGioHang>
+    <Id>4</Id>
+    <MaGioHang>3</MaGioHang>
+    <MaSanPham>15</MaSanPham>
+    <DonGia>25990000.00</DonGia>
+    <SoLuong>2</SoLuong>
+  </ChiTietGioHang>
+  <ChiTietGioHang>
+    <Id>5</Id>
+    <MaGioHang>4</MaGioHang>
+    <MaSanPham>3</MaSanPham>
+    <DonGia>33990000.00</DonGia>
+    <SoLuong>1</SoLuong>
+  </ChiTietGioHang>
+</NewDataSet>

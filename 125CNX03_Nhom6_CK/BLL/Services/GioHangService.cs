@@ -27,15 +27,23 @@ namespace _125CNX03_Nhom6_CK.BLL
         public void CreateCartForUser(int userId)
         {
             var existingCart = GetCartByUserId(userId);
-            if (existingCart == null)
-            {
-                var newCart = new XElement("GioHang",
-                    new XElement("MaNguoiDung", userId),
-                    new XElement("NgayCapNhat", DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss"))
-                );
-                _cartRepository.Add(newCart);
-            }
+            if (existingCart != null) return;
+
+            // 🔑 Tạo Id tự tăng
+            var allCarts = _cartRepository.GetAll();
+            int newCartId = allCarts.Any()
+                ? allCarts.Max(c => (int?)c.Element("Id") ?? 0) + 1
+                : 1;
+
+            var newCart = new XElement("GioHang",
+                new XElement("Id", newCartId),
+                new XElement("MaNguoiDung", userId),
+                new XElement("NgayCapNhat", DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss"))
+            );
+
+            _cartRepository.Add(newCart);
         }
+
 
         public void AddProductToCart(int userId, int productId, int quantity)
         {
