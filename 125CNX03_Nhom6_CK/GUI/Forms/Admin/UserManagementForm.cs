@@ -1,15 +1,19 @@
-﻿using System;
+﻿using _125CNX03_Nhom6_CK.BLL;
+using _125CNX03_Nhom6_CK.GUI.Interfaces;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using _125CNX03_Nhom6_CK.BLL;
-using System.Collections.Generic;
+using _125CNX03_Nhom6_CK.GUI.Interfaces;
 
 namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 {
-    public partial class UserManagementForm : Form
+    public partial class UserManagementForm : Form, ISearchableForm
     {
         private readonly INguoiDungService _userService;
+        private List<XElement> _allUsers;
 
         public UserManagementForm()
         {
@@ -29,152 +33,156 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 
             // Create form panel
             Panel formPanel = new Panel();
-            formPanel.Size = new Size(this.Width - 40, 150);
+            formPanel.Size = new Size(this.Width - 40, 180);
             formPanel.Location = new Point(20, 20);
             formPanel.BackColor = Color.White;
             formPanel.BorderStyle = BorderStyle.FixedSingle;
 
-            // Form controls
+            // ==== Họ tên ====
             Label lblFullName = new Label();
             lblFullName.Text = "Họ và tên:";
-            lblFullName.Font = new Font("Segoe UI", 9);
             lblFullName.Location = new Point(20, 20);
-            lblFullName.Size = new Size(100, 20);
             formPanel.Controls.Add(lblFullName);
 
             TextBox txtFullName = new TextBox();
             txtFullName.Name = "txtFullName";
-            txtFullName.Font = new Font("Segoe UI", 10);
-            txtFullName.Size = new Size(200, 20);
             txtFullName.Location = new Point(130, 20);
-            txtFullName.BorderStyle = BorderStyle.FixedSingle;
+            txtFullName.Width = 200;
             formPanel.Controls.Add(txtFullName);
 
+            // ==== Email ====
             Label lblEmail = new Label();
             lblEmail.Text = "Email:";
-            lblEmail.Font = new Font("Segoe UI", 9);
             lblEmail.Location = new Point(20, 50);
-            lblEmail.Size = new Size(100, 20);
             formPanel.Controls.Add(lblEmail);
 
             TextBox txtEmail = new TextBox();
             txtEmail.Name = "txtEmail";
-            txtEmail.Font = new Font("Segoe UI", 10);
-            txtEmail.Size = new Size(200, 20);
             txtEmail.Location = new Point(130, 50);
-            txtEmail.BorderStyle = BorderStyle.FixedSingle;
+            txtEmail.Width = 200;
             formPanel.Controls.Add(txtEmail);
 
+            // ==== Phone ====
             Label lblPhone = new Label();
             lblPhone.Text = "Số điện thoại:";
-            lblPhone.Font = new Font("Segoe UI", 9);
             lblPhone.Location = new Point(20, 80);
-            lblPhone.Size = new Size(100, 20);
             formPanel.Controls.Add(lblPhone);
 
             TextBox txtPhone = new TextBox();
             txtPhone.Name = "txtPhone";
-            txtPhone.Font = new Font("Segoe UI", 10);
-            txtPhone.Size = new Size(200, 20);
             txtPhone.Location = new Point(130, 80);
-            txtPhone.BorderStyle = BorderStyle.FixedSingle;
+            txtPhone.Width = 200;
             formPanel.Controls.Add(txtPhone);
 
+            // ==== PASSWORD ====
+            Label lblPassword = new Label();
+            lblPassword.Text = "Mật khẩu:";
+            lblPassword.Location = new Point(350, 20);
+            formPanel.Controls.Add(lblPassword);
+
+            TextBox txtPassword = new TextBox();
+            txtPassword.Name = "txtPassword";
+            txtPassword.Location = new Point(450, 20);
+            txtPassword.Width = 200;
+            txtPassword.PasswordChar = '●';
+            formPanel.Controls.Add(txtPassword);
+
+            // ==== Vai trò ====
             Label lblRole = new Label();
             lblRole.Text = "Vai trò:";
-            lblRole.Font = new Font("Segoe UI", 9);
             lblRole.Location = new Point(20, 110);
-            lblRole.Size = new Size(100, 20);
             formPanel.Controls.Add(lblRole);
 
             ComboBox cboRole = new ComboBox();
             cboRole.Name = "cboRole";
-            cboRole.Font = new Font("Segoe UI", 10);
-            cboRole.Size = new Size(200, 20);
-            cboRole.Location = new Point(130, 110);
-            cboRole.DropDownStyle = ComboBoxStyle.DropDownList;
             cboRole.Items.AddRange(new object[] { "Customer", "Admin" });
             cboRole.SelectedIndex = 0;
+            cboRole.Location = new Point(130, 110);
+            cboRole.Width = 200;
             formPanel.Controls.Add(cboRole);
 
+            // ==== Active ====
             CheckBox chkActive = new CheckBox();
             chkActive.Name = "chkActive";
             chkActive.Text = "Hoạt động";
-            chkActive.Font = new Font("Segoe UI", 9);
             chkActive.Location = new Point(130, 140);
-            chkActive.Size = new Size(100, 20);
             chkActive.Checked = true;
             formPanel.Controls.Add(chkActive);
 
-            // Action buttons
+            // ==== Add ====
+            Button btnAdd = new Button();
+            btnAdd.Text = "Thêm";
+            btnAdd.BackColor = Color.ForestGreen;
+            btnAdd.ForeColor = Color.White;
+            btnAdd.Location = new Point(350, 60);
+            btnAdd.Click += BtnAdd_Click;
+            formPanel.Controls.Add(btnAdd);
+
+            // ==== Update ====
             Button btnUpdate = new Button();
             btnUpdate.Text = "Cập nhật";
-            btnUpdate.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-            btnUpdate.Size = new Size(100, 30);
-            btnUpdate.Location = new Point(350, 20);
             btnUpdate.BackColor = Color.FromArgb(0, 174, 219);
             btnUpdate.ForeColor = Color.White;
-            btnUpdate.FlatStyle = FlatStyle.Flat;
-            btnUpdate.FlatAppearance.BorderSize = 0;
-            btnUpdate.Cursor = Cursors.Hand;
+            btnUpdate.Location = new Point(350, 110);
             btnUpdate.Click += BtnUpdate_Click;
             formPanel.Controls.Add(btnUpdate);
 
+            // ==== Delete ====
             Button btnDelete = new Button();
             btnDelete.Text = "Xóa";
-            btnDelete.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-            btnDelete.Size = new Size(100, 30);
-            btnDelete.Location = new Point(460, 20);
-            btnDelete.BackColor = Color.FromArgb(219, 0, 0);
+            btnDelete.BackColor = Color.DarkRed;
             btnDelete.ForeColor = Color.White;
-            btnDelete.FlatStyle = FlatStyle.Flat;
-            btnDelete.FlatAppearance.BorderSize = 0;
-            btnDelete.Cursor = Cursors.Hand;
+            btnDelete.Location = new Point(460, 110);
             btnDelete.Click += BtnDelete_Click;
             formPanel.Controls.Add(btnDelete);
 
             this.Controls.Add(formPanel);
 
-            // Create data grid panel
+            // ==== GRID PANEL ====
             Panel gridPanel = new Panel();
             gridPanel.Size = new Size(this.Width - 40, 500);
-            gridPanel.Location = new Point(20, 190);
+            gridPanel.Location = new Point(20, 220);
             gridPanel.BackColor = Color.White;
             gridPanel.BorderStyle = BorderStyle.FixedSingle;
 
-            Label gridTitle = new Label();
-            gridTitle.Text = "Danh sách người dùng";
-            gridTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            gridTitle.Location = new Point(20, 20);
-            gridTitle.Size = new Size(200, 30);
-            gridPanel.Controls.Add(gridTitle);
-
             DataGridView dataGridView = new DataGridView();
-            dataGridView.Size = new Size(gridPanel.Width - 40, gridPanel.Height - 60);
-            dataGridView.Location = new Point(20, 60);
-            dataGridView.Font = new Font("Segoe UI", 10);
-            dataGridView.BackgroundColor = Color.White;
-            dataGridView.BorderStyle = BorderStyle.None;
+            dataGridView.Name = "dgvUsers";
+            dataGridView.Dock = DockStyle.Fill;
             dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView.MultiSelect = false;
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView.RowTemplate.Height = 30;
             dataGridView.SelectionChanged += DataGridView_SelectionChanged;
-            gridPanel.Controls.Add(dataGridView);
 
+            gridPanel.Controls.Add(dataGridView);
             this.Controls.Add(gridPanel);
         }
 
+        // =====================
+        // LOAD DATA
+        // =====================
         private void LoadData()
         {
-            var users = _userService.GetAllUsers();
-            var dataGridView = this.Controls[1].Controls[1] as DataGridView;
-            if (dataGridView != null)
+            _allUsers = _userService.GetAllUsers();
+
+            var dgv = this.Controls.Find("dgvUsers", true)
+                                   .FirstOrDefault() as DataGridView;
+
+            if (dgv != null)
             {
-                dataGridView.DataSource = null;
-                dataGridView.DataSource = ConvertToUserTable(users);
+                BindGrid(_allUsers);
             }
         }
+        private void BindGrid(List<XElement> users)
+        {
+            var dgv = this.Controls.Find("dgvUsers", true)
+                                   .FirstOrDefault() as DataGridView;
+
+            if (dgv != null)
+            {
+                dgv.DataSource = null;
+                dgv.DataSource = ConvertToUserTable(users);
+            }
+        }
+
 
         private System.Data.DataTable ConvertToUserTable(List<XElement> elements)
         {
@@ -187,97 +195,201 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
             dt.Columns.Add("Ngày tạo", typeof(DateTime));
             dt.Columns.Add("Trạng thái", typeof(bool));
 
-            foreach (var element in elements)
+            foreach (var el in elements)
             {
+                int.TryParse(el.Element("Id")?.Value, out int id);
+                DateTime.TryParse(el.Element("NgayTao")?.Value, out DateTime created);
+                bool.TryParse(el.Element("TrangThai")?.Value, out bool status);
+
                 dt.Rows.Add(
-                    int.Parse(element.Element("Id").Value),
-                    element.Element("HoTen").Value,
-                    element.Element("Email").Value,
-                    element.Element("SoDienThoai").Value,
-                    element.Element("VaiTro").Value,
-                    DateTime.Parse(element.Element("NgayTao").Value),
-                    bool.Parse(element.Element("TrangThai").Value)
+                    id,
+                    el.Element("HoTen")?.Value ?? "",
+                    el.Element("Email")?.Value ?? "",
+                    el.Element("SoDienThoai")?.Value ?? "",
+                    el.Element("VaiTro")?.Value ?? "Customer",
+                    created,
+                    status
                 );
             }
 
             return dt;
         }
 
+        // =====================
+        // SELECTION CHANGED
+        // =====================
         private void DataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            var dataGridView = sender as DataGridView;
-            if (dataGridView != null && dataGridView.SelectedRows.Count > 0)
+            var dgv = sender as DataGridView;
+            if (dgv == null || dgv.SelectedRows.Count == 0)
+                return;
+
+            var row = dgv.SelectedRows[0];
+
+            var fullName = this.Controls.Find("txtFullName", true).FirstOrDefault() as TextBox;
+            var email = this.Controls.Find("txtEmail", true).FirstOrDefault() as TextBox;
+            var phone = this.Controls.Find("txtPhone", true).FirstOrDefault() as TextBox;
+            var role = this.Controls.Find("cboRole", true).FirstOrDefault() as ComboBox;
+            var active = this.Controls.Find("chkActive", true).FirstOrDefault() as CheckBox;
+            var pass = this.Controls.Find("txtPassword", true).FirstOrDefault() as TextBox;
+
+            // Clear password ALWAYS
+            if (pass != null) pass.Clear();
+
+            if (row.IsNewRow)
             {
-                var selectedRow = dataGridView.SelectedRows[0];
-
-                var fullNameControl = this.Controls[0].Controls.Find("txtFullName", true)[0] as TextBox;
-                var emailControl = this.Controls[0].Controls.Find("txtEmail", true)[0] as TextBox;
-                var phoneControl = this.Controls[0].Controls.Find("txtPhone", true)[0] as TextBox;
-                var roleControl = this.Controls[0].Controls.Find("cboRole", true)[0] as ComboBox;
-                var activeControl = this.Controls[0].Controls.Find("chkActive", true)[0] as CheckBox;
-
-                if (fullNameControl != null) fullNameControl.Text = selectedRow.Cells["Họ tên"].Value?.ToString() ?? "";
-                if (emailControl != null) emailControl.Text = selectedRow.Cells["Email"].Value?.ToString() ?? "";
-                if (phoneControl != null) phoneControl.Text = selectedRow.Cells["Số điện thoại"].Value?.ToString() ?? "";
-                if (roleControl != null) roleControl.SelectedItem = selectedRow.Cells["Vai trò"].Value?.ToString() ?? "Customer";
-                if (activeControl != null) activeControl.Checked = bool.Parse(selectedRow.Cells["Trạng thái"].Value?.ToString() ?? "false");
+                fullName?.Clear();
+                email?.Clear();
+                phone?.Clear();
+                role.SelectedIndex = -1;
+                active.Checked = false;
+                return;
             }
+
+            fullName.Text = row.Cells["Họ tên"].Value?.ToString();
+            email.Text = row.Cells["Email"].Value?.ToString();
+            phone.Text = row.Cells["Số điện thoại"].Value?.ToString();
+            role.SelectedItem = row.Cells["Vai trò"].Value?.ToString();
+            bool.TryParse(row.Cells["Trạng thái"].Value?.ToString(), out bool status);
+            active.Checked = status;
         }
 
+        // =====================
+        // ADD USER
+        // =====================
+        private void BtnAdd_Click(object sender, EventArgs e)
+        {
+            var fullName = this.Controls.Find("txtFullName", true).FirstOrDefault() as TextBox;
+            var email = this.Controls.Find("txtEmail", true).FirstOrDefault() as TextBox;
+            var phone = this.Controls.Find("txtPhone", true).FirstOrDefault() as TextBox;
+            var role = this.Controls.Find("cboRole", true).FirstOrDefault() as ComboBox;
+            var active = this.Controls.Find("chkActive", true).FirstOrDefault() as CheckBox;
+            var pass = this.Controls.Find("txtPassword", true).FirstOrDefault() as TextBox;
+
+            if (string.IsNullOrWhiteSpace(fullName.Text))
+            {
+                MessageBox.Show("Vui lòng nhập họ tên!");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(email.Text))
+            {
+                MessageBox.Show("Vui lòng nhập email!");
+                return;
+            }
+
+            int newId = _userService.GenerateNewId();
+
+            var newUser = new XElement("NguoiDung",
+                new XElement("Id", newId),
+                new XElement("HoTen", fullName.Text),
+                new XElement("Email", email.Text),
+                new XElement("SoDienThoai", phone.Text),
+                new XElement("VaiTro", role.SelectedItem?.ToString() ?? "Customer"),
+                new XElement("NgayTao", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")),
+                new XElement("TrangThai", active.Checked.ToString()),
+                new XElement("MatKhauHash", pass.Text ?? "")
+            );
+
+            _userService.AddUser(newUser);
+
+            LoadData();
+            MessageBox.Show("Thêm người dùng thành công!");
+
+            fullName.Clear();
+            email.Clear();
+            phone.Clear();
+            pass.Clear();
+            role.SelectedIndex = 0;
+            active.Checked = true;
+        }
+
+        // =====================
+        // UPDATE USER
+        // =====================
         private void BtnUpdate_Click(object sender, EventArgs e)
         {
-            var dataGridView = this.Controls[1].Controls[1] as DataGridView;
-            if (dataGridView != null && dataGridView.SelectedRows.Count > 0)
+            var dgv = this.Controls.Find("dgvUsers", true).FirstOrDefault() as DataGridView;
+            if (dgv == null || dgv.SelectedRows.Count == 0)
             {
-                var selectedRow = dataGridView.SelectedRows[0];
-                var userId = int.Parse(selectedRow.Cells["Id"].Value?.ToString() ?? "0");
-
-                var fullNameControl = this.Controls[0].Controls.Find("txtFullName", true)[0] as TextBox;
-                var emailControl = this.Controls[0].Controls.Find("txtEmail", true)[0] as TextBox;
-                var phoneControl = this.Controls[0].Controls.Find("txtPhone", true)[0] as TextBox;
-                var roleControl = this.Controls[0].Controls.Find("cboRole", true)[0] as ComboBox;
-                var activeControl = this.Controls[0].Controls.Find("chkActive", true)[0] as CheckBox;
-
-                var user = _userService.GetUserById(userId);
-                if (user != null)
-                {
-                    user.Element("HoTen").Value = fullNameControl?.Text ?? "";
-                    user.Element("Email").Value = emailControl?.Text ?? "";
-                    user.Element("SoDienThoai").Value = phoneControl?.Text ?? "";
-                    user.Element("VaiTro").Value = roleControl?.SelectedItem?.ToString() ?? "Customer";
-                    user.Element("TrangThai").Value = activeControl?.Checked.ToString() ?? "false";
-
-                    _userService.UpdateUser(user);
-                    LoadData();
-                    MessageBox.Show("Cập nhật người dùng thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                MessageBox.Show("Vui lòng chọn user!");
+                return;
             }
-            else
+
+            var row = dgv.SelectedRows[0];
+            int userId = Convert.ToInt32(row.Cells["Id"].Value);
+
+            var user = _userService.GetUserById(userId);
+            if (user == null) return;
+
+            var fullName = this.Controls.Find("txtFullName", true).FirstOrDefault() as TextBox;
+            var email = this.Controls.Find("txtEmail", true).FirstOrDefault() as TextBox;
+            var phone = this.Controls.Find("txtPhone", true).FirstOrDefault() as TextBox;
+            var role = this.Controls.Find("cboRole", true).FirstOrDefault() as ComboBox;
+            var active = this.Controls.Find("chkActive", true).FirstOrDefault() as CheckBox;
+            var pass = this.Controls.Find("txtPassword", true).FirstOrDefault() as TextBox;
+
+            user.Element("HoTen").Value = fullName.Text;
+            user.Element("Email").Value = email.Text;
+            user.Element("SoDienThoai").Value = phone.Text;
+            user.Element("VaiTro").Value = role.SelectedItem?.ToString() ?? "Customer";
+            user.Element("TrangThai").Value = active.Checked.ToString();
+
+            if (!string.IsNullOrWhiteSpace(pass.Text))
             {
-                MessageBox.Show("Vui lòng chọn người dùng để cập nhật!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                user.Element("MatKhauHash").Value = pass.Text;
             }
+
+            _userService.UpdateUser(user);
+
+            LoadData();
+            MessageBox.Show("Cập nhật người dùng thành công!");
         }
 
+        // =====================
+        // DELETE USER
+        // =====================
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            var dataGridView = this.Controls[1].Controls[1] as DataGridView;
-            if (dataGridView != null && dataGridView.SelectedRows.Count > 0)
-            {
-                var selectedRow = dataGridView.SelectedRows[0];
-                var userId = int.Parse(selectedRow.Cells["Id"].Value?.ToString() ?? "0");
+            var dgv = this.Controls.Find("dgvUsers", true).FirstOrDefault() as DataGridView;
 
-                var result = MessageBox.Show("Bạn có chắc chắn muốn xóa người dùng này?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == DialogResult.Yes)
-                {
-                    _userService.DeleteUser(userId);
-                    LoadData();
-                    MessageBox.Show("Xóa người dùng thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            else
+            if (dgv == null || dgv.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Vui lòng chọn người dùng để xóa!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn user để xóa");
+                return;
+            }
+
+            int userId = Convert.ToInt32(dgv.SelectedRows[0].Cells["Id"].Value);
+
+            if (MessageBox.Show("Bạn có chắc muốn xóa?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                _userService.DeleteUser(userId);
+                LoadData();
+                MessageBox.Show("Đã xóa user!");
             }
         }
+        public void OnSearch(string keyword)
+        {
+            if (_allUsers == null) return;
+
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                BindGrid(_allUsers);
+                return;
+            }
+
+            keyword = keyword.ToLower();
+
+            var filtered = _allUsers.Where(u =>
+                (u.Element("HoTen")?.Value.ToLower().Contains(keyword) ?? false) ||
+                (u.Element("Email")?.Value.ToLower().Contains(keyword) ?? false) ||
+                (u.Element("SoDienThoai")?.Value.ToLower().Contains(keyword) ?? false) ||
+                (u.Element("DiaChi")?.Value.ToLower().Contains(keyword) ?? false) ||
+                (u.Element("VaiTro")?.Value.ToLower().Contains(keyword) ?? false)
+            ).ToList();
+
+            BindGrid(filtered);
+        }
+
     }
 }

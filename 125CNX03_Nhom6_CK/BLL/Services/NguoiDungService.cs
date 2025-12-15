@@ -37,14 +37,31 @@ namespace _125CNX03_Nhom6_CK.BLL
 
         public void AddUser(XElement user)
         {
-            var passwordHash = GetPasswordHash(user.Element("MatKhauHash").Value);
+            if (user.Element("MatKhauHash") == null)
+                user.Add(new XElement("MatKhauHash", ""));
+
+            string rawPassword = user.Element("MatKhauHash")?.Value ?? "";
+
+            string passwordHash = GetPasswordHash(rawPassword);
+
             user.Element("MatKhauHash").Value = passwordHash;
+
             _userRepository.Add(user);
         }
 
+
         public void UpdateUser(XElement user)
         {
-            _userRepository.Update(user);
+            if (user.Element("MatKhauHash") == null)
+                user.Add(new XElement("MatKhauHash", ""));
+
+            string rawPassword = user.Element("MatKhauHash")?.Value ?? "";
+
+            string passwordHash = GetPasswordHash(rawPassword);
+
+            user.Element("MatKhauHash").Value = passwordHash;
+
+            _userRepository.Add(user);
         }
 
         public void DeleteUser(int id)
@@ -87,5 +104,18 @@ namespace _125CNX03_Nhom6_CK.BLL
                 return System.BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
             }
         }
+        public int GenerateNewId()
+        {
+            var all = _userRepository.GetAll();
+            if (all == null || all.Count == 0)
+                return 1;
+
+            return all.Max(x =>
+            {
+                int.TryParse(x.Element("Id")?.Value, out int id);
+                return id;
+            }) + 1;
+        }
+
     }
 }

@@ -1,16 +1,20 @@
-﻿using System;
+﻿using _125CNX03_Nhom6_CK.BLL;
+using _125CNX03_Nhom6_CK.GUI.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using _125CNX03_Nhom6_CK.BLL;
 
 namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 {
-    public partial class BlogManagementForm : Form
+    public partial class BlogManagementForm : Form, ISearchableForm
     {
         private readonly IBaiVietService _articleService;
+
+        private List<XElement> _allArticles;
 
         private TextBox txtTitle, txtSummary, txtImageUrl, txtContent;
         private CheckBox chkDisplay;
@@ -107,6 +111,12 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
             this.Controls.Add(gridPanel);
         }
 
+        private void BindGrid(List<XElement> articles)
+        {
+            dgvArticles.DataSource = null;
+            dgvArticles.DataSource = ToArticleTable(articles);
+        }
+
         private void CreateControl(string label, out TextBox tb, int y, Panel panel)
         {
             new Label
@@ -127,7 +137,7 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 
         private Button CreateButton(string text, Point loc, Color color, EventHandler click)
         {
-            return new Button
+            var btn = new Button
             {
                 Text = text,
                 Location = loc,
@@ -139,14 +149,19 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
                 Cursor = Cursors.Hand,
                 FlatAppearance = { BorderSize = 0 }
             };
+
+            btn.Click += click;   // <-- QUAN TRỌNG: gán sự kiện click
+
+            return btn;
         }
+
 
         private void LoadData()
         {
             try
             {
-                var articles = _articleService.GetAllArticles();
-                dgvArticles.DataSource = ToArticleTable(articles);
+                _allArticles = _articleService.GetAllArticles();
+                BindGrid(_allArticles);
             }
             catch (Exception ex)
             {
@@ -204,7 +219,10 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
                 return;
             }
 
+            int newId = _articleService.GenerateNewId();
+
             var newArticle = new XElement("BaiViet",
+                new XElement("Id", newId),
                 new XElement("TieuDe", txtTitle.Text.Trim()),
                 new XElement("TomTat", txtSummary.Text.Trim()),
                 new XElement("NoiDung", txtContent.Text),
@@ -273,5 +291,26 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
             chkDisplay.Checked = true;
             txtTitle.Focus();
         }
+        public void OnSearch(string keyword)
+            {
+                if (_allArticles == null) return;
+
+                if (string.IsNullOrWhiteSpace(keyword))
+                {
+                    BindGrid(_allArticles);
+                    return;
+                }
+
+                keyword = keyword.Trim().ToLower();
+
+                var filtered = _allArticles.Where(a =>
+                    a.Elements().Any(e =>
+                        !string.IsNullOrEmpty(e.Value) &&
+                        e.Value.ToLower().Contains(keyword)
+                    )
+                ).ToList();
+
+                BindGrid(filtered);
+            }
     }
 }

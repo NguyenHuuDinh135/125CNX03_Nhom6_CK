@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -257,8 +258,45 @@
       <DependentUpon>ProfileForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Forms\User\UserEventArgs.cs" />
+    <Compile Include="GUI\Interfaces\ISearchableForm.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUI\Forms\Admin\BannerForm.resx">
+      <DependentUpon>BannerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\Admin\BlogManagementForm.resx">
+      <DependentUpon>BlogManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\Admin\BrandManagementForm.resx">
+      <DependentUpon>BrandManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\Admin\CategoryManagementForm.resx">
+      <DependentUpon>CategoryManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\Admin\ContactForm.resx">
+      <DependentUpon>ContactForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\Admin\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\Admin\OrderManagementForm.resx">
+      <DependentUpon>OrderManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\Admin\ProductManagementForm.resx">
+      <DependentUpon>ProductManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\Admin\UserManagementForm.resx">
+      <DependentUpon>UserManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\Auth\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\UserControls\Admin\HeaderControl.resx">
+      <DependentUpon>HeaderControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\UserControls\Admin\SidebarControl.resx">
+      <DependentUpon>SidebarControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -283,54 +321,34 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\Data\BaiViet.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="bin\Data\BaiViet.xml" />
+    <Content Include="bin\Data\Banner.xml" />
+    <Content Include="bin\Data\ChiTietDonHang.xml" />
+    <Content Include="bin\Data\ChiTietGioHang.xml" />
+    <Content Include="bin\Data\DonHang.xml">
+      <SubType>Designer</SubType>
     </Content>
-    <Content Include="bin\Debug\Data\Banner.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="bin\Data\GioHang.xml" />
+    <Content Include="bin\Data\LienHe.xml" />
+    <Content Include="bin\Data\LoaiSanPham.xml" />
+    <Content Include="bin\Data\NguoiDung.xml" />
+    <Content Include="bin\Data\PhuongThucThanhToan.xml" />
+    <Content Include="bin\Data\SanPham.xml">
+      <SubType>Designer</SubType>
     </Content>
-    <Content Include="bin\Debug\Data\ChiTietDonHang.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bin\Debug\Data\ChiTietGioHang.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bin\Debug\Data\DonHang.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bin\Debug\Data\GioHang.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bin\Debug\Data\LienHe.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bin\Debug\Data\LoaiSanPham.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bin\Debug\Data\NguoiDung.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bin\Debug\Data\PhuongThucThanhToan.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bin\Debug\Data\SanPham.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bin\Debug\Data\ThuongHieu.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\BaiViet.xml" />
-    <Content Include="Data\Banner.xml" />
-    <Content Include="Data\ChiTietDonHang.xml" />
-    <Content Include="Data\ChiTietGioHang.xml" />
-    <Content Include="Data\DonHang.xml" />
-    <Content Include="Data\GioHang.xml" />
-    <Content Include="Data\LienHe.xml" />
-    <Content Include="Data\LoaiSanPham.xml" />
-    <Content Include="Data\NguoiDung.xml" />
-    <Content Include="Data\PhuongThucThanhToan.xml" />
-    <Content Include="Data\SanPham.xml" />
-    <Content Include="Data\ThuongHieu.xml" />
+    <Content Include="bin\Data\ThuongHieu.xml" />
+    <Content Include="bin\Debug\Data\BaiViet.xml" />
+    <Content Include="bin\Debug\Data\Banner.xml" />
+    <Content Include="bin\Debug\Data\ChiTietDonHang.xml" />
+    <Content Include="bin\Debug\Data\ChiTietGioHang.xml" />
+    <Content Include="bin\Debug\Data\DonHang.xml" />
+    <Content Include="bin\Debug\Data\GioHang.xml" />
+    <Content Include="bin\Debug\Data\LienHe.xml" />
+    <Content Include="bin\Debug\Data\LoaiSanPham.xml" />
+    <Content Include="bin\Debug\Data\NguoiDung.xml" />
+    <Content Include="bin\Debug\Data\PhuongThucThanhToan.xml" />
+    <Content Include="bin\Debug\Data\SanPham.xml" />
+    <Content Include="bin\Debug\Data\ThuongHieu.xml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

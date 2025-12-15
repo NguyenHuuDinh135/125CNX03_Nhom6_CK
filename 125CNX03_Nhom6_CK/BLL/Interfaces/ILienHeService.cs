@@ -13,5 +13,6 @@ namespace _125CNX03_Nhom6_CK.BLL
         List<XElement> GetUnreadMessages();
         List<XElement> GetReadMessages();
         void MarkMessageAsRead(int id);
+        int GenerateNewId();
     }
 }

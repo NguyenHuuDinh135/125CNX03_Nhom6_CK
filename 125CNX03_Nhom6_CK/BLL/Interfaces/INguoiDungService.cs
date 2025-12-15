@@ -15,5 +15,7 @@ namespace _125CNX03_Nhom6_CK.BLL
         List<XElement> GetUsersByRole(string role);
         List<XElement> GetActiveUsers();
         bool IsEmailUnique(string email, int? userIdToExclude = null);
+        int GenerateNewId();
+
     }
 }

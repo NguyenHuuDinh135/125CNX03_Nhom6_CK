@@ -37,8 +37,11 @@ namespace _125CNX03_Nhom6_CK.DAL.Repositories
             try
             {
                 var doc = XDocument.Load(_filePath);
-                var root = doc.Root ?? new XElement("NewDataSet");
-                root.Add(entity);
+                if (doc.Root == null)
+                {
+                    doc.Add(new XElement("NewDataSet"));
+                }
+                doc.Root.Add(entity);
                 doc.Save(_filePath);
             }
             catch (Exception ex)
@@ -52,16 +55,14 @@ namespace _125CNX03_Nhom6_CK.DAL.Repositories
             try
             {
                 var doc = XDocument.Load(_filePath);
-                var idValue = int.Parse(entity.Element("Id").Value);
+                int idValue = int.Parse(entity.Element("Id")?.Value ?? "0");
                 var element = doc.Descendants(_tableName).FirstOrDefault(e =>
-                    e.Element("Id") != null &&
-                    int.TryParse(e.Element("Id").Value, out var elementId) &&
+                    int.TryParse(e.Element("Id")?.Value, out var elementId) &&
                     elementId == idValue);
 
                 if (element != null)
                 {
-                    element.Remove();
-                    doc.Root?.Add(entity);
+                    element.ReplaceWith(new XElement(entity));
                 }
 
                 doc.Save(_filePath);

@@ -5,10 +5,11 @@ using System.Xml.Linq;
 using _125CNX03_Nhom6_CK.BLL;
 using System.Collections.Generic;
 using System.Linq;
+using _125CNX03_Nhom6_CK.GUI.Interfaces;
 
 namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
 {
-    public partial class CategoryManagementForm : Form
+    public partial class CategoryManagementForm : Form, ISearchableForm
     {
         private readonly ILoaiSanPhamService _categoryService;
 
@@ -19,6 +20,7 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
         private DataGridView dgvCategories;
         private Button btnAdd, btnUpdate, btnDelete;
 
+        private List<XElement> _allCategories;
         public CategoryManagementForm()
         {
             InitializeComponent();
@@ -137,15 +139,21 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
         {
             try
             {
-                var categories = _categoryService.GetAllCategories();
-                dgvCategories.DataSource = ConvertToCategoryTable(categories);
+                _allCategories = _categoryService.GetAllCategories();
+                BindGrid(_allCategories);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi tải dữ liệu: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Lỗi tải dữ liệu: {ex.Message}",
+                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        private void BindGrid(List<XElement> categories)
+        {
+            dgvCategories.DataSource = null;
+            dgvCategories.DataSource = ConvertToCategoryTable(categories);
+        }
         private System.Data.DataTable ConvertToCategoryTable(List<XElement> elements)
         {
             var dt = new System.Data.DataTable();
@@ -185,7 +193,10 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
                 return;
             }
 
+            int newId = _categoryService.GenerateNewId();
+
             var newCat = new XElement("LoaiSanPham",
+                new XElement("Id", newId),
                 new XElement("TenLoai", txtCategoryName.Text.Trim()),
                 new XElement("MoTa", txtDescription.Text.Trim()),
                 new XElement("HienThi", chkDisplay.Checked)
@@ -196,6 +207,7 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
             ClearForm();
             MessageBox.Show("Thêm danh mục thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
 
         private void BtnUpdate_Click(object sender, EventArgs e)
         {
@@ -246,5 +258,26 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms.Admin
             chkDisplay.Checked = true;
             txtCategoryName.Focus();
         }
+        public void OnSearch(string keyword)
+        {
+            if (_allCategories == null) return;
+
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                BindGrid(_allCategories);
+                return;
+            }
+
+            keyword = keyword.ToLower();
+
+            var filtered = _allCategories.Where(c =>
+                c.Element("TenLoai")?.Value
+                    .ToLower()
+                    .Contains(keyword) == true
+            ).ToList();
+
+            BindGrid(filtered);
+        }
+
     }
 }   

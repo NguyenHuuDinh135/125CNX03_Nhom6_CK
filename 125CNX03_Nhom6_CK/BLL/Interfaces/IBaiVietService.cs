@@ -14,5 +14,6 @@ namespace _125CNX03_Nhom6_CK.BLL
         List<XElement> GetLatestArticles(int count);
         List<XElement> GetArticlesByAuthor(int authorId);
         List<XElement> SearchArticles(string searchTerm);
+        int GenerateNewId();
     }
 }

@@ -1,9 +1,10 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using _125CNX03_Nhom6_CK.BLL;
+﻿using _125CNX03_Nhom6_CK.BLL;
 using _125CNX03_Nhom6_CK.GUI.Forms.Admin;
 using _125CNX03_Nhom6_CK.GUI.Forms.User;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Xml.Linq;
 
 
 namespace _125CNX03_Nhom6_CK.GUI.Forms
@@ -194,47 +195,26 @@ namespace _125CNX03_Nhom6_CK.GUI.Forms
             this.Controls.Add(leftPanel);
             this.Controls.Add(rightPanel);
         }
+        public XElement LoggedInUser { get; private set; }
 
         private void Login_Click(object sender, EventArgs e, TextBox emailBox, TextBox passwordBox)
         {
             string email = emailBox.Text.Trim();
             string password = passwordBox.Text;
 
-            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
-            {
-                MessageBox.Show("Vui lòng nhập email và mật khẩu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             var user = _userService.AuthenticateUser(email, password);
             if (user != null)
             {
-                var role = user.Element("VaiTro").Value;
-
-                MessageBox.Show($"Đăng nhập thành công! Xin chào {user.Element("HoTen").Value}",
-                    "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                this.Hide();
-
-                if (role == "Admin")
-                {
-                    var adminForm = new _125CNX03_Nhom6_CK.GUI.Forms.Admin.MainForm(user);
-                    adminForm.ShowDialog();
-                }
-                else
-                {
-                    var userForm = new _125CNX03_Nhom6_CK.GUI.Forms.User.MainForm(user);
-                    userForm.ShowDialog();
-                }
-
+                LoggedInUser = user;
+                this.DialogResult = DialogResult.OK; // báo hiệu login thành công
                 this.Close();
-
             }
             else
             {
                 MessageBox.Show("Email hoặc mật khẩu không đúng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void RegisterButton_Click(object sender, EventArgs e)
         {

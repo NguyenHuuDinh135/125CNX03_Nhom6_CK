@@ -52,25 +52,23 @@ namespace _125CNX03_Nhom6_CK.DAL.Repositories
             try
             {
                 var doc = XDocument.Load(_filePath);
-                var idValue = int.Parse(entity.Element("Id").Value);
-                var element = doc.Descendants(_tableName).FirstOrDefault(e =>
-                    e.Element("Id") != null &&
-                    int.TryParse(e.Element("Id").Value, out var elementId) &&
-                    elementId == idValue);
+                int idValue = int.Parse(entity.Element("Id").Value);
+
+                var element = doc.Descendants(_tableName)
+                    .FirstOrDefault(e => (int)e.Element("Id") == idValue);
 
                 if (element != null)
                 {
-                    element.Remove();
-                    doc.Root?.Add(entity);
+                    element.ReplaceWith(new XElement(entity));
+                    doc.Save(_filePath);
                 }
-
-                doc.Save(_filePath);
             }
             catch (Exception ex)
             {
                 throw new Exception($"Error updating entity in {_filePath}: {ex.Message}", ex);
             }
         }
+
 
         public void Delete(int id)
         {
