@@ -25,16 +25,33 @@ namespace _125CNX03_Nhom6_CK.BLL
             return _contactRepository.GetById(id);
         }
 
-        public void AddMessage(XElement message)
+        public void AddMessage(XElement message, XElement currentUser)
         {
-            int newId = GenerateNewId();
+            // 1️⃣ Id
+            if (message.Element("Id") == null)
+                message.AddFirst(new XElement("Id", GenerateNewId()));
 
-            message.AddFirst(new XElement("Id", newId));
-            message.Element("DaXem").Value = "false";
-            message.Element("NgayGui").Value = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss");
+            // 2️⃣ Số điện thoại lấy từ người gửi
+            if (message.Element("SoDienThoai") == null)
+            {
+                string sdt = currentUser?.Element("SoDienThoai")?.Value ?? "";
+                message.Add(new XElement("SoDienThoai", sdt));
+            }
+
+            // 3️⃣ Đã xem
+            if (message.Element("DaXem") == null)
+                message.Add(new XElement("DaXem", "false"));
+
+            // 4️⃣ Ngày gửi
+            if (message.Element("NgayGui") == null)
+                message.Add(new XElement(
+                    "NgayGui",
+                    DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss")
+                ));
 
             _contactRepository.Add(message);
         }
+
 
 
         public void UpdateMessage(XElement message)

@@ -338,6 +338,7 @@
   <ItemGroup>
     <Content Include="bin\Debug\Data\BaiViet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="bin\Debug\Data\Banner.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -372,7 +373,6 @@
     <Content Include="bin\Debug\Data\SanPham.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="bin\Debug\Data\SanPhamTemplate.xslt" />
     <Content Include="bin\Debug\Data\ThuongHieu.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
