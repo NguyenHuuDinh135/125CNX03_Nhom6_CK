@@ -182,5 +182,51 @@ namespace _125CNX03_Nhom6_CK.DAL.Repositories
 
             return value;
         }
+        public List<T> Search(string keyword, params string[] fields)
+        {
+            var result = new List<T>();
+
+            if (string.IsNullOrWhiteSpace(keyword))
+                return GetAll();
+
+            keyword = keyword.ToLower();
+
+            try
+            {
+                var doc = XDocument.Load(_filePath);
+
+                var elements = doc.Descendants(_tableName)
+                    .Where(e =>
+                        fields.Any(f =>
+                            e.Element(f) != null &&
+                            e.Element(f).Value.ToLower().Contains(keyword)
+                        )
+                    );
+
+                foreach (var element in elements)
+                {
+                    var entity = new T();
+                    var properties = typeof(T).GetProperties();
+
+                    foreach (var prop in properties)
+                    {
+                        var el = element.Element(prop.Name);
+                        if (el != null)
+                        {
+                            prop.SetValue(entity, ConvertValue(el.Value, prop.PropertyType));
+                        }
+                    }
+
+                    result.Add(entity);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Search error in {_filePath}: {ex.Message}", ex);
+            }
+
+            return result;
+        }
+
     }
 }

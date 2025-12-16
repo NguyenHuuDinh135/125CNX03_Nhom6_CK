@@ -55,14 +55,18 @@ namespace _125CNX03_Nhom6_CK.BLL
             if (user.Element("MatKhauHash") == null)
                 user.Add(new XElement("MatKhauHash", ""));
 
+            // ⚠️ Chỉ hash khi user có nhập mật khẩu mới
             string rawPassword = user.Element("MatKhauHash")?.Value ?? "";
 
-            string passwordHash = GetPasswordHash(rawPassword);
+            if (!string.IsNullOrWhiteSpace(rawPassword))
+            {
+                string passwordHash = GetPasswordHash(rawPassword);
+                user.Element("MatKhauHash").Value = passwordHash;
+            }
 
-            user.Element("MatKhauHash").Value = passwordHash;
-
-            _userRepository.Add(user);
+            _userRepository.Update(user); // ✅ ĐÚNG
         }
+
 
         public void DeleteUser(int id)
         {

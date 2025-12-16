@@ -39,8 +39,13 @@ namespace _125CNX03_Nhom6_CK.DAL.Repositories
             try
             {
                 var doc = XDocument.Load(_filePath);
-                var root = doc.Root ?? new XElement("NewDataSet");
-                root.Add(entity);
+
+                if (doc.Root == null)
+                {
+                    doc.Add(new XElement("NewDataSet"));
+                }
+
+                doc.Root.Add(entity);
                 doc.Save(_filePath);
             }
             catch (Exception ex)
@@ -48,6 +53,7 @@ namespace _125CNX03_Nhom6_CK.DAL.Repositories
                 throw new Exception($"Error adding entity to {_filePath}: {ex.Message}", ex);
             }
         }
+
 
         public void Update(XElement entity)
         {

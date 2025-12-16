@@ -27,10 +27,15 @@ namespace _125CNX03_Nhom6_CK.BLL
 
         public void AddMessage(XElement message)
         {
+            int newId = GenerateNewId();
+
+            message.AddFirst(new XElement("Id", newId));
             message.Element("DaXem").Value = "false";
             message.Element("NgayGui").Value = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss");
+
             _contactRepository.Add(message);
         }
+
 
         public void UpdateMessage(XElement message)
         {
@@ -71,7 +76,12 @@ namespace _125CNX03_Nhom6_CK.BLL
 
         public void MarkMessageAsRead(int id)
         {
-            throw new NotImplementedException();
+            var msg = _contactRepository.GetById(id);
+            if (msg == null) return;
+
+            msg.Element("DaXem").Value = "true";
+            _contactRepository.Update(msg);
         }
+
     }
 }
